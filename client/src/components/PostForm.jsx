@@ -1,29 +1,52 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Form } from "semantic-ui-react";
 import FileBase from "react-file-base64";
-import { createPost } from "../actions/posts";
+import { createPost, updatePost } from "../actions/posts";
 
-export default function PostForm() {
+export default function PostForm({ currentId, setCurrentId }) {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
     selectedFile: "",
   });
+  const post = useSelector((state) =>
+    currentId ? state.posts.find((p) => p._id === currentId) : null
+  );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(postData);
+    if (currentId) {
+      dispatch(updatePost(currentId, postData));
+    } else {
+      dispatch(createPost(postData));
+    }
+    clear();
+  };
 
-    dispatch(createPost(postData));
+  const clear = () => {
+    setCurrentId(null);
+    setPostData({
+      title: "",
+      message: "",
+      selectedFile: "",
+    });
   };
 
   return (
     <>
       <Form onSubmit={onSubmit}>
-        <h2>Create a for the class</h2>
+        {currentId ? (
+          <h2>Edit the story</h2>
+        ) : (
+          <h2>Create a Story for the class</h2>
+        )}
         <Form.Field>
           <Form.Input
             placeholder="Title"
@@ -43,13 +66,13 @@ export default function PostForm() {
           />
 
           <div>
-            {/* <FileBase
+            <FileBase
               type="file"
               multiple={false}
               onDone={({ base64 }) =>
                 setPostData({ ...postData, selectedFile: base64 })
               }
-            /> */}
+            />
           </div>
 
           <Button type="submit" color="purple">
