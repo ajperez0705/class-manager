@@ -6,12 +6,9 @@ import cors from "cors";
 import postRoutes from "./routes/posts.js";
 
 const app = express();
-
-// This adds the prefix 'posts' to all routes within the posts file
-// NOT localhost:5000/
-// YES localhost:5000/posts
-
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use("/posts", postRoutes);
 
