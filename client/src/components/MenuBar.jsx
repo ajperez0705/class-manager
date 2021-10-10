@@ -1,21 +1,55 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Menu } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import decode from "jwt-decode";
 
 function MenuBar() {
   const pathname = window.location.pathname;
   const path = pathname === "/" ? "home" : pathname.substr(1);
   const [activeItem, setActiveItem] = useState(path);
-  const user = null;
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
+
+  const logout = (e) => {
+    dispatch({ type: "LOGOUT" });
+
+    history.push("/auth");
+
+    setUser(null);
+  };
+
+  console.log(user);
+  useEffect(() => {
+    const token = user?.token;
+
+    // JWT...
+    if (token) {
+      const decodedToken = decode(token);
+
+      // If the token has passed 1hr, then logout
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        logout();
+      }
+    }
+
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
-  const logout = (e, { name }) => setActiveItem(name);
-
   const menuBar = user ? (
     <Menu pointing secondary size="massive" color="purple">
-      <Menu.Item name={user.username} active as={Link} to="/" />
-
+      <Menu.Item name={user.result.username} active as={Link} to="/" />
+      <Menu.Item
+        name="class-story"
+        active={activeItem === "class-story"}
+        onClick={handleItemClick}
+        as={Link}
+        to="/class-story"
+      />
       <Menu.Menu position="right">
         <Menu.Item name="logout" onClick={logout} />
       </Menu.Menu>
@@ -39,13 +73,23 @@ function MenuBar() {
       />
 
       <Menu.Menu position="right">
-        <Menu.Item
-          name="sign-in"
-          active={activeItem === "sign-in"}
-          onClick={handleItemClick}
-          as={Link}
-          to="/auth"
-        />
+        {user ? (
+          <Menu.Item
+            name="sign-in"
+            active={activeItem === "sign-in"}
+            onClick={handleItemClick}
+            as={Link}
+            to="/auth"
+          />
+        ) : (
+          <Menu.Item
+            name="register"
+            active={activeItem === "sign-in"}
+            onClick={handleItemClick}
+            as={Link}
+            to="/auth"
+          />
+        )}
       </Menu.Menu>
     </Menu>
   );

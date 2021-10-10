@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 
 // Routers
 import postRoutes from "./routes/posts.js";
+import userRoutes from "./routes/users.js";
 
 const app = express();
 dotenv.config();
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/posts", postRoutes);
+app.use("/user", userRoutes);
 
 // MongoDB
 // const MONGODB =

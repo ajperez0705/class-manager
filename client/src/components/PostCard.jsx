@@ -10,11 +10,51 @@ import { deletePost, likePost } from "../actions/posts";
 // import DeleteButton from "./DeleteButton";
 
 export default function PostCard({
-  post: { _id, title, message, createdAt, selectedFile, likeCount },
+  post: { _id, title, message, createdAt, selectedFile, likes },
   setCurrentId,
 }) {
-  console.log(likeCount);
+  const numOfLikes = likes.length;
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const Likes = () => {
+    if (likes.length > 0) {
+      return likes.find(
+        (like) => like === (user?.result?.googleId || user?.result?._id)
+      ) ? (
+        <>
+          <Button color="violet" basic>
+            <Icon name="like" />
+          </Button>
+          <Label basic color="violet" pointing="left">
+            {numOfLikes > 2
+              ? `You and ${numOfLikes - 1} others`
+              : `${numOfLikes} like${numOfLikes > 1 ? "s" : ""}`}
+          </Label>
+        </>
+      ) : (
+        <>
+          <Button color="violet" basic>
+            <Icon name="like" />
+          </Button>
+          <Label basic color="violet" pointing="left">
+            {numOfLikes} {numOfLikes === 1 ? "Like" : "Likes"}
+          </Label>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <Button color="violet" basic>
+          <Icon name="like" />
+        </Button>
+        <Label basic color="violet" pointing="left">
+          Like
+        </Label>
+      </>
+    );
+  };
 
   return (
     <Card fluid>
@@ -32,14 +72,13 @@ export default function PostCard({
         <Card.Description>{message}</Card.Description>
       </Card.Content>
       <Card.Content extra>
-        {/* <LikeButton user={user} post={{ id, likes, likeCount }} /> */}
-        <Button labelPosition="right" onClick={() => dispatch(likePost(_id))}>
-          <Button color="violet" basic>
-            <Icon name="like" />
-          </Button>
-          <Label basic color="violet" pointing="left">
-            {likeCount}
-          </Label>
+        {/* <LikeButton user={user} post={{ id, numOfLikes, likeCount }} /> */}
+        <Button
+          labelPosition="right"
+          disabled={!user}
+          onClick={() => dispatch(likePost(_id))}
+        >
+          <Likes />
         </Button>
 
         <Button labelPosition="right" as={Link} to={`/posts/${1}`}>
@@ -51,23 +90,30 @@ export default function PostCard({
           </Label> */}
         </Button>
 
-        <Button labelPosition="right" onClick={() => setCurrentId(_id)}>
-          <Button color="violet" basic>
-            <Icon name="edit" />
-          </Button>
-          {/* <Label basic color="violet" pointing="left">
+        {user?.result?.isTeacher === true && (
+          <Button labelPosition="right" onClick={() => setCurrentId(_id)}>
+            <Button color="violet" basic>
+              <Icon name="edit" />
+            </Button>
+            {/* <Label basic color="violet" pointing="left">
             {commentCount}
           </Label> */}
-        </Button>
+          </Button>
+        )}
 
-        <Button labelPosition="right" onClick={() => dispatch(deletePost(_id))}>
-          <Button color="violet" basic>
-            <Icon name="delete" />
-          </Button>
-          {/* <Label basic color="violet" pointing="left">
+        {user?.result?.isTeacher === true && (
+          <Button
+            labelPosition="right"
+            onClick={() => dispatch(deletePost(_id))}
+          >
+            <Button color="violet" basic>
+              <Icon name="delete" />
+            </Button>
+            {/* <Label basic color="violet" pointing="left">
             {commentCount}
           </Label> */}
-        </Button>
+          </Button>
+        )}
 
         {/* {user && user.username === username && <DeleteButton postId={id} />} */}
       </Card.Content>

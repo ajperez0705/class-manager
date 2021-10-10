@@ -1,21 +1,54 @@
 import React, { useState, useContext } from "react";
 import { Button, Form } from "semantic-ui-react";
 import { GoogleLogin } from "react-google-login";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+import { signin, signup } from "../actions/auth";
+
+const initialState = {
+  username: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 function Auth() {
   const [errors, setErrors] = useState({});
   const [isSignup, setisSignup] = useState(false);
+  const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const onSubmit = () => {};
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-  const handleChange = () => {};
+    if (isSignup) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
+  };
+
+  const onChangeHandler = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const switchMode = () => {
     setisSignup((prevIsSignup) => !prevIsSignup);
   };
 
   const googleSuccess = async (res) => {
-    console.log(res);
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    try {
+      dispatch({ type: "AUTH", data: { result, token } });
+
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const googleFailure = (error) => {
@@ -34,7 +67,7 @@ function Auth() {
           type="text"
           //   value={values.username}
           //   error={errors.username ? true : false}
-          //   onChange={onChange}
+          onChange={onChangeHandler}
         />
 
         <Form.Input
@@ -44,7 +77,7 @@ function Auth() {
           type="email"
           //   value={values.email}
           //   error={errors.email ? true : false}
-          //   onChange={onChange}
+          onChange={onChangeHandler}
         />
 
         <Form.Input
@@ -54,7 +87,7 @@ function Auth() {
           type="password"
           //   value={values.password}
           //   error={errors.password ? true : false}
-          //   onChange={onChange}
+          onChange={onChangeHandler}
         />
 
         <Form.Input
@@ -64,7 +97,7 @@ function Auth() {
           type="password"
           //   value={values.confirmPassword}
           //   error={errors.confirmPassword ? true : false}
-          //   onChange={onChange}
+          onChange={onChangeHandler}
         />
         <Button type="submit" primary>
           Register
@@ -73,7 +106,6 @@ function Auth() {
           clientId="327712308001-bah7566eof34tbrfdlhtm5s6vkpdir12.apps.googleusercontent.com"
           render={(renderProps) => (
             <Button
-              type="submit"
               primary
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
@@ -83,7 +115,7 @@ function Auth() {
           )}
           onSuccess={googleSuccess}
           onFailure={googleFailure}
-          cookiePolicy="http://localhost:3000/"
+          cookiePolicy="single_host_origin"
         />
         <Button type="submit" primary onClick={switchMode}>
           {isSignup
@@ -113,7 +145,7 @@ function Auth() {
           type="text"
           //   value={values.username}
           //   error={errors.username ? true : false}
-          //   onChange={onChange}
+          onChange={onChangeHandler}
         />
 
         <Form.Input
@@ -123,7 +155,7 @@ function Auth() {
           type="password"
           //   value={values.password}
           //   error={errors.password ? true : false}
-          //   onChange={onChange}
+          onChange={onChangeHandler}
         />
 
         <Button type="submit" primary>
@@ -141,6 +173,9 @@ function Auth() {
               Google Sign In
             </Button>
           )}
+          onSuccess={googleSuccess}
+          onFailure={googleFailure}
+          cookiePolicy="single_host_origin"
         />
         <Button type="submit" primary onClick={switchMode}>
           {isSignup
