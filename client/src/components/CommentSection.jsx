@@ -11,14 +11,13 @@ function CommentSection({ post }) {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
 
-  console.log(comments);
-
   const submitComment = async (e) => {
     e.preventDefault();
 
     const finalComment = `${user.result.username}: ${comment}`;
 
     const newComments = await dispatch(commentPost(finalComment, post.postId));
+    console.log(newComments);
 
     setComments(newComments);
     setComment("");
@@ -30,13 +29,13 @@ function CommentSection({ post }) {
         <Card fluid>
           <Card.Content>
             <p>Post a comment</p>
-            <Form>
+            <Form onSubmit={submitComment}>
               <div className="ui action input fluid">
                 <input
                   type="text"
                   placeholder="Comment.."
                   name="comment"
-                  // value={comment}
+                  value={comment}
                   onChange={(e) => setComment(e.target.value)}
                   // ref={commentInputRef}
                 />
@@ -44,7 +43,6 @@ function CommentSection({ post }) {
                   type="submit"
                   className="ui button teal"
                   disabled={!comment}
-                  onClick={submitComment}
                 >
                   Submit
                 </button>

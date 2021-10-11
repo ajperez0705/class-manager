@@ -37,7 +37,7 @@ function ClassStory() {
 
           <Transition.Group>
             {posts &&
-              posts.map((post) => (
+              posts?.map((post) => (
                 <Grid.Column key={post._id} style={{ marginBottom: 20 }}>
                   <PostCard post={post} setCurrentId={setCurrentId} />
                 </Grid.Column>
