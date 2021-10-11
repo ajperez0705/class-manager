@@ -10,7 +10,7 @@ import { deletePost, likePost } from "../actions/posts";
 // import DeleteButton from "./DeleteButton";
 
 export default function PostCard({
-  post: { _id, title, message, createdAt, selectedFile, likes },
+  post: { _id, title, message, createdAt, selectedFile, comments, likes },
   setCurrentId,
 }) {
   const numOfLikes = likes.length;
@@ -63,9 +63,10 @@ export default function PostCard({
         wrapped
         ui={false}
         as={Link}
-        to={`/posts/${1}`}
+        to={`/posts/${_id}`}
+        post={title}
       />
-      <Card.Content as={Link} to={`/posts/${1}`}>
+      <Card.Content as={Link} to={`/posts/${_id}`}>
         <Card.Header>{title}</Card.Header>
         <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
         {/* <p>{totalPoints}</p> */}

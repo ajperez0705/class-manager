@@ -1,4 +1,10 @@
-import { CREATE, DELETE, FETCH_ALL, UPDATE } from "../constants/actionTypes";
+import {
+  COMMENT,
+  CREATE,
+  DELETE,
+  FETCH_ALL,
+  UPDATE,
+} from "../constants/actionTypes";
 
 const posts = (posts = [], action) => {
   switch (action.type) {
@@ -10,6 +16,17 @@ const posts = (posts = [], action) => {
       return posts.map((post) =>
         post._id === action.payload._id ? action.payload : post
       );
+
+    case COMMENT:
+      return {
+        ...posts,
+        posts: posts.map((post) => {
+          if (post._id === action.payload._id) {
+            return action.payload;
+          }
+          return post;
+        }),
+      };
 
     case FETCH_ALL:
       return action.payload;

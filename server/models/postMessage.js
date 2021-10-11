@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
+  // id: { type: String },
   title: String,
   message: String,
   selectedFile: String,
@@ -8,6 +9,7 @@ const postSchema = mongoose.Schema({
     type: [String],
     default: [],
   },
+  comments: { type: [String], default: [] },
   createdAt: {
     type: Date,
     default: new Date(),

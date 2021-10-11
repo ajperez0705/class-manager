@@ -8,6 +8,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import MenuBar from "./components/MenuBar";
 import Auth from "./Pages/Auth";
+import SinglePost from "./Pages/SinglePost";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           {/* <Route exact path="/login" component={Login} /> */}
           {/* <Route exact path="/register" component={Register} /> */}
           <Route exact path="/class-story" component={ClassStory} />
+          <Route exact path="/posts/:postId" component={SinglePost} />
         </Switch>
       </Container>
     </BrowserRouter>
