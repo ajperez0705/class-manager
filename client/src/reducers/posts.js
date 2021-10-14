@@ -18,15 +18,7 @@ const posts = (posts = [], action) => {
       );
 
     case COMMENT:
-      return {
-        ...posts,
-        posts: posts.map((post) => {
-          if (post._id === action.payload._id) {
-            return action.payload;
-          }
-          return post;
-        }),
-      };
+      return [...posts, action.payload];
 
     case FETCH_ALL:
       return action.payload;

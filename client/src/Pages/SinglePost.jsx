@@ -23,33 +23,33 @@ function SinglePost(props) {
   let postMarkup;
 
   useEffect(() => {
-    const init = async () => {
-      try {
-        setIsLoading(true);
-        const clickedPost = await posts.filter((post) => post._id === postId);
-
-        const { title, message, createdAt, selectedFile, likes, comments } =
-          await clickedPost[0];
-
-        setClickedPostData((prevState) => ({
-          ...prevState,
-          postId,
-          title,
-          message,
-          createdAt,
-          selectedFile,
-          likes,
-          comments,
-        }));
-
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     init();
-    console.log(clickedPostData);
   }, []);
+
+  const init = async () => {
+    try {
+      setIsLoading(true);
+      const clickedPost = await posts?.filter((post) => post._id === postId);
+
+      const { title, message, createdAt, selectedFile, likes, comments } =
+        await clickedPost[0];
+
+      setClickedPostData((prevState) => ({
+        ...prevState,
+        postId,
+        title,
+        message,
+        createdAt,
+        selectedFile,
+        likes,
+        comments,
+      }));
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Grid>
