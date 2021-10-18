@@ -17,7 +17,6 @@ function CommentSection({ post }) {
     const finalComment = `${user.result.username}: ${comment}`;
 
     const newComments = await dispatch(commentPost(finalComment, post.postId));
-    console.log(newComments);
 
     setComments(newComments);
     setComment("");

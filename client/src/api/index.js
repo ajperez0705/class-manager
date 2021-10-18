@@ -15,6 +15,7 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+// Posts
 export const fetchPosts = () => API.get("/posts");
 export const createPost = (newPost) => API.post("/posts", newPost);
 export const updatePost = (id, updatedPost) =>
@@ -27,3 +28,6 @@ export const comment = (finalComment, id) =>
 
 export const signIn = (formData) => API.post("/user/signin", formData);
 export const signUp = (formData) => API.post("/user/signup", formData);
+
+// Users / Students
+export const fetchStudents = () => API.get("/user/class");

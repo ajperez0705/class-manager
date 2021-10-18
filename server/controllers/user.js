@@ -80,3 +80,16 @@ export const signup = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+export const getStudents = async (req, res) => {
+  try {
+    const users = await User.find();
+
+    const students = users.filter((user) => user.isTeacher === false);
+    console.log(students);
+
+    res.status(200).json(students);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

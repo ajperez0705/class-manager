@@ -13,8 +13,6 @@ function ClassStory() {
   // current Id is used to grab the id of the post you want to edit
   const [currentId, setCurrentId] = useState(null);
 
-  console.log(posts);
-
   useEffect(() => {
     dispatch(getPosts());
   }, [currentId, dispatch]);
