@@ -63,6 +63,10 @@ export const signup = async (req, res) => {
       negPoints: 0,
       posPoints: 0,
       totalPoints: 0,
+      trophyA: null,
+      trophyB: null,
+      trophyC: null,
+      totalTrophies: 0,
     });
 
     const token = jwt.sign(

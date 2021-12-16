@@ -8,6 +8,10 @@ const userSchema = mongoose.Schema({
   negPoints: { type: Number },
   posPoints: { type: Number },
   totalPoints: { type: Number },
+  trophyA: { type: String },
+  trophyB: { type: String },
+  trophyC: { type: String },
+  totalTrophies: { type: Number },
   isTeacher: { type: Boolean },
 });
 
