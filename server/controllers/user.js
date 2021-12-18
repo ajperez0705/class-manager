@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -83,6 +84,30 @@ export const signup = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
   }
+};
+
+// Change points
+export const updatePoints = async (req, res) => {
+  console.log("reached update point controller");
+  const { id: _id } = req.params;
+  const student = req.body;
+
+  console.log(student);
+  console.log(_id);
+
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).send("No student with that id");
+  }
+
+  const updatedStudent = await User.findByIdAndUpdate(
+    _id,
+    { ...student, _id },
+    {
+      new: true,
+    }
+  );
+
+  res.json(updatedStudent);
 };
 
 export const getStudents = async (req, res) => {

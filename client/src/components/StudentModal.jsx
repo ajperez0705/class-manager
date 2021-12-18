@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Button, Header, Image, Modal, Card, Icon } from "semantic-ui-react";
 import decode from "jwt-decode";
+import { updateStudentPoints } from "../actions/users";
 
 function StudentModal({ student, modalStatus, setModalStatus }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [feedBack, setFeedBack] = useState("positive");
   const [isTeacher, setIsTeacher] = useState(null);
+  const dispatch = useDispatch();
   console.log(student);
 
   useEffect(() => {
@@ -15,6 +18,18 @@ function StudentModal({ student, modalStatus, setModalStatus }) {
       setIsTeacher(true);
     } else return;
   }, []);
+
+  const updatePoints = function (updateType, student) {
+    if (updateType === "positive") {
+      student.posPoints++;
+      student.totalPoints++;
+    } else if (updateType === "negative") {
+      student.negPoints++;
+      student.totalPoints = student.posPoints - student.negPoints;
+    }
+
+    dispatch(updateStudentPoints(student._id, student));
+  };
 
   return (
     <>
@@ -38,7 +53,7 @@ function StudentModal({ student, modalStatus, setModalStatus }) {
                     Negative Feedback
                   </Header>
                 </div>
-                <Card>
+                <Card onClick={() => updatePoints("positive", student)}>
                   <Icon name="thumbs up outline" size="huge" />
                   <Card.Content>
                     <Card.Header>Helping Others</Card.Header>
@@ -53,7 +68,7 @@ function StudentModal({ student, modalStatus, setModalStatus }) {
                   </Header>
                   <Header>Negative Feedback</Header>
                 </div>
-                <Card>
+                <Card onClick={() => updatePoints("negative", student)}>
                   <Icon name="thumbs down outline" size="huge" />
                   <Card.Content>
                     <Card.Header>Disrespecting Others</Card.Header>
