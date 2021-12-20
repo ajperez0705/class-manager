@@ -1,3 +1,5 @@
+/* Globals */
+
 .page-title {
   display: block;
   text-align: center;
@@ -20,6 +22,10 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.span {
+  color: rgb(152, 245, 109);
 }
 
 /* Modal */

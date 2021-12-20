@@ -33,3 +33,5 @@ export const signUp = (formData) => API.post("/user/signup", formData);
 export const fetchStudents = () => API.get("/user/class");
 export const updateStudentPoints = (id, student) =>
   API.patch(`/user/${id}`, student);
+export const purchaseTrophy = (id, student) =>
+  API.patch(`/user/${id}/trophy`, student);

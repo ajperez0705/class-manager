@@ -62,8 +62,7 @@ export const signup = async (req, res) => {
       password: hashedPassword,
       isTeacher: false,
       negPoints: 0,
-      posPoints: 0,
-      totalPoints: 0,
+      curPoints: 0,
       trophyA: null,
       trophyB: null,
       trophyC: null,
@@ -89,6 +88,30 @@ export const signup = async (req, res) => {
 // Change points
 export const updatePoints = async (req, res) => {
   console.log("reached update point controller");
+  const { id: _id } = req.params;
+  const student = req.body;
+
+  console.log(student);
+  console.log(_id);
+
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).send("No student with that id");
+  }
+
+  const updatedStudent = await User.findByIdAndUpdate(
+    _id,
+    { ...student, _id },
+    {
+      new: true,
+    }
+  );
+
+  res.json(updatedStudent);
+};
+
+// Purchase Trophy
+export const purchaseTrophy = async (req, res) => {
+  console.log("reached purchase trophy controller");
   const { id: _id } = req.params;
   const student = req.body;
 

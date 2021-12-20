@@ -21,11 +21,9 @@ function StudentModal({ student, modalStatus, setModalStatus }) {
 
   const updatePoints = function (updateType, student) {
     if (updateType === "positive") {
-      student.posPoints++;
       student.totalPoints++;
     } else if (updateType === "negative") {
-      student.negPoints++;
-      student.totalPoints = student.posPoints - student.negPoints;
+      student.totalPoints--;
     }
 
     dispatch(updateStudentPoints(student._id, student));
@@ -97,9 +95,7 @@ function StudentModal({ student, modalStatus, setModalStatus }) {
             />
             <Modal.Description>
               <Header>Points</Header>
-              <Card meta="Positive Points" description={student.posPoints} />
-              <Card meta="Negativ Points" description={student.negPoints} />
-              <Card meta="Total Points" description={student.totalPoints} />
+              <Card meta="Current Points" description={student.totalPoints} />
             </Modal.Description>
 
             <Modal.Description>

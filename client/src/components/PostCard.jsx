@@ -69,7 +69,7 @@ export default function PostCard({
       <Card.Content as={Link} to={`/posts/${_id}`}>
         <Card.Header>{title}</Card.Header>
         <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
-        {/* <p>{totalPoints}</p> */}
+        {/* <p>{}</p> */}
         <Card.Description>{message}</Card.Description>
       </Card.Content>
       <Card.Content extra>

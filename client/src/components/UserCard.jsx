@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
-import { Button, Header, Image, Modal, Card } from "semantic-ui-react";
+import { Image, Modal, Card } from "semantic-ui-react";
 import StudentModal from "./StudentModal";
 
 function UserCard({ student }) {
-  const user = JSON.parse(localStorage.getItem("profile"));
   const [open, setOpen] = useState(false);
 
   return (
@@ -24,9 +23,8 @@ function UserCard({ student }) {
           </Card.Content>
           <Card.Content extra>
             <div className="point-totals">
-              <h6>Positive: {student.posPoints}</h6>
-              <h6>Negative: {student.negPoints}</h6>
-              <h6>Total: {student.totalPoints}</h6>
+              <h6>Current Points: {student.totalPoints}</h6>
+              <h6>Trophies: {student.totalTrophies}</h6>
             </div>
           </Card.Content>
         </Card>

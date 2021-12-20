@@ -9,3 +9,8 @@ export const COMMENT = "COMMENT";
 // Auth
 export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";
+
+// Users
+export const FETCH_STUDENTS = "FETCH_STUDENTS";
+export const UPDATE_STUDENT = "UPDATE_STUDENT";
+export const PURCHASE_TROPHY = "PURCHASE_TROPHY";

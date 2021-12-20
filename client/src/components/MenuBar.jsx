@@ -21,7 +21,6 @@ function MenuBar() {
     setUser(null);
   };
 
-  console.log(user);
   useEffect(() => {
     const token = user?.token;
 
@@ -50,6 +49,15 @@ function MenuBar() {
         as={Link}
         to="/class-story"
       />
+
+      <Menu.Item
+        name="market"
+        active={activeItem === "market"}
+        onClick={handleItemClick}
+        as={Link}
+        to="/market"
+      />
+
       <Menu.Menu position="right">
         <h2>Hello, {user.result.username}</h2>
         <Menu.Item name="logout" onClick={logout} />
