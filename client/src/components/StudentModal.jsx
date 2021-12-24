@@ -22,6 +22,7 @@ function StudentModal({ student, modalStatus, setModalStatus }) {
   const updatePoints = function (updateType, student) {
     if (updateType === "positive") {
       student.totalPoints++;
+      student.allTimePoints++;
     } else if (updateType === "negative") {
       student.totalPoints--;
     }

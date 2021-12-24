@@ -60,6 +60,13 @@ function MenuBar() {
 
       <Menu.Menu position="right">
         <h2>Hello, {user.result.username}</h2>
+        <Menu.Item
+          name="my-account"
+          active={activeItem === "my-account"}
+          onClick={handleItemClick}
+          as={Link}
+          to="/my-account"
+        />
         <Menu.Item name="logout" onClick={logout} />
       </Menu.Menu>
     </Menu>

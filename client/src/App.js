@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import ClassStory from "./Pages/ClassStory";
@@ -11,10 +10,9 @@ import MenuBar from "./components/MenuBar";
 import Auth from "./Pages/Auth";
 import SinglePost from "./Pages/SinglePost";
 import StudentMarket from "./Pages/StudentMarket";
+import MyAccount from "./Pages/MyAccount";
 
 function App() {
-  const students = useSelector((state) => state.users);
-
   return (
     <BrowserRouter>
       <Container>
@@ -28,12 +26,8 @@ function App() {
             path="/market"
             render={(props) => <StudentMarket {...props} />}
           />
-          <Route
-            exact
-            path="/posts/:postId"
-            component={SinglePost}
-            students={students}
-          />
+          <Route exact path="/my-account" component={MyAccount} />
+          <Route exact path="/posts/:postId" component={SinglePost} />
         </Switch>
       </Container>
     </BrowserRouter>
