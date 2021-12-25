@@ -24,6 +24,7 @@ function SinglePost(props) {
 
   useEffect(() => {
     init();
+    console.log(clickedPostData);
   }, []);
 
   const init = async () => {
@@ -74,7 +75,7 @@ function SinglePost(props) {
                   </Card.Meta>
                   <Card.Description>{clickedPostData.message}</Card.Description>
                   <Card.Description>
-                    {clickedPostData.selectedFile}
+                    <Image src={clickedPostData.selectedFile} />
                   </Card.Description>
                 </div>
               </CardContent>

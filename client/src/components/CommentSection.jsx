@@ -55,7 +55,7 @@ function CommentSection({ post }) {
           <Card.Content>
             <Card.Header>{comment}</Card.Header>
             <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
-            <Card.Description>{comment.message}</Card.Description>
+            {/* <Card.Description>{comment.message}</Card.Description> */}
           </Card.Content>
         </Card>
       ))}

@@ -8,10 +8,19 @@ import PostCard from "../components/PostCard";
 
 function ClassStory() {
   const dispatch = useDispatch();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [isTeacher, setIsTeacher] = useState(null);
+
   const posts = useSelector((state) => state.posts);
 
   // current Id is used to grab the id of the post you want to edit
   const [currentId, setCurrentId] = useState(null);
+
+  useEffect(() => {
+    if (user.result.isTeacher) {
+      setIsTeacher(true);
+    }
+  }, []);
 
   useEffect(() => {
     dispatch(getPosts());
@@ -20,7 +29,10 @@ function ClassStory() {
   return (
     <div>
       <h1>Class Story</h1>
-      <PostForm currentId={currentId} setCurrentId={setCurrentId} />
+      {isTeacher && (
+        <PostForm currentId={currentId} setCurrentId={setCurrentId} />
+      )}
+
       <Grid columns={3}>
         <Grid.Row className="page-title">
           <h1>Recent by MrTeacher</h1>
