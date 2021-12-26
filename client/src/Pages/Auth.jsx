@@ -13,6 +13,7 @@ const initialState = {
   email: "",
   password: "",
   confirmPassword: "",
+  avatar: "",
 };
 
 function Auth() {
@@ -30,7 +31,13 @@ function Auth() {
 
     setGenAvatar(true);
 
-    setAvatar(getRandomOptions());
+    //setAvatar(getRandomOptions());
+
+    let avatarString = JSON.stringify(getRandomOptions());
+    console.log(avatarString);
+
+    setFormData({ ...formData, avatar: avatarString });
+    console.log(formData);
   };
 
   const onSubmit = (e) => {

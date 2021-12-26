@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { BigHead } from "@bigheads/core";
 
 import { Image, Modal, Card } from "semantic-ui-react";
 import StudentModal from "./StudentModal";
 
 function UserCard({ student }) {
   const [open, setOpen] = useState(false);
+
+  console.log(JSON.parse(student.avatar));
 
   return (
     <Modal
@@ -13,11 +16,8 @@ function UserCard({ student }) {
       open={open}
       trigger={
         <Card>
-          <Image
-            src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-            wrapped
-            ui={false}
-          />
+          <BigHead {...JSON.parse(student.avatar)} />
+
           <Card.Content>
             <Card.Header>{student.username}</Card.Header>
           </Card.Content>

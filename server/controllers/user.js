@@ -42,7 +42,9 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const { username, email, password, confirmPassword } = req.body;
+  const { username, email, password, confirmPassword, avatar } = req.body;
+
+  console.log(req.body);
 
   try {
     const existingUser = await User.findOne({ email });
@@ -59,6 +61,7 @@ export const signup = async (req, res) => {
     const result = await User.create({
       username,
       email,
+      avatar,
       password: hashedPassword,
       isTeacher: false,
       negPoints: 0,
