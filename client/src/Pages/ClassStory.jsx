@@ -17,6 +17,8 @@ function ClassStory() {
   const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {
+    if (!user) return;
+
     if (user.result.isTeacher) {
       setIsTeacher(true);
     }

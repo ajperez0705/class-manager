@@ -2,9 +2,10 @@ import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema({
   username: { type: String, required: true },
+  avatar: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  id: { type: String },
+  // id: { type: String },
   totalPoints: { type: Number },
   allTimePoints: { type: Number },
   trophyA: { type: String },

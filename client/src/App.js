@@ -11,6 +11,7 @@ import Auth from "./Pages/Auth";
 import SinglePost from "./Pages/SinglePost";
 import StudentMarket from "./Pages/StudentMarket";
 import MyAccount from "./Pages/MyAccount";
+import TestBigHead from "./Pages/TestBigHead";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           />
           <Route exact path="/my-account" component={MyAccount} />
           <Route exact path="/posts/:postId" component={SinglePost} />
+          <Route exact path="/test" component={TestBigHead} />
         </Switch>
       </Container>
     </BrowserRouter>

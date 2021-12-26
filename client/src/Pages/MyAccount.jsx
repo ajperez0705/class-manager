@@ -34,19 +34,6 @@ function MyAccount() {
             page from their end.
           </p>
           <p>Put the avatar here</p>
-          <Card>
-            <Card.Content>
-              <Icon name="thumbs down outline" size="huge" />
-              <Card.Header>Trophy A</Card.Header>
-              <Card.Description>
-                Trophy A allows you to chew gum in class for one week.
-              </Card.Description>
-              <Card.Meta>
-                <span className="date">Value: 10 points</span>
-              </Card.Meta>
-              <Button color="grey">Purple</Button>
-            </Card.Content>
-          </Card>
         </>
       ) : (
         <>

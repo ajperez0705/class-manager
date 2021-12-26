@@ -3,6 +3,8 @@ import { Button, Form } from "semantic-ui-react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { BigHead } from "@bigheads/core";
+import { getRandomOptions } from "../utils/bigheads";
 
 import { signin, signup } from "../actions/auth";
 
@@ -17,8 +19,19 @@ function Auth() {
   const [errors, setErrors] = useState({});
   const [isSignup, setisSignup] = useState(false);
   const [formData, setFormData] = useState(initialState);
+  const [avatar, setAvatar] = useState({});
+  const [genAvatar, setGenAvatar] = useState(false);
+
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const generateAvatar = function (e) {
+    e.preventDefault();
+
+    setGenAvatar(true);
+
+    setAvatar(getRandomOptions());
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -99,6 +112,12 @@ function Auth() {
           //   error={errors.confirmPassword ? true : false}
           onChange={onChangeHandler}
         />
+
+        <button onClick={generateAvatar}>Generate</button>
+        <div style={{ width: "300px" }}>
+          {genAvatar && <BigHead {...avatar} />}
+        </div>
+
         <Button type="submit" primary>
           Register
         </Button>
@@ -123,15 +142,15 @@ function Auth() {
             : "Do not have an account? Sign up"}
         </Button>
       </Form>
-      {/* {Object.keys(errors).length > 0 && (
-      <div className="ui error message">
-        <ul className="list">
-          {Object.values(errors).map((value) => (
-            <li key={value}>{value}</li>
-          ))}
-        </ul>
-      </div>
-    )} */}
+      {Object.keys(errors).length > 0 && (
+        <div className="ui error message">
+          <ul className="list">
+            {Object.values(errors).map((value) => (
+              <li key={value}>{value}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   ) : (
     //   if user already has account
@@ -183,15 +202,15 @@ function Auth() {
             : "Do not have an account? Sign up"}
         </Button>
       </Form>
-      {/* {Object.keys(errors).length > 0 && (
-      <div className="ui error message">
-        <ul className="list">
-          {Object.values(errors).map((value) => (
-            <li key={value}>{value}</li>
-          ))}
-        </ul>
-      </div>
-    )} */}
+      {Object.keys(errors).length > 0 && (
+        <div className="ui error message">
+          <ul className="list">
+            {Object.values(errors).map((value) => (
+              <li key={value}>{value}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 

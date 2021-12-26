@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
-  id: { type: String },
+  // id: { type: String },
   title: String,
   message: String,
   selectedFile: String,
