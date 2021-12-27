@@ -123,7 +123,7 @@ function Auth() {
           onChange={onChangeHandler}
         />
 
-        {/* <Form.TextArea
+        <Form.TextArea
           label="About Me"
           placeholder="Write a little about yourself here"
           name="bio"
@@ -131,7 +131,7 @@ function Auth() {
           //   value={values.confirmPassword}
           //   error={errors.confirmPassword ? true : false}
           onChange={onChangeHandler}
-        /> */}
+        />
 
         <button onClick={generateAvatar}>Generate</button>
         <div style={{ width: "300px" }}>

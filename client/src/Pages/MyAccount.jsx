@@ -48,10 +48,11 @@ function MyAccount() {
                 description to learn more about them!
               </p>
               <UserAvatar studentAvatar={student.avatar} />
+              {student.bio}
               <Card.Group itemsPerRow={2}>
                 <Card
                   color="red"
-                  header="Total Points"
+                  header="Current Points"
                   meta={student.totalPoints}
                 />
                 <Card

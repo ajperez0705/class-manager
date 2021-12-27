@@ -42,7 +42,7 @@ export const signin = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  const { username, email, password, confirmPassword, bio, avatar } = req.body;
+  const { username, email, password, confirmPassword, avatar, bio } = req.body;
 
   console.log(req.body);
 
@@ -62,11 +62,11 @@ export const signup = async (req, res) => {
       username,
       email,
       avatar,
-      totalPoints,
-      allTimePoints,
       bio,
       password: hashedPassword,
       isTeacher: false,
+      totalPoints: 0,
+      allTimePoints: 0,
       negPoints: 0,
       curPoints: 0,
       trophyA: 0,
