@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Icon, Button } from "semantic-ui-react";
 import { purchaseTrophy, updateStudentPoints } from "../actions/users";
+import UserAvatar from "../components/UserAvatar";
 
 function MyAccount() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -46,20 +47,28 @@ function MyAccount() {
                 and allows different perks if you have them. Read each
                 description to learn more about them!
               </p>
-              <p>Put the avatar here</p>
-              <Card.Group itemsPerRow={3}>
-                <Card color="red" header="Test" meta={student.totalPoints} />
+              <UserAvatar studentAvatar={student.avatar} />
+              <Card.Group itemsPerRow={2}>
+                <Card
+                  color="red"
+                  header="Total Points"
+                  meta={student.totalPoints}
+                />
                 <Card
                   color="green"
-                  header="Test"
+                  header="All Time Points"
                   meta={student.allTimePoints}
                 />
-                <Card color="blue" header="Test" />
               </Card.Group>
-              <Card.Group itemsPerRow={3}>
-                <Card color="red" header="Test" meta={student.trophyA} />
-                <Card color="green" header="Test" meta={student.trophyB} />
-                <Card color="blue" header="Test" meta={student.trophyC} />
+              <Card.Group itemsPerRow={4}>
+                <Card color="red" header="Trophy A" meta={student.trophyA} />
+                <Card color="green" header="Trophy B" meta={student.trophyB} />
+                <Card color="blue" header="Trophy C" meta={student.trophyC} />
+                <Card
+                  color="blue"
+                  header="Total Trophies"
+                  meta={student.totalTrophies}
+                />
               </Card.Group>
             </div>
           ))}

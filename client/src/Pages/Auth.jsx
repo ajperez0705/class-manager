@@ -7,12 +7,14 @@ import { BigHead } from "@bigheads/core";
 import { getRandomOptions } from "../utils/bigheads";
 
 import { signin, signup } from "../actions/auth";
+import UserAvatar from "../components/UserAvatar";
 
 const initialState = {
   username: "",
   email: "",
   password: "",
   confirmPassword: "",
+  bio: "",
   avatar: "",
 };
 
@@ -34,6 +36,7 @@ function Auth() {
     //setAvatar(getRandomOptions());
 
     let avatarString = JSON.stringify(getRandomOptions());
+    setAvatar(JSON.parse(avatarString));
     console.log(avatarString);
 
     setFormData({ ...formData, avatar: avatarString });
@@ -119,6 +122,16 @@ function Auth() {
           //   error={errors.confirmPassword ? true : false}
           onChange={onChangeHandler}
         />
+
+        {/* <Form.TextArea
+          label="About Me"
+          placeholder="Write a little about yourself here"
+          name="bio"
+          type="text"
+          //   value={values.confirmPassword}
+          //   error={errors.confirmPassword ? true : false}
+          onChange={onChangeHandler}
+        /> */}
 
         <button onClick={generateAvatar}>Generate</button>
         <div style={{ width: "300px" }}>

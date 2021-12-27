@@ -27,7 +27,7 @@ export const comment = (finalComment, id) =>
   API.post(`/posts/${id}/commentPost`, { finalComment });
 
 export const signIn = (formData) => API.post("/user/signin", formData);
-export const signUp = (formData, avatar) => API.post("/user/signup", formData);
+export const signUp = (formData) => API.post("/user/signup", formData);
 
 // Users / Students
 export const fetchStudents = () => API.get("/user/class");

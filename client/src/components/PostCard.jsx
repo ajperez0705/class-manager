@@ -79,7 +79,9 @@ export default function PostCard({
           disabled={!user}
           onClick={() => dispatch(likePost(_id))}
         >
-          <Likes />
+          <>
+            <Likes />
+          </>
         </Button>
 
         <Button labelPosition="right" as={Link} to={`/posts/${1}`}>

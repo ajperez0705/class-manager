@@ -7,8 +7,6 @@ import StudentModal from "./StudentModal";
 function UserCard({ student }) {
   const [open, setOpen] = useState(false);
 
-  console.log(JSON.parse(student.avatar));
-
   return (
     <Modal
       onClose={() => setOpen(false)}

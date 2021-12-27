@@ -4,6 +4,7 @@ import { Card, Icon, Button } from "semantic-ui-react";
 function TrophyCards({ buyTrophy }) {
   const trophies = [
     {
+      id: 1,
       icon: "thumbs down outline",
       name: "Trophy A",
       symbol: "a",
@@ -12,6 +13,7 @@ function TrophyCards({ buyTrophy }) {
       btnColor: "purple",
     },
     {
+      id: 2,
       icon: "thumbs down outline",
       name: "Trophy B",
       symbol: "b",
@@ -20,6 +22,7 @@ function TrophyCards({ buyTrophy }) {
       btnColor: "blue",
     },
     {
+      id: 3,
       icon: "thumbs down outline",
       name: "Trophy C",
       symbol: "c",
@@ -32,7 +35,7 @@ function TrophyCards({ buyTrophy }) {
   return (
     <div>
       {trophies.map((trophy) => (
-        <Card>
+        <Card key={trophy.id}>
           <Card.Content>
             <Icon name={trophy.icon} size="huge" />
             <Card.Header>{trophy.name}</Card.Header>

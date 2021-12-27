@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Button, Header, Image, Modal, Card, Icon } from "semantic-ui-react";
 import decode from "jwt-decode";
 import { updateStudentPoints } from "../actions/users";
+import UserAvatar from "./UserAvatar";
 
 function StudentModal({ student, modalStatus, setModalStatus }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -38,11 +39,7 @@ function StudentModal({ student, modalStatus, setModalStatus }) {
             {student.username}'s Current Points: {student.totalPoints}
           </Modal.Header>
           <Modal.Content image>
-            <Image
-              size="small"
-              src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
-              wrapped
-            />
+            <UserAvatar studentAvatar={student.avatar} />
 
             {feedBack === "positive" ? (
               <Modal.Description>
@@ -89,11 +86,7 @@ function StudentModal({ student, modalStatus, setModalStatus }) {
             {student.username}'s Current Points: {student.totalPoints}
           </Modal.Header>
           <Modal.Content image>
-            <Image
-              size="small"
-              src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
-              wrapped
-            />
+            <UserAvatar studentAvatar={student.avatar} />
             <Modal.Description>
               <Header>Points</Header>
               <Card meta="Current Points" description={student.totalPoints} />
