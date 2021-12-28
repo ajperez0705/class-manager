@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Card,
@@ -7,7 +7,6 @@ import {
   Icon,
   Image,
   Label,
-  Form,
 } from "semantic-ui-react";
 import moment from "moment";
 import { useSelector } from "react-redux";
@@ -20,7 +19,6 @@ function SinglePost(props) {
   const [clickedPostData, setClickedPostData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const posts = useSelector((state) => state.posts);
-  let postMarkup;
 
   useEffect(() => {
     init();

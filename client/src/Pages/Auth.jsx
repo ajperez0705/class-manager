@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
@@ -7,7 +7,6 @@ import { BigHead } from "@bigheads/core";
 import { getRandomOptions } from "../utils/bigheads";
 
 import { signin, signup } from "../actions/auth";
-import UserAvatar from "../components/UserAvatar";
 
 const initialState = {
   username: "",
@@ -88,7 +87,7 @@ function Auth() {
           placeholder="Username..."
           name="username"
           type="text"
-          //   value={values.username}
+          // value={formData.username}
           //   error={errors.username ? true : false}
           onChange={onChangeHandler}
         />
@@ -98,7 +97,7 @@ function Auth() {
           placeholder="Email..."
           name="email"
           type="email"
-          //   value={values.email}
+          //   value={formData.email}
           //   error={errors.email ? true : false}
           onChange={onChangeHandler}
         />
@@ -108,7 +107,7 @@ function Auth() {
           placeholder="Password..."
           name="password"
           type="password"
-          //   value={values.password}
+          //   value={formData.password}
           //   error={errors.password ? true : false}
           onChange={onChangeHandler}
         />
@@ -118,7 +117,7 @@ function Auth() {
           placeholder="Confirm Password..."
           name="confirmPassword"
           type="password"
-          //   value={values.confirmPassword}
+          //   value={formData.confirmPassword}
           //   error={errors.confirmPassword ? true : false}
           onChange={onChangeHandler}
         />
@@ -128,7 +127,7 @@ function Auth() {
           placeholder="Write a little about yourself here"
           name="bio"
           type="text"
-          //   value={values.confirmPassword}
+          //   value={formData.confirmPassword}
           //   error={errors.confirmPassword ? true : false}
           onChange={onChangeHandler}
         />
@@ -165,7 +164,7 @@ function Auth() {
       {Object.keys(errors).length > 0 && (
         <div className="ui error message">
           <ul className="list">
-            {Object.values(errors).map((value) => (
+            {Object.formData(errors).map((value) => (
               <li key={value}>{value}</li>
             ))}
           </ul>
@@ -182,7 +181,7 @@ function Auth() {
           placeholder="Username..."
           name="username"
           type="text"
-          //   value={values.username}
+          //   value={formData.username}
           //   error={errors.username ? true : false}
           onChange={onChangeHandler}
         />
@@ -192,7 +191,7 @@ function Auth() {
           placeholder="Password..."
           name="password"
           type="password"
-          //   value={values.password}
+          //   value={formData.password}
           //   error={errors.password ? true : false}
           onChange={onChangeHandler}
         />
@@ -225,7 +224,7 @@ function Auth() {
       {Object.keys(errors).length > 0 && (
         <div className="ui error message">
           <ul className="list">
-            {Object.values(errors).map((value) => (
+            {Object.formData(errors).map((value) => (
               <li key={value}>{value}</li>
             ))}
           </ul>

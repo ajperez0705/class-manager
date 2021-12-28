@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import ClassStory from "./Pages/ClassStory";
 import "./App.css";
-import { Container, Button } from "semantic-ui-react";
-import Login from "./Pages/Login";
-import Register from "./Pages/Register";
+import { Container } from "semantic-ui-react";
 import MenuBar from "./components/MenuBar";
 import Auth from "./Pages/Auth";
 import SinglePost from "./Pages/SinglePost";

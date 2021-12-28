@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BigHead } from "@bigheads/core";
 import { getRandomOptions } from "../utils/bigheads";
+import { Form, Message, Button } from "semantic-ui-react";
 
 function TestBigHead() {
   const [avatar, setAvatar] = useState({});
@@ -17,11 +18,15 @@ function TestBigHead() {
   };
 
   return (
-    <div style={{ width: "200px" }}>
-      <button onClick={generateAvatar}>Generate</button>
-      {/* <BigHead {...getRandomOptions()} /> */}
-      {genAvatar && <BigHead />}
-    </div>
+    <Form error>
+      <Form.Input label="Email" placeholder="joe@schmoe.com" />
+      <Message
+        error
+        header="Action Forbidden"
+        content="You can only sign up for an account once with a given e-mail address."
+      />
+      <Button>Submit</Button>
+    </Form>
   );
 }
 

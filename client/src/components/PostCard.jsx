@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Card, Icon, Label, Image, Button, Popup } from "semantic-ui-react";
+import React from "react";
+import { Card, Icon, Label, Image, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import moment from "moment";

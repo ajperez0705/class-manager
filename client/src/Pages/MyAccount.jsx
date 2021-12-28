@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Card, Icon, Button } from "semantic-ui-react";
-import { purchaseTrophy, updateStudentPoints } from "../actions/users";
+import { useSelector } from "react-redux";
+import { Card } from "semantic-ui-react";
 import UserAvatar from "../components/UserAvatar";
 
 function MyAccount() {
