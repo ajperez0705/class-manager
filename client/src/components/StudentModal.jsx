@@ -13,7 +13,15 @@ import decode from "jwt-decode";
 import { updateStudentPoints } from "../actions/users";
 import UserAvatar from "./UserAvatar";
 
-function StudentModal({ student, modalStatus, setModalStatus }) {
+function StudentModal({
+  student,
+  modalStatus,
+  setModalStatus,
+  pointAnim,
+  setPointAnim,
+  setOpen,
+  numPointsToShow,
+}) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [feedBack, setFeedBack] = useState("positive");
   const [numPoints, setNumPoints] = useState(0);
@@ -30,15 +38,27 @@ function StudentModal({ student, modalStatus, setModalStatus }) {
   }, []);
 
   const updatePoints = function (updateType, student, numPoints) {
+    console.log(updateType);
+    if (numPoints === 0) return;
+
+    setOpen(false);
+    setPointAnim(true);
+
+    numPointsToShow(numPoints);
+
     if (updateType === "positive") {
       student.totalPoints = student.totalPoints + numPoints;
       student.allTimePoints = student.allTimePoints + numPoints;
     } else if (updateType === "negative") {
-      student.totalPoints = student.totalPoints - numPoints;
+      student.totalPoints = student.totalPoints - Math.abs(numPoints);
     }
 
     dispatch(updateStudentPoints(student._id, student));
     setNumPoints(0);
+
+    setTimeout(() => {
+      setPointAnim(false);
+    }, 1000);
   };
 
   const numPointsHandler = function (e) {

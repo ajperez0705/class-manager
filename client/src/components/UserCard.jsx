@@ -4,7 +4,7 @@ import { BigHead } from "@bigheads/core";
 import { Image, Modal, Card } from "semantic-ui-react";
 import StudentModal from "./StudentModal";
 
-function UserCard({ student }) {
+function UserCard({ student, pointAnim, setPointAnim, numPointsToShow }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -32,6 +32,10 @@ function UserCard({ student }) {
         student={student}
         modalStatus={open}
         setModalStatus={setOpen}
+        pointAnim={pointAnim}
+        setPointAnim={setPointAnim}
+        setOpen={setOpen}
+        numPointsToShow={numPointsToShow}
       />
     </Modal>
   );

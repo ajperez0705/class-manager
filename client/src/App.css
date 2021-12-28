@@ -35,3 +35,17 @@
   justify-content: flex-start;
   margin-top: 0px;
 }
+
+/* Home */
+.home-container {
+  position: relative;
+}
+
+.point-modal {
+  margin: 0 auto;
+  text-align: center;
+  z-index: 99;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+}
