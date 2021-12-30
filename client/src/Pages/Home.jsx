@@ -10,6 +10,7 @@ import successAudio from "../sound/SSBM_Success.mp3";
 import failureAudio from "../sound/SSBM_Failure.mp3";
 
 import { motion } from "framer-motion";
+import Confetti from "../components/Confetti";
 
 function Home() {
   const dispatch = useDispatch();
@@ -19,8 +20,6 @@ function Home() {
   const [currentId, setCurrentId] = useState(null);
   const [pointAnim, setPointAnim] = useState(false);
   const [showPoints, setShowPoints] = useState(0);
-
-  console.log(students);
 
   useEffect(() => {
     dispatch(fetchStudents());
@@ -40,19 +39,22 @@ function Home() {
   return (
     <div className="home-container">
       <h1>Home</h1>
+
       {pointAnim && (
-        <motion.div
-          className="point-modal"
-          animate={{
-            // fontSize: "500px",
-            color: "red",
-            opacity: "1",
-          }}
-          transition={{ duration: 3 }}
-          initial={{ opacity: "0", fontSize: "200px" }}
-        >
-          <p>{showPoints > 0 ? `+${showPoints}` : `${showPoints}`}</p>
-        </motion.div>
+        <>
+          <motion.div
+            className="point-modal"
+            animate={{
+              // fontSize: "500px",
+              color: "red",
+              opacity: "1",
+            }}
+            transition={{ duration: 3 }}
+            initial={{ opacity: "0", fontSize: "200px" }}
+          >
+            <p>{showPoints > 0 ? `+${showPoints}` : `${showPoints}`}</p>
+          </motion.div>
+        </>
       )}
 
       <Grid columns={3}>

@@ -12,6 +12,8 @@ import {
 import decode from "jwt-decode";
 import { updateStudentPoints } from "../actions/users";
 import UserAvatar from "./UserAvatar";
+import Confetti from "./Confetti";
+import { motion } from "framer-motion";
 
 function StudentModal({
   student,
@@ -41,7 +43,6 @@ function StudentModal({
     console.log(updateType);
     if (numPoints === 0) return;
 
-    setOpen(false);
     setPointAnim(true);
 
     numPointsToShow(numPoints);
@@ -58,6 +59,7 @@ function StudentModal({
 
     setTimeout(() => {
       setPointAnim(false);
+      setOpen(false);
     }, 1000);
   };
 
@@ -79,9 +81,34 @@ function StudentModal({
     <>
       {isTeacher ? (
         <>
-          <Modal.Header>
-            {student.username}'s Current Points: {student.totalPoints}
-          </Modal.Header>
+          {pointAnim ? (
+            <>
+              <Modal.Header>
+                <span>{student.username}'s Current Points:</span>
+                <motion.p
+                  //className="point-modal"
+                  animate={{
+                    // fontSize: "500px",
+                    scale: 1.3,
+                    originX: 0,
+                    originY: 0,
+                  }}
+                  // transition={{ duration: 3 }}
+                >
+                  {student.totalPoints}
+                </motion.p>
+              </Modal.Header>
+            </>
+          ) : (
+            <>
+              <Modal.Header>
+                <span>
+                  {student.username}'s Current Points: {student.totalPoints}
+                </span>
+              </Modal.Header>
+            </>
+          )}
+
           <Modal.Content image>
             <UserAvatar studentAvatar={student.avatar} />
             {feedBack === "positive" ? (
@@ -102,14 +129,20 @@ function StudentModal({
                     Negative Feedback
                   </Header>
                 </div>
-                <Card
+                <Confetti
+                  updatePoints={updatePoints}
+                  positive="positive"
+                  student={student}
+                  numPoints={numPoints}
+                />
+                {/* <Card
                   onClick={() => updatePoints("positive", student, numPoints)}
                 >
                   <Icon name="thumbs up outline" size="huge" />
                   <Card.Content>
                     <Card.Header>Helping Others</Card.Header>
                   </Card.Content>
-                </Card>
+                </Card> */}
               </Modal.Description>
             ) : (
               <Modal.Description>
