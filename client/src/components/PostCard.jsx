@@ -70,7 +70,7 @@ export default function PostCard({
         <Card.Header>{title}</Card.Header>
         <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
         {/* <p>{}</p> */}
-        <Card.Description>{message}</Card.Description>
+        <Card.Description>{message.substring(0, 50)}...</Card.Description>
       </Card.Content>
       <Card.Content extra>
         {/* <LikeButton user={user} post={{ id, numOfLikes, likeCount }} /> */}

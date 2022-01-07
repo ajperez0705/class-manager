@@ -4,7 +4,11 @@ import { Button, Form } from "semantic-ui-react";
 import FileBase from "react-file-base64";
 import { createPost, updatePost } from "../actions/posts";
 
-export default function PostForm({ currentId, setCurrentId }) {
+export default function PostForm({
+  currentId,
+  setCurrentId,
+  filterPostAfterForm,
+}) {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
@@ -28,6 +32,10 @@ export default function PostForm({ currentId, setCurrentId }) {
       dispatch(createPost(postData));
     }
     clear();
+
+    setTimeout(() => {
+      filterPostAfterForm();
+    }, 1000);
   };
 
   const clear = () => {

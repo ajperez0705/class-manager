@@ -134,6 +134,8 @@ function StudentModal({
                   positive="positive"
                   student={student}
                   numPoints={numPoints}
+                  icon="thumbs up outline"
+                  message="Helping Others"
                 />
                 {/* <Card
                   onClick={() => updatePoints("positive", student, numPoints)}

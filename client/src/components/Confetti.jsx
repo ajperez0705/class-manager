@@ -89,8 +89,6 @@ export default class Confetti extends Component {
       rewardPunish,
     } = this.state;
     const disabled = rewardPunish === "punish";
-    const buttonName = this.props.buttonName;
-    console.log(buttonName);
     return (
       <Reward
         ref={(ref) => {
@@ -115,9 +113,9 @@ export default class Confetti extends Component {
           icon={type ? "like" : "trophy"}
           size="large"
         >
-          <Icon name="thumbs up outline" size="huge" />
+          <Icon name={this.props.icon} size="huge" />
           <Card.Content>
-            <Card.Header>Helping Others</Card.Header>
+            <Card.Header>{this.props.message}</Card.Header>
           </Card.Content>
         </Card>
       </Reward>

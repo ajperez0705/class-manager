@@ -7,11 +7,34 @@ import {
   COMMENT,
 } from "../constants/actionTypes";
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (filter) => async (dispatch) => {
   try {
     const { data } = await api.fetchPosts();
+    let finalData;
+    switch (filter) {
+      case "recent":
+        finalData = data.sort(function (a, b) {
+          var c = new Date(a.createdAt);
+          var d = new Date(b.createdAt);
+          return d - c;
+        });
+        break;
 
-    dispatch({ type: FETCH_ALL, payload: data });
+      case "oldest":
+        finalData = data.sort(function (a, b) {
+          var c = new Date(a.createdAt);
+          var d = new Date(b.createdAt);
+          return c - d;
+        });
+
+        break;
+
+      default:
+        break;
+    }
+    console.log(finalData);
+
+    dispatch({ type: FETCH_ALL, payload: finalData });
   } catch (error) {
     console.log(error.message);
   }

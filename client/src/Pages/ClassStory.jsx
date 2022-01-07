@@ -6,23 +6,23 @@ import { getPosts } from "../actions/posts";
 import PostForm from "../components/PostForm";
 import PostCard from "../components/PostCard";
 
-const filterOptions = [
-  { key: "Most Recent", value: "recent", text: "Most Recent" },
-];
+// const filterOptions = [
+//   { key: "Most Recent", value: "recent", text: "Most Recent" },
+// ];
 
 function ClassStory() {
   const dispatch = useDispatch();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [isTeacher, setIsTeacher] = useState(null);
   const [showForm, setShowForm] = useState(false);
-  const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState("recent");
 
   const posts = useSelector((state) => state.posts);
-  console.log(posts);
 
   // current Id is used to grab the id of the post you want to edit
   const [currentId, setCurrentId] = useState(null);
 
+  // On initial render, checks if logged in and if user is teacher
   useEffect(() => {
     if (!user) return;
 
@@ -31,9 +31,15 @@ function ClassStory() {
     }
   }, []);
 
+  // Grabs the posts from the database on load
   useEffect(() => {
-    dispatch(getPosts());
+    dispatch(getPosts(filter));
   }, [currentId, dispatch]);
+
+  // Re-calls the posts using the current filter whenever the filter handler changes
+  useEffect(() => {
+    dispatch(getPosts(filter));
+  }, [filter, dispatch]);
 
   const showPostForm = function () {
     if (showForm === true) {
@@ -51,6 +57,11 @@ function ClassStory() {
     console.log(filter);
   };
 
+  const filterPostAfterForm = function () {
+    console.log("reached function");
+    dispatch(getPosts(filter));
+  };
+
   return (
     <div>
       <h1>Class Story</h1>
@@ -63,7 +74,11 @@ function ClassStory() {
           )}
           {showForm && (
             <Transition.Group>
-              <PostForm currentId={currentId} setCurrentId={setCurrentId} />
+              <PostForm
+                filterPostAfterForm={filterPostAfterForm}
+                currentId={currentId}
+                setCurrentId={setCurrentId}
+              />
             </Transition.Group>
           )}
         </>
@@ -79,7 +94,6 @@ function ClassStory() {
             value={filter}
           /> */}
           <select onChange={(e) => filterHandler(e)}>
-            <option value="Default">Default</option>
             <option value="recent">Most Recent</option>
             <option value="oldest">Oldest</option>
           </select>
