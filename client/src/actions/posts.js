@@ -32,7 +32,6 @@ export const getPosts = (filter) => async (dispatch) => {
       default:
         break;
     }
-    console.log(finalData);
 
     dispatch({ type: FETCH_ALL, payload: finalData });
   } catch (error) {
