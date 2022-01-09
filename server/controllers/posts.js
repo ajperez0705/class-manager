@@ -90,14 +90,41 @@ export const likePost = async (req, res) => {
 export const commentPost = async (req, res) => {
   const { id } = req.params;
   const { finalComment } = req.body;
+  console.log(req.body);
 
   const post = await PostMessage.findById(id);
 
-  post.comments.push(finalComment);
+  post.comments.push({ message: finalComment });
 
   const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
     new: true,
   });
 
   res.json(updatedPost);
+};
+
+export const deleteComment = async (req, res) => {
+  const { postID, commentID } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(postID)) {
+    return res.status(404).send("No comment with that postID");
+  }
+
+  const post = await PostMessage.findById(postID);
+  // console.log(post);
+
+  post.comments.forEach((comment) => {
+    console.log(String(comment._id));
+  });
+
+  post.comments = post.comments.filter(
+    (comment) => String(comment._id) !== commentID
+  );
+  // console.log(post);
+
+  await PostMessage.findByIdAndUpdate(postID, post, {
+    new: true,
+  });
+
+  res.json({ message: "Comment deleted successfully" });
 };

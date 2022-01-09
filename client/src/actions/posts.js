@@ -5,12 +5,14 @@ import {
   FETCH_ALL,
   UPDATE,
   COMMENT,
+  DELETE_COMMENT,
 } from "../constants/actionTypes";
 
 export const getPosts = (filter) => async (dispatch) => {
   try {
     const { data } = await api.fetchPosts();
     let finalData;
+
     switch (filter) {
       case "recent":
         finalData = data.sort(function (a, b) {
@@ -87,9 +89,21 @@ export const commentPost = (finalComment, id) => async (dispatch) => {
   try {
     const { data } = await api.comment(finalComment, id);
 
+    console.log(data);
+
     dispatch({ type: COMMENT, payload: data });
 
     return data.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteComment = (commentID, postID) => async (dispatch) => {
+  try {
+    await api.deleteComment(commentID, postID);
+
+    dispatch({ type: DELETE_COMMENT, payload: commentID });
   } catch (error) {
     console.log(error);
   }

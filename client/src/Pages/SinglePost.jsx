@@ -14,28 +14,32 @@ import CommentSection from "../components/CommentSection";
 
 function SinglePost(props) {
   //   const commentInputRef = useRef(null);
-  const postId = props.match.params.postId;
+  const _id = props.match.params.postId;
   //   const [comment, setComment] = useState("");
   const [clickedPostData, setClickedPostData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const posts = useSelector((state) => state.posts);
 
+  console.log(posts);
+
   useEffect(() => {
     init();
-    console.log(clickedPostData);
   }, []);
 
   const init = async () => {
     try {
       setIsLoading(true);
-      const clickedPost = await posts?.filter((post) => post._id === postId);
+      const clickedPost = await posts?.filter((post) => post._id === _id);
+      console.log(clickedPost);
 
       const { title, message, createdAt, selectedFile, likes, comments } =
         await clickedPost[0];
 
+      console.log(likes);
+
       setClickedPostData((prevState) => ({
         ...prevState,
-        postId,
+        _id,
         title,
         message,
         createdAt,

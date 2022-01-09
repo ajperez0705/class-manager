@@ -5,6 +5,7 @@ export const UPDATE = "UPDATE";
 export const DELETE = "DELETE";
 export const FETCH_ALL = "FETCH_ALL";
 export const COMMENT = "COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 // Auth
 export const AUTH = "AUTH";

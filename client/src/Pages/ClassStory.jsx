@@ -63,8 +63,6 @@ function ClassStory() {
     e.preventDefault();
 
     setFilter(e.target.value);
-
-    console.log(filter);
   };
 
   const filterPostAfterForm = function () {
@@ -90,15 +88,12 @@ function ClassStory() {
               ) : (
                 <button onClick={showPostForm}>Create Post</button>
               )}
-              {showForm && (
-                <Transition.Group>
-                  <PostForm
-                    filterPostAfterForm={filterPostAfterForm}
-                    currentId={currentId}
-                    setCurrentId={setCurrentId}
-                  />
-                </Transition.Group>
-              )}
+              <PostForm
+                filterPostAfterForm={filterPostAfterForm}
+                currentId={currentId}
+                setCurrentId={setCurrentId}
+                showForm={showForm}
+              />
             </>
           )}
           <Grid columns={3}>

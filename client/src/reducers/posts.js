@@ -2,6 +2,7 @@ import {
   COMMENT,
   CREATE,
   DELETE,
+  DELETE_COMMENT,
   FETCH_ALL,
   UPDATE,
 } from "../constants/actionTypes";
@@ -19,6 +20,10 @@ const posts = (posts = [], action) => {
 
     case COMMENT:
       return [...posts, action.payload];
+
+    case DELETE_COMMENT:
+      // Keep all comments EXCEPT for the one where the id === action.payload
+      return posts.filter((post) => post.comments._id !== action.payload);
 
     case FETCH_ALL:
       return action.payload;

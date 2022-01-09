@@ -9,7 +9,7 @@ const postSchema = mongoose.Schema({
     type: [String],
     default: [],
   },
-  comments: { type: [String], default: [] },
+  comments: [{ message: String }],
   createdAt: {
     type: Date,
     default: new Date(),
