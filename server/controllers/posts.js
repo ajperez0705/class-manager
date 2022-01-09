@@ -126,5 +126,5 @@ export const deleteComment = async (req, res) => {
     new: true,
   });
 
-  res.json({ message: "Comment deleted successfully" });
+  res.json(post.comments);
 };

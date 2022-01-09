@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Form, Icon, Button } from "semantic-ui-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
 import { commentPost, deleteComment } from "../actions/posts";
@@ -11,6 +11,9 @@ function CommentSection({ post }) {
   const [myComments, setMyComments] = useState([]);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
+  const currentPost = useSelector((state) =>
+    state.posts.filter((p) => p?._id === post?._id)
+  );
 
   useEffect(() => {
     if (!comments) return;
@@ -22,20 +25,7 @@ function CommentSection({ post }) {
     );
 
     setMyComments(userComments);
-
-    // post?.comments.forEach((comment) => {
-    //   // Check if username is = the string before the colon
-    //   if (user.username === comment.substr(0, comment.indexOf(":"))) {
-    //     // Add to the my comments array
-    //     setMyComments((prevState) => [...prevState, comment]);
-    //   }
-    //   console.log(comment.substr(0, comment.indexOf(":")));
-    // });
   }, [comments, dispatch]);
-
-  // post.comments.forEach((comment) => {
-  //   console.log(comment.substr(0, comment.indexOf(":")));
-  // });
 
   const submitComment = async (e) => {
     e.preventDefault();
@@ -43,10 +33,19 @@ function CommentSection({ post }) {
     const finalComment = `${user.result.username}: ${comment}`;
 
     const newComments = await dispatch(commentPost(finalComment, post?._id));
-    console.log(newComments);
 
     setComments(newComments);
     setComment("");
+  };
+
+  const deleteCommentHandler = async (e, clicked_id) => {
+    e.preventDefault();
+
+    const updatedComments = await dispatch(
+      deleteComment(clicked_id, post?._id)
+    );
+
+    setComments(updatedComments);
   };
 
   return (
@@ -90,7 +89,7 @@ function CommentSection({ post }) {
               <Button
                 basic
                 color="purple"
-                onClick={() => dispatch(deleteComment(comment?._id, post?._id))}
+                onClick={(e) => deleteCommentHandler(e, comment?._id)}
               >
                 <Icon name="delete" />
               </Button>

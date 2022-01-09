@@ -101,9 +101,13 @@ export const commentPost = (finalComment, id) => async (dispatch) => {
 
 export const deleteComment = (commentID, postID) => async (dispatch) => {
   try {
-    await api.deleteComment(commentID, postID);
+    const { data } = await api.deleteComment(commentID, postID);
+
+    console.log(data);
 
     dispatch({ type: DELETE_COMMENT, payload: commentID });
+
+    return data;
   } catch (error) {
     console.log(error);
   }

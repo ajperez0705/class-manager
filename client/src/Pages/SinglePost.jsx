@@ -20,8 +20,6 @@ function SinglePost(props) {
   const [isLoading, setIsLoading] = useState(false);
   const posts = useSelector((state) => state.posts);
 
-  console.log(posts);
-
   useEffect(() => {
     init();
   }, []);
@@ -30,12 +28,9 @@ function SinglePost(props) {
     try {
       setIsLoading(true);
       const clickedPost = await posts?.filter((post) => post._id === _id);
-      console.log(clickedPost);
 
       const { title, message, createdAt, selectedFile, likes, comments } =
         await clickedPost[0];
-
-      console.log(likes);
 
       setClickedPostData((prevState) => ({
         ...prevState,

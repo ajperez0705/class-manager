@@ -49,6 +49,8 @@ function ClassStory() {
   // Re-calls the posts using the current filter whenever the filter handler changes
   useEffect(() => {
     dispatch(getPosts(filter));
+
+    console.log("called get more posts");
   }, [filter, dispatch]);
 
   const showPostForm = function () {
