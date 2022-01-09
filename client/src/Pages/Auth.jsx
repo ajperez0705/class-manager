@@ -18,7 +18,7 @@ const initialState = {
 };
 
 function Auth() {
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([]);
   const [isSignup, setisSignup] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const [avatar, setAvatar] = useState({});
@@ -26,6 +26,8 @@ function Auth() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  console.log(errors);
 
   const generateAvatar = function (e) {
     e.preventDefault();
@@ -46,9 +48,9 @@ function Auth() {
     e.preventDefault();
 
     if (isSignup) {
-      dispatch(signup(formData, history));
+      dispatch(signup(formData, setErrors, history));
     } else {
-      dispatch(signin(formData, history));
+      dispatch(signin(formData, setErrors, history));
     }
   };
 
@@ -161,12 +163,12 @@ function Auth() {
             : "Do not have an account? Sign up"}
         </Button>
       </Form>
-      {Object.keys(errors).length > 0 && (
+      {errors.length > 0 && (
         <div className="ui error message">
           <ul className="list">
-            {Object.formData(errors).map((value) => (
-              <li key={value}>{value}</li>
-            ))}
+            {errors.map((error) => {
+              return <li key={error}>{error}</li>;
+            })}
           </ul>
         </div>
       )}
@@ -221,12 +223,12 @@ function Auth() {
             : "Do not have an account? Sign up"}
         </Button>
       </Form>
-      {Object.keys(errors).length > 0 && (
+      {errors.length > 0 && (
         <div className="ui error message">
           <ul className="list">
-            {Object.formData(errors).map((value) => (
-              <li key={value}>{value}</li>
-            ))}
+            {errors.map((error) => {
+              return <li key={error}>{error}</li>;
+            })}
           </ul>
         </div>
       )}

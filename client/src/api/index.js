@@ -28,8 +28,11 @@ export const comment = (finalComment, id) =>
 export const deleteComment = (commentID, postID) =>
   API.delete(`/posts/${postID}/deleteComment/${commentID}`);
 
-export const signIn = (formData) => API.post("/user/signin", formData);
-export const signUp = (formData) => API.post("/user/signup", formData);
+export const signIn = (formData, setErrors) =>
+  API.post("/user/signin", formData, setErrors);
+
+export const signUp = (formData, setErrors) =>
+  API.post("/user/signup", formData);
 
 // Users / Students
 export const fetchStudents = () => API.get("/user/class");
