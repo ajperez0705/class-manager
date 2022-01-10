@@ -79,10 +79,7 @@ function CommentSection({ post }) {
       {comments?.map((comment) => (
         <Card fluid key={comment._id}>
           <Card.Content>
-            <Card.Header>
-              {comment.message}
-              {comment?._id}
-            </Card.Header>
+            <Card.Header>{comment.message}</Card.Header>
             <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
             {/* <Card.Description>{comment.message}</Card.Description> */}
             {myComments.includes(comment) && (

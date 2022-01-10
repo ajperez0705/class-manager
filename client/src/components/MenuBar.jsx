@@ -76,45 +76,44 @@ function MenuBar() {
         <Menu.Item name="logout" onClick={logout} />
       </Menu.Menu>
     </Menu>
-  ) : (
-    <Menu pointing secondary size="massive" color="purple">
-      <Menu.Item
-        name="home"
-        active={activeItem === "home"}
-        onClick={handleItemClick}
-        as={Link}
-        to="/"
-      />
+  ) : null;
+  // <Menu pointing secondary size="massive" color="purple">
+  //   <Menu.Item
+  //     name="home"
+  //     active={activeItem === "home"}
+  //     onClick={handleItemClick}
+  //     as={Link}
+  //     to="/"
+  //   />
 
-      <Menu.Item
-        name="class-story"
-        active={activeItem === "class-story"}
-        onClick={handleItemClick}
-        as={Link}
-        to="/class-story"
-      />
+  //   <Menu.Item
+  //     name="class-story"
+  //     active={activeItem === "class-story"}
+  //     onClick={handleItemClick}
+  //     as={Link}
+  //     to="/class-story"
+  //   />
 
-      <Menu.Menu position="right">
-        {user ? (
-          <Menu.Item
-            name="sign-in"
-            active={activeItem === "sign-in"}
-            onClick={handleItemClick}
-            as={Link}
-            to="/auth"
-          />
-        ) : (
-          <Menu.Item
-            name="login"
-            active={activeItem === "login"}
-            onClick={handleItemClick}
-            as={Link}
-            to="/auth"
-          />
-        )}
-      </Menu.Menu>
-    </Menu>
-  );
+  //   <Menu.Menu position="right">
+  //     {user ? (
+  //       <Menu.Item
+  //         name="sign-in"
+  //         active={activeItem === "sign-in"}
+  //         onClick={handleItemClick}
+  //         as={Link}
+  //         to="/auth"
+  //       />
+  //     ) : (
+  //       <Menu.Item
+  //         name="login"
+  //         active={activeItem === "login"}
+  //         onClick={handleItemClick}
+  //         as={Link}
+  //         to="/auth"
+  //       />
+  //     )}
+  //   </Menu.Menu>
+  // </Menu>
 
   return menuBar;
 }

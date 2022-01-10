@@ -14,6 +14,7 @@ export default function PostCard({
   setCurrentId,
 }) {
   const numOfLikes = likes.length;
+  const numOfComments = comments.length;
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
 
@@ -66,7 +67,7 @@ export default function PostCard({
         to={`/posts/${_id}`}
         post={title}
       />
-      <Card.Content as={Link} to={`/posts/${_id}`}>
+      <Card.Content as={Link} to={`/posts/${_id}`} post={title}>
         <Card.Header>{title}</Card.Header>
         <Card.Meta>{moment(createdAt).fromNow(true)}</Card.Meta>
         {/* <p>{}</p> */}
@@ -81,39 +82,33 @@ export default function PostCard({
           disabled={!user}
           onClick={() => dispatch(likePost(_id))}
         >
-          <>
-            <Likes />
-          </>
+          <Likes />
         </Button>
 
-        <Button labelPosition="right" as={Link} to={`/posts/${1}`}>
-          <Button color="violet" basic>
-            <Icon name="comments" />
-          </Button>
-          {/* <Label basic color="violet" pointing="left">
-            {commentCount}
-          </Label> */}
+        <Button
+          color="violet"
+          basic
+          as={Link}
+          to={`/posts/${_id}`}
+          post={title}
+        >
+          <Icon name="comments" />
+          <span> {`${numOfComments} comments`}</span>
         </Button>
 
         {user?.result?.isTeacher === true && (
-          <Button labelPosition="right" onClick={() => setCurrentId(_id)}>
-            <Button color="violet" basic>
-              <Icon name="edit" />
-            </Button>
-            {/* <Label basic color="violet" pointing="left">
-            {commentCount}
-          </Label> */}
+          <Button color="violet" basic onClick={() => console.log("clicked")}>
+            <Icon name="edit" />
           </Button>
         )}
 
         {user?.result?.isTeacher === true && (
           <Button
-            labelPosition="right"
             onClick={() => dispatch(deletePost(_id))}
+            color="violet"
+            basic
           >
-            <Button color="violet" basic>
-              <Icon name="delete" />
-            </Button>
+            <Icon name="delete" />
             {/* <Label basic color="violet" pointing="left">
             {commentCount}
           </Label> */}
