@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { purchaseTrophy, updateStudentPoints } from "../actions/users";
 import TrophyCards from "../components/TrophyCards";
+import { Container, Grid, Card } from "semantic-ui-react";
+import { motion } from "framer-motion";
 
 function StudentMarket() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
@@ -13,6 +15,10 @@ function StudentMarket() {
 
   const [currentStudent, setCurrentStudent] = useState(curStudent);
   const [isTeacher, setIsTeacher] = useState(null);
+  const [anim, setAnim] = useState(false);
+  const [trophyAnim, setTrophyAnim] = useState(null);
+  const [errors, setErrors] = useState([]);
+
   const dispatch = useDispatch();
   //const [currentUser, setCurrentUser] = useState(null);
 
@@ -28,13 +34,12 @@ function StudentMarket() {
   const buyTrophy = function (e) {
     e.preventDefault();
 
+    setAnim(true);
+
     const trophyName = e.target.name;
     const trophyValue = e.target.value;
-
-    if (isTeacher || currentStudent[0].totalPoints < trophyValue) {
-      console.log("not enough points");
-      return;
-    }
+    console.log(trophyName);
+    console.log(trophyValue);
 
     // Handle points logic
     currentStudent[0].totalPoints = currentStudent[0].totalPoints - trophyValue;
@@ -60,7 +65,11 @@ function StudentMarket() {
     }
 
     dispatch(purchaseTrophy(currentStudent[0]._id, currentStudent[0]));
-    console.log(currentStudent[0]);
+
+    setTimeout(() => {
+      setAnim(false);
+      setTrophyAnim(null);
+    }, 2000);
   };
 
   return (
@@ -73,7 +82,6 @@ function StudentMarket() {
             this page will look very similar to how your students will see this
             page from their end.
           </p>
-          <TrophyCards />
         </>
       ) : (
         <>
@@ -81,13 +89,78 @@ function StudentMarket() {
             <div key={student._id}>
               <h1>
                 Hello {student.username}, you have{" "}
-                <span className="span">{student.totalPoints}</span> points to
-                spend!
+                <motion.span className="span">
+                  {anim && trophyAnim ? (
+                    <motion.span
+                      animate={{
+                        fontSize: "50px",
+                        color: "red",
+                      }}
+                    >
+                      {student.totalPoints}
+                    </motion.span>
+                  ) : (
+                    student.totalPoints
+                  )}
+                </motion.span>{" "}
+                points to spend!
               </h1>
-              <h3>Total Trophies: {student.totalTrophies}</h3>
-              <h3>Trophy A: x{student.trophyA}</h3>
-              <h3>Trophy B: x{student.trophyB}</h3>
-              <h3>Trophy C: x{student.trophyC}</h3>
+              <Grid columns="equal">
+                <Grid.Row>
+                  <Grid.Column>
+                    <Card>
+                      <Card.Content header="Total Trophies" />
+                      <Card.Content description={student.totalTrophies} />
+                    </Card>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Card>
+                      <Card.Content header="Trophy A" />
+                      <Card.Content>
+                        {anim && trophyAnim === "a" ? (
+                          <motion.h5
+                            animate={{
+                              fontSize: "50px",
+                              color: "green",
+                            }}
+                          >
+                            {student.trophyA}
+                          </motion.h5>
+                        ) : (
+                          student.trophyA
+                        )}
+                      </Card.Content>
+                      {/* <Card.Content description={`x${student.trophyA}`} /> */}
+                    </Card>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Card>
+                      <Card.Content header="Trophy B" />
+                      <Card.Content>
+                        {anim && trophyAnim === "b" ? (
+                          <motion.h5
+                            animate={{
+                              fontSize: "50px",
+                              color: "green",
+                            }}
+                          >
+                            {student.trophyB}
+                          </motion.h5>
+                        ) : (
+                          student.trophyB
+                        )}
+                      </Card.Content>
+                      {/* <Card.Content description={`x${student.trophyB}`} /> */}
+                    </Card>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Card>
+                      <Card.Content header="Trophy C" />
+                      <Card.Content description={`x${student.trophyC}`} />
+                    </Card>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
               <p>
                 Here is the student marketplace. You may use the points you
                 earned to purchase trophies. Each trophy has a different value
@@ -96,7 +169,16 @@ function StudentMarket() {
               </p>
             </div>
           ))}
-          <TrophyCards buyTrophy={buyTrophy} />
+          {!isTeacher && (
+            <TrophyCards
+              curStudent={curStudent}
+              buyTrophy={buyTrophy}
+              errors={errors}
+              setErrors={setErrors}
+              setTrophyAnim={setTrophyAnim}
+              trophyAnim={trophyAnim}
+            />
+          )}
         </>
       )}
     </>

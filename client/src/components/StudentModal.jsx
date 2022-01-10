@@ -12,7 +12,7 @@ import {
 import decode from "jwt-decode";
 import { updateStudentPoints } from "../actions/users";
 import UserAvatar from "./UserAvatar";
-import Confetti from "./Confetti";
+import PointsConfetti from "../utils/PointsConfetti";
 import { motion } from "framer-motion";
 
 function StudentModal({
@@ -129,7 +129,7 @@ function StudentModal({
                     Negative Feedback
                   </Header>
                 </div>
-                <Confetti
+                <PointsConfetti
                   updatePoints={updatePoints}
                   positive="positive"
                   student={student}

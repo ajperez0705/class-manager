@@ -17,7 +17,7 @@ function UserCard({ student, pointAnim, setPointAnim, numPointsToShow }) {
           <BigHead {...JSON.parse(student.avatar)} />
 
           <Card.Content>
-            <Card.Header>{student.username}</Card.Header>
+            <Card.Header textAlign="center">{student.username}</Card.Header>
           </Card.Content>
           <Card.Content extra>
             <div className="point-totals">

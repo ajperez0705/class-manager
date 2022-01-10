@@ -10,7 +10,6 @@ import successAudio from "../sound/SSBM_Success.mp3";
 import failureAudio from "../sound/SSBM_Failure.mp3";
 
 import { motion } from "framer-motion";
-import Confetti from "../components/Confetti";
 
 function Home() {
   const dispatch = useDispatch();
@@ -57,7 +56,7 @@ function Home() {
         </>
       )}
 
-      <Grid columns={3}>
+      <Grid stackable columns={6}>
         <Grid.Row>
           {students.map((student) => (
             <Grid.Column key={student._id} style={{ marginBottom: 20 }}>

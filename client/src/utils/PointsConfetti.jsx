@@ -46,7 +46,7 @@ const defaults = {
   },
 };
 
-export default class Confetti extends Component {
+export default class PointsConfetti extends Component {
   constructor(props) {
     super(props);
 

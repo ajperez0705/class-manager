@@ -1,7 +1,17 @@
 import React from "react";
-import { Card, Icon, Button } from "semantic-ui-react";
+import { Card, Icon, Button, Grid } from "semantic-ui-react";
+import TrophyConfetti from "../utils/TrophyConfetti";
 
-function TrophyCards({ buyTrophy }) {
+function TrophyCards({
+  buyTrophy,
+  curStudent,
+  pointAnim,
+  setPointAnim,
+  errors,
+  setErrors,
+  setTrophyAnim,
+  trophyAnim,
+}) {
   const trophies = [
     {
       id: 1,
@@ -33,28 +43,54 @@ function TrophyCards({ buyTrophy }) {
   ];
 
   return (
-    <div>
-      {trophies.map((trophy) => (
-        <Card key={trophy.id}>
-          <Card.Content>
-            <Icon name={trophy.icon} size="huge" />
-            <Card.Header>{trophy.name}</Card.Header>
-            <Card.Description>{trophy.description}</Card.Description>
-            <Card.Meta>
-              <span className="date">Value: {trophy.pointValue} points</span>
-            </Card.Meta>
-            <Button
-              name={trophy.symbol}
-              value={trophy.pointValue}
-              color={trophy.btnColor}
-              onClick={buyTrophy}
-            >
-              Purple
-            </Button>
-          </Card.Content>
-        </Card>
-      ))}
-    </div>
+    <Grid columns={3}>
+      <Grid.Row>
+        {trophies.map((trophy) => (
+          <Grid.Column>
+            <Card key={trophy.id}>
+              <Card.Content>
+                <Icon name={trophy.icon} size="huge" />
+                <Card.Header>{trophy.name}</Card.Header>
+                <Card.Description>{trophy.description}</Card.Description>
+                <Card.Meta>
+                  <span className="date">
+                    Value: {trophy.pointValue} points
+                  </span>
+                </Card.Meta>
+                {/* <Button
+                  name={trophy.symbol}
+                  value={trophy.pointValue}
+                  color={trophy.btnColor}
+                  onClick={buyTrophy}
+                >
+                  Purple
+                </Button> */}
+                <TrophyConfetti
+                  name={trophy.symbol}
+                  value={trophy.pointValue}
+                  buyTrophy={buyTrophy}
+                  curStudent={curStudent}
+                  icon="thumbs up outline"
+                  message="Helping Others"
+                  setErrors={setErrors}
+                  setTrophyAnim={setTrophyAnim}
+                  trophyAnim={trophyAnim}
+                />
+                {errors.length > 0 && errors[0].trophyName === trophy.symbol && (
+                  <div className="ui error message">
+                    <ul className="list">
+                      {errors.map((error) => {
+                        return <li key={error.trophyName}>{error.message}</li>;
+                      })}
+                    </ul>
+                  </div>
+                )}
+              </Card.Content>
+            </Card>
+          </Grid.Column>
+        ))}
+      </Grid.Row>
+    </Grid>
   );
 }
 
