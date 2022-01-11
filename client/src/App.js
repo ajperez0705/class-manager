@@ -14,11 +14,11 @@ import TestBigHead from "./Pages/TestBigHead";
 function App() {
   return (
     <BrowserRouter>
-      <Container>
-        <MenuBar />
-        <Switch>
+      <MenuBar />
+      <Switch>
+        <Route exact path="/auth" component={Auth} />
+        <Container>
           <Route exact path="/" component={Home} />
-          <Route exact path="/auth" component={Auth} />
           <Route exact path="/class-story" component={ClassStory} />
           <Route
             exact
@@ -28,8 +28,8 @@ function App() {
           <Route exact path="/my-account" component={MyAccount} />
           <Route exact path="/posts/:postId" component={SinglePost} />
           <Route exact path="/test" component={TestBigHead} />
-        </Switch>
-      </Container>
+        </Container>
+      </Switch>
     </BrowserRouter>
   );
 }

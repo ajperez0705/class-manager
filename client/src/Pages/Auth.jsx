@@ -1,10 +1,20 @@
 import React, { useState } from "react";
-import { Button, Form, Grid } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Container,
+  Card,
+  Image,
+  Icon,
+} from "semantic-ui-react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { BigHead } from "@bigheads/core";
 import { getRandomOptions } from "../utils/bigheads";
+import { motion } from "framer-motion";
 
 import { signin, signup } from "../actions/auth";
 
@@ -23,6 +33,7 @@ function Auth() {
   const [formData, setFormData] = useState(initialState);
   const [avatar, setAvatar] = useState({});
   const [genAvatar, setGenAvatar] = useState(false);
+  const [enteredApp, setEnteredApp] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -80,11 +91,20 @@ function Auth() {
 
   const authForm = isSignup ? (
     // <div className="form-container">
-    <Grid centered columns={2}>
+    <Grid centered>
       <Grid.Row>
-        <Grid.Column>
-          <Form onSubmit={onSubmit} noValidate>
-            <h1>Register</h1>
+        <Grid.Column width={8}>
+          <Form onSubmit={onSubmit} inverted noValidate>
+            <Header
+              as="h1"
+              content="Register"
+              inverted
+              style={{
+                fontSize: "5em",
+                fontWeight: "normal",
+                marginBottom: 20,
+              }}
+            />
             <Form.Input
               label="Username"
               placeholder="Username..."
@@ -135,29 +155,41 @@ function Auth() {
               onChange={onChangeHandler}
             />
 
-            <Button type="submit" primary>
-              Register
-            </Button>
-            <GoogleLogin
-              clientId="327712308001-bah7566eof34tbrfdlhtm5s6vkpdir12.apps.googleusercontent.com"
-              render={(renderProps) => (
-                <Button
-                  primary
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                >
-                  Google Sign Up
-                </Button>
-              )}
-              onSuccess={googleSuccess}
-              onFailure={googleFailure}
-              cookiePolicy="single_host_origin"
-            />
-            <Button type="submit" primary onClick={switchMode}>
-              {isSignup
-                ? "Already have an account ? Sign in"
-                : "Do not have an account? Sign up"}
-            </Button>
+            <div className="auth-form-btns">
+              <motion.button
+                className="btn_main"
+                onClick={() => setEnteredApp(true)}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              >
+                Register
+              </motion.button>
+              <motion.button
+                className="btn_main"
+                onClick={switchMode}
+                whileHover={{
+                  scale: 1.1,
+                }}
+              >
+                Have an account? Login
+              </motion.button>
+            </div>
+            {/* <GoogleLogin
+                  clientId="327712308001-bah7566eof34tbrfdlhtm5s6vkpdir12.apps.googleusercontent.com"
+                  render={(renderProps) => (
+                    <Button
+                      primary
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                    >
+                      Google Sign Up
+                    </Button>
+                  )}
+                  onSuccess={googleSuccess}
+                  onFailure={googleFailure}
+                  cookiePolicy="single_host_origin"
+                /> */}
           </Form>
           {errors.length > 0 && (
             <div className="ui error message">
@@ -169,9 +201,46 @@ function Auth() {
             </div>
           )}
         </Grid.Column>
-        <Grid.Column verticalAlign="middle" textAlign="center">
-          <button onClick={generateAvatar}>Generate</button>
-          <div>{genAvatar && <BigHead {...avatar} />}</div>
+        <Grid.Column verticalAlign="middle" textAlign="center" width={8}>
+          <motion.button
+            className="btn_gen-avatar"
+            onClick={generateAvatar}
+            animate={{
+              scale: 1.1,
+              transition: {
+                duration: 0.4,
+                yoyo: Infinity,
+              },
+            }}
+            whileHover={{
+              scale: 1.1,
+              boxShadow: "0px 0px 19px 5px rgba(255,255,255,0.92)",
+            }}
+          >
+            {genAvatar === false ? "Generate Avatar" : "Regenerate Avatar"}
+          </motion.button>
+          {
+            formData === initialState ? null : (
+              <Card className="account-preview" centered>
+                <Card.Content>
+                  <Card.Content>
+                    {genAvatar && <BigHead {...avatar} />}
+                  </Card.Content>
+
+                  <Card.Header>{formData.username}</Card.Header>
+                  <Card.Meta>{formData.email}</Card.Meta>
+                  <Card.Description>{formData.bio}</Card.Description>
+                </Card.Content>
+                {/* <Card.Content extra>
+              <a>
+                <Icon name="user" />
+                10 Friends
+              </a>
+            </Card.Content> */}
+              </Card>
+            )
+            // <div>{genAvatar && <BigHead {...avatar} />}</div>
+          }
         </Grid.Column>
         {/* </div> */}
       </Grid.Row>
@@ -179,13 +248,29 @@ function Auth() {
   ) : (
     //   if user already has account
     <div className="form-container">
-      <Form onSubmit={onSubmit} noValidate>
-        <h1>Login</h1>
+      <Form
+        className="auth-form"
+        onSubmit={onSubmit}
+        size={"medium"}
+        inverted
+        noValidate
+      >
+        <Header
+          as="h1"
+          content="Login"
+          inverted
+          style={{
+            fontSize: "5em",
+            fontWeight: "normal",
+            marginBottom: 20,
+          }}
+        />
         <Form.Input
           label="Username"
           placeholder="Username..."
           name="username"
           type="text"
+          // width={16}
           //   value={formData.username}
           //   error={errors.username ? true : false}
           onChange={onChangeHandler}
@@ -200,31 +285,42 @@ function Auth() {
           //   error={errors.password ? true : false}
           onChange={onChangeHandler}
         />
-
-        <Button type="submit" primary>
-          Login
-        </Button>
-        <GoogleLogin
-          clientId="327712308001-bah7566eof34tbrfdlhtm5s6vkpdir12.apps.googleusercontent.com"
-          render={(renderProps) => (
-            <Button
-              type="submit"
-              primary
-              onClick={renderProps.onClick}
-              disabled={renderProps.disabled}
-            >
-              Google Sign In
-            </Button>
-          )}
-          onSuccess={googleSuccess}
-          onFailure={googleFailure}
-          cookiePolicy="single_host_origin"
-        />
-        <Button type="submit" primary onClick={switchMode}>
-          {isSignup
-            ? "Already have an account ? Sign in"
-            : "Do not have an account? Sign up"}
-        </Button>
+        <div className="auth-form-btns">
+          <motion.button
+            className="btn_main"
+            onClick={() => setEnteredApp(true)}
+            whileHover={{
+              scale: 1.1,
+            }}
+          >
+            Login
+          </motion.button>
+          <motion.button
+            className="btn_main"
+            onClick={switchMode}
+            whileHover={{
+              scale: 1.1,
+            }}
+          >
+            Sign Up
+          </motion.button>
+        </div>
+        {/* <GoogleLogin
+            clientId="327712308001-bah7566eof34tbrfdlhtm5s6vkpdir12.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <Button
+                type="submit"
+                primary
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                Google Sign In
+              </Button>
+            )}
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin"
+          /> */}
       </Form>
       {errors.length > 0 && (
         <div className="ui error message">
@@ -238,7 +334,60 @@ function Auth() {
     </div>
   );
 
-  return authForm;
+  return (
+    <div className="auth-container">
+      {enteredApp === false ? (
+        <motion.div
+          className="auth-container_enter"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, type: "spring", stiffness: 120 }}
+        >
+          <Container text textAlign={"center"}>
+            <Header
+              as="h1"
+              content="Welcome To Class Manager"
+              inverted
+              style={{
+                fontSize: "4em",
+                fontWeight: "normal",
+                marginBottom: 0,
+              }}
+            />
+            <Header
+              as="h2"
+              content="The ultimate class management tool that keeps students on task and engaged, and teachers free of stress!"
+              inverted
+              style={{
+                fontSize: "1.7em",
+                fontWeight: "normal",
+                marginTop: "1.5em",
+              }}
+            />
+            <motion.button
+              className="btn_enter-app"
+              onClick={() => setEnteredApp(true)}
+              animate={{
+                scale: 1.1,
+                transition: {
+                  duration: 0.4,
+                  yoyo: Infinity,
+                },
+              }}
+              whileHover={{
+                scale: 1.1,
+                boxShadow: "0px 0px 19px 5px rgba(255,255,255,0.92)",
+              }}
+            >
+              Enter App
+            </motion.button>
+          </Container>
+        </motion.div>
+      ) : (
+        <div className="auth-container_auth">{authForm}</div>
+      )}
+    </div>
+  );
 }
 
 export default Auth;
