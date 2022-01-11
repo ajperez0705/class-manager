@@ -34,7 +34,6 @@ function UserCard({ student, pointAnim, setPointAnim, numPointsToShow }) {
         setModalStatus={setOpen}
         pointAnim={pointAnim}
         setPointAnim={setPointAnim}
-        setOpen={setOpen}
         numPointsToShow={numPointsToShow}
       />
     </Modal>

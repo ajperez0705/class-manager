@@ -8,7 +8,8 @@ export default function PostForm({
   currentId,
   setCurrentId,
   filterPostAfterForm,
-  showForm,
+  modalStatus,
+  setModalStatus,
 }) {
   const [postData, setPostData] = useState({
     title: "",
@@ -36,6 +37,7 @@ export default function PostForm({
 
     setTimeout(() => {
       filterPostAfterForm();
+      setModalStatus(false);
     }, 1000);
   };
 
@@ -50,54 +52,55 @@ export default function PostForm({
 
   return (
     <>
-      <Transition visible={showForm} animation="fade" duration={500}>
-        <Form onSubmit={onSubmit}>
-          {currentId ? (
-            <h2>Edit the story</h2>
-          ) : (
-            <h2>Create a Story for the class</h2>
-          )}
-          <Form.Field>
-            <Form.Input
-              placeholder="Title"
-              name="title"
-              value={postData.title}
-              onChange={(e) =>
-                setPostData({ ...postData, title: e.target.value })
+      <Form className="post-form">
+        {currentId ? (
+          <h2>Edit the story</h2>
+        ) : (
+          <h2>Create a Story for the class</h2>
+        )}
+        <Form.Field>
+          <Form.Input
+            placeholder="Title"
+            name="title"
+            value={postData.title}
+            onChange={(e) =>
+              setPostData({ ...postData, title: e.target.value })
+            }
+          />
+          <Form.Input
+            placeholder="message"
+            name="message"
+            value={postData.message}
+            onChange={(e) =>
+              setPostData({ ...postData, message: e.target.value })
+            }
+          />
+
+          <div>
+            <FileBase
+              type="file"
+              multiple={false}
+              onDone={({ base64 }) =>
+                setPostData({ ...postData, selectedFile: base64 })
               }
             />
-            <Form.Input
-              placeholder="message"
-              name="message"
-              value={postData.message}
-              onChange={(e) =>
-                setPostData({ ...postData, message: e.target.value })
-              }
-            />
+          </div>
 
-            <div>
-              <FileBase
-                type="file"
-                multiple={false}
-                onDone={({ base64 }) =>
-                  setPostData({ ...postData, selectedFile: base64 })
-                }
-              />
-            </div>
-
-            <Button type="submit" color="purple">
-              Submit
-            </Button>
-          </Form.Field>
-        </Form>
-        {/* {error && (
+          <Button type="submit" color="purple" onClick={onSubmit}>
+            Submit
+          </Button>
+        </Form.Field>
+      </Form>
+      <Button color="purple" onClick={() => setModalStatus(false)}>
+        Cancel
+      </Button>
+      {/* {error && (
         <div className="ui error message" style={{ marginBottom: 20 }}>
           <ul className="list">
             <li>{error.graphQLErrors[0].message}</li>
           </ul>
         </div>
       )} */}
-      </Transition>
     </>
   );
 }

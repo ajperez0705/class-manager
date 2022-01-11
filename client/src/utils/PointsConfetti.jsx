@@ -57,20 +57,33 @@ export default class PointsConfetti extends Component {
   }
 
   fakeRequest = () => {
-    const { rewardPunish } = this.state;
-    this.setState({
-      fakingRequest: true,
-    });
-    //setTimeout(() => {
-    this.setState({ fakingRequest: false, success: true });
-    rewardPunish === "reward" ? this.reward.rewardMe() : this.reward.punishMe();
-    //}, 1500);
+    if (this.props.numPoints === 0) {
+      if (this.props.feedBack === "positive") {
+        this.props.setErrors(
+          "Please select how many points you would like this student to receive."
+        );
+        return;
+      }
+    } else {
+      this.props.setErrors(null);
 
-    this.props.updatePoints(
-      this.props.positive,
-      this.props.student,
-      this.props.numPoints
-    );
+      const { rewardPunish } = this.state;
+      this.setState({
+        fakingRequest: true,
+      });
+      //setTimeout(() => {
+      this.setState({ fakingRequest: false, success: true });
+      rewardPunish === "reward"
+        ? this.reward.rewardMe()
+        : this.reward.punishMe();
+      //}, 1500);
+
+      this.props.updatePoints(
+        this.props.positive,
+        this.props.student,
+        this.props.numPoints
+      );
+    }
   };
 
   render() {
@@ -107,17 +120,28 @@ export default class PointsConfetti extends Component {
           springAnimation,
         }}
       >
-        <Card
-          onClick={this.fakeRequest}
-          loading={fakingRequest}
-          icon={type ? "like" : "trophy"}
-          size="large"
-        >
-          <Icon name={this.props.icon} size="huge" />
-          <Card.Content>
-            <Card.Header>{this.props.message}</Card.Header>
-          </Card.Content>
-        </Card>
+        <Card.Group className="feedback-cards">
+          <Card onClick={this.fakeRequest} loading={fakingRequest}>
+            <Icon name={this.props.icon} size="huge" />
+            <Card.Content>
+              <Card.Header>{this.props.message}</Card.Header>
+            </Card.Content>
+          </Card>
+
+          <Card onClick={this.fakeRequest} loading={fakingRequest}>
+            <Icon name={this.props.icon} size="huge" />
+            <Card.Content>
+              <Card.Header>{this.props.message}</Card.Header>
+            </Card.Content>
+          </Card>
+
+          <Card onClick={this.fakeRequest} loading={fakingRequest}>
+            <Icon name={this.props.icon} size="huge" />
+            <Card.Content>
+              <Card.Header>{this.props.message}</Card.Header>
+            </Card.Content>
+          </Card>
+        </Card.Group>
       </Reward>
     );
   }

@@ -7,6 +7,7 @@ import PostForm from "../components/PostForm";
 import PostCard from "../components/PostCard";
 import Pagination from "../utils/Pagination";
 import Loading from "../utils/Loading";
+import FormModal from "../components/FormModal";
 
 // const filterOptions = [
 //   { key: "Most Recent", value: "recent", text: "Most Recent" },
@@ -16,6 +17,8 @@ function ClassStory() {
   const dispatch = useDispatch();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [isTeacher, setIsTeacher] = useState(null);
+  const [open, setOpen] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [filter, setFilter] = useState("recent");
@@ -76,37 +79,26 @@ function ClassStory() {
     <div>
       {isLoading === true ? (
         <>
-          {" "}
-          <Loading />{" "}
+          <Loading />
         </>
       ) : (
         <>
-          {" "}
           <h1>Class Story</h1>
-          {isTeacher && (
-            <>
-              {showForm ? (
-                <button onClick={showPostForm}>Cancel</button>
-              ) : (
-                <button onClick={showPostForm}>Create Post</button>
-              )}
-              <PostForm
-                filterPostAfterForm={filterPostAfterForm}
-                currentId={currentId}
-                setCurrentId={setCurrentId}
-                showForm={showForm}
-              />
-            </>
-          )}
+
           <Grid columns={3}>
             <Grid.Row className="page-title">
               <h1>Recent by MrTeacher</h1>
-              {/* <Select
-            placeholder="Filter Posts"
-            onChange={(e) => filterHandler(e)}
-            options={filterOptions}
-            value={filter}
-          /> */}
+              {isTeacher && (
+                <FormModal
+                  setOpen={setOpen}
+                  modalStatus={open}
+                  setModalStatus={setOpen}
+                  filterPostAfterForm={filterPostAfterForm}
+                  currentId={currentId}
+                  setCurrentId={setCurrentId}
+                  showForm={showForm}
+                />
+              )}
               <select onChange={(e) => filterHandler(e)}>
                 <option value="recent">Most Recent</option>
                 <option value="oldest">Oldest</option>

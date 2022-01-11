@@ -99,3 +99,11 @@
   box-shadow: none;
   color: #999;
 }
+
+.ui-cards {
+}
+
+.ui.card,
+.ui.cards > .card {
+  width: auto;
+}

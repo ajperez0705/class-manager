@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   Button,
   Header,
-  Image,
+  Grid,
   Modal,
   Card,
   Icon,
@@ -21,13 +21,14 @@ function StudentModal({
   setModalStatus,
   pointAnim,
   setPointAnim,
-  setOpen,
   numPointsToShow,
 }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [feedBack, setFeedBack] = useState("positive");
   const [numPoints, setNumPoints] = useState(0);
   const [isTeacher, setIsTeacher] = useState(null);
+  const [errors, setErrors] = useState(null);
+
   const dispatch = useDispatch();
   console.log(student);
 
@@ -39,12 +40,18 @@ function StudentModal({
     } else return;
   }, []);
 
+  console.log(0 > -1);
+
   const updatePoints = function (updateType, student, numPoints) {
-    console.log(updateType);
-    if (numPoints === 0) return;
+    if (updateType === "negative" && numPoints > -1) {
+      setErrors(
+        "Please select how many points you would like to take away from this student."
+      );
+      return;
+    }
 
+    setErrors(null);
     setPointAnim(true);
-
     numPointsToShow(numPoints);
 
     if (updateType === "positive") {
@@ -59,7 +66,7 @@ function StudentModal({
 
     setTimeout(() => {
       setPointAnim(false);
-      setOpen(false);
+      setModalStatus(false);
     }, 1000);
   };
 
@@ -68,12 +75,12 @@ function StudentModal({
   };
 
   const changeFeedbackType = function (feedbackType) {
+    setErrors(null);
+
     if (feedbackType === "positive") {
       setFeedBack("positive");
-      setNumPoints(1);
     } else if (feedbackType === "negative") {
       setFeedBack("negative");
-      setNumPoints(-1);
     }
   };
 
@@ -109,7 +116,7 @@ function StudentModal({
             </>
           )}
 
-          <Modal.Content image>
+          <Modal.Content image centered={true}>
             <UserAvatar studentAvatar={student.avatar} />
             {feedBack === "positive" ? (
               <Modal.Description>
@@ -123,12 +130,13 @@ function StudentModal({
                   max="10"
                   onChange={numPointsHandler}
                 />
-                <div className="toggle-header">
-                  <Header>Positive Feedback</Header>
-                  <Header onClick={() => changeFeedbackType("negative")}>
+                <Modal.Actions>
+                  <Button disabled>Positive Feedback</Button>
+                  <Button onClick={() => changeFeedbackType("negative")}>
                     Negative Feedback
-                  </Header>
-                </div>
+                  </Button>
+                </Modal.Actions>
+
                 <PointsConfetti
                   updatePoints={updatePoints}
                   positive="positive"
@@ -136,7 +144,17 @@ function StudentModal({
                   numPoints={numPoints}
                   icon="thumbs up outline"
                   message="Helping Others"
+                  setErrors={setErrors}
+                  feedBack={feedBack}
                 />
+
+                {errors && (
+                  <div className="ui error message">
+                    <ul className="list">
+                      <li key={errors}>{errors}</li>
+                    </ul>
+                  </div>
+                )}
                 {/* <Card
                   onClick={() => updatePoints("positive", student, numPoints)}
                 >
@@ -158,20 +176,31 @@ function StudentModal({
                   max="-1"
                   onChange={numPointsHandler}
                 />
-                <div className="toggle-header">
-                  <Header onClick={() => changeFeedbackType("positive")}>
+
+                <Modal.Actions>
+                  <Button onClick={() => changeFeedbackType("positive")}>
                     Positive Feedback
-                  </Header>
-                  <Header>Negative Feedback</Header>
-                </div>
-                <Card
-                  onClick={() => updatePoints("negative", student, numPoints)}
-                >
-                  <Icon name="thumbs down outline" size="huge" />
-                  <Card.Content>
-                    <Card.Header>Disrespecting Others</Card.Header>
-                  </Card.Content>
-                </Card>
+                  </Button>
+                  <Button disabled>Negative Feedback</Button>
+                </Modal.Actions>
+
+                <Card.Group className="feedback-cards">
+                  <Card
+                    onClick={() => updatePoints("negative", student, numPoints)}
+                  >
+                    <Icon name="thumbs down outline" size="huge" />
+                    <Card.Content>
+                      <Card.Header>Disrespecting Others</Card.Header>
+                    </Card.Content>
+                  </Card>
+                </Card.Group>
+                {errors && (
+                  <div className="ui error message">
+                    <ul className="list">
+                      <li key={errors}>{errors}</li>
+                    </ul>
+                  </div>
+                )}
               </Modal.Description>
             )}
           </Modal.Content>

@@ -15,7 +15,7 @@ import { likePost } from "../actions/posts";
 import { useDispatch } from "react-redux";
 
 function SinglePost(props) {
-  console.log(props);
+  console.log({ props });
   //   const commentInputRef = useRef(null);
   // const _id = props.match.params.postId;
   const [postId, setPostId] = useState(props.match.params.postId);
