@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BigHead } from "@bigheads/core";
 
-import { Image, Modal, Card } from "semantic-ui-react";
+import { Image, Modal, Card, Icon } from "semantic-ui-react";
 import StudentModal from "./StudentModal";
 
 function UserCard({ student, pointAnim, setPointAnim, numPointsToShow }) {
@@ -13,16 +13,23 @@ function UserCard({ student, pointAnim, setPointAnim, numPointsToShow }) {
       onOpen={() => setOpen(true)}
       open={open}
       trigger={
-        <Card>
+        <Card className="student-card" centered>
+          {/* <Card.Content> */}
+          <Card.Header className="student-card_header" textAlign="center">
+            {student.username}
+          </Card.Header>
           <BigHead {...JSON.parse(student.avatar)} />
-
-          <Card.Content>
-            <Card.Header textAlign="center">{student.username}</Card.Header>
-          </Card.Content>
-          <Card.Content extra>
+          {/* </Card.Content> */}
+          <Card.Content className="student-card_score" extra>
             <div className="point-totals">
-              <h6>Current Points: {student.totalPoints}</h6>
-              <h6>Trophies: {student.totalTrophies}</h6>
+              <p>
+                <Icon name="target" />
+                {student.totalPoints}
+              </p>
+              <p>
+                <Icon name="trophy" />
+                {student.totalTrophies}
+              </p>
             </div>
           </Card.Content>
         </Card>

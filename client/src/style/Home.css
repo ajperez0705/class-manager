@@ -1,0 +1,70 @@
+/* Home */
+.home-container {
+  position: relative;
+}
+
+.point-modal {
+  margin: 0 auto;
+  text-align: center;
+  z-index: 99;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+}
+.point-totals {
+  display: flex;
+  justify-content: space-around;
+}
+
+.student-card {
+  padding: 16px !important;
+  background: rgb(59 31 108) !important;
+  border: none !important;
+  border-color: none !important;
+  border-radius: 12px !important;
+  padding: 24px 48px;
+  box-shadow: 0px 0px 15px -4px rgb(0 0 0 / 70%) !important;
+}
+
+.student-card_header {
+  color: white !important;
+  font-family: "Bangers";
+  font-size: 36px;
+  margin-top: 20px;
+}
+
+.student-card_meta {
+  color: rgba(201, 201, 201, 0.747) !important;
+  font-size: 16px !important;
+  margin: 8px 0;
+}
+
+.student-card_bio {
+  font-size: 16px;
+  color: white;
+}
+
+.student-card_score {
+  color: white !important;
+  background-color: rgb(106, 64, 223) !important;
+  padding: 8px 0 0 0 !important;
+  margin-top: 16px !important;
+}
+
+.modal_feedback-cards {
+  margin-top: 24px !important;
+}
+
+.modal_feedback-type-btns > .button {
+  margin-left: 0 !important;
+  margin-top: 16px !important;
+}
+
+.ui.card,
+.ui.cards > .card {
+  width: auto !important;
+}
+
+a .point-icon {
+  color: rgb(95, 31, 95) !important;
+}

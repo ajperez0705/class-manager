@@ -120,27 +120,21 @@ export default class PointsConfetti extends Component {
           springAnimation,
         }}
       >
-        <Card.Group className="feedback-cards">
-          <Card onClick={this.fakeRequest} loading={fakingRequest}>
-            <Icon name={this.props.icon} size="huge" />
-            <Card.Content>
-              <Card.Header>{this.props.message}</Card.Header>
-            </Card.Content>
-          </Card>
-
-          <Card onClick={this.fakeRequest} loading={fakingRequest}>
-            <Icon name={this.props.icon} size="huge" />
-            <Card.Content>
-              <Card.Header>{this.props.message}</Card.Header>
-            </Card.Content>
-          </Card>
-
-          <Card onClick={this.fakeRequest} loading={fakingRequest}>
-            <Icon name={this.props.icon} size="huge" />
-            <Card.Content>
-              <Card.Header>{this.props.message}</Card.Header>
-            </Card.Content>
-          </Card>
+        <Card.Group className="modal_feedback-cards">
+          {this.props.positiveCards.map((pointCard) => (
+            <Card
+              key={pointCard.id}
+              onClick={this.fakeRequest}
+              loading={fakingRequest}
+            >
+              <Card.Content textAlign={"center"}>
+                <Icon name={pointCard.icon} size="huge" />
+              </Card.Content>
+              <Card.Content>
+                <Card.Header>{pointCard.name}</Card.Header>
+              </Card.Content>
+            </Card>
+          ))}
         </Card.Group>
       </Reward>
     );

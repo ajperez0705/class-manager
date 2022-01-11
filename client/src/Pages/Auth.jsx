@@ -91,10 +91,15 @@ function Auth() {
 
   const authForm = isSignup ? (
     // <div className="form-container">
-    <Grid centered>
+    <Grid centered stackable>
       <Grid.Row>
         <Grid.Column width={8}>
-          <Form onSubmit={onSubmit} inverted noValidate>
+          <Form
+            className="auth_form-register"
+            onSubmit={onSubmit}
+            inverted
+            noValidate
+          >
             <Header
               as="h1"
               content="Register"
@@ -106,8 +111,9 @@ function Auth() {
               }}
             />
             <Form.Input
+              className="auth-input"
               label="Username"
-              placeholder="Username..."
+              placeholder="Berlin"
               name="username"
               type="text"
               // value={formData.username}
@@ -116,8 +122,9 @@ function Auth() {
             />
 
             <Form.Input
+              className="auth-input"
               label="Email"
-              placeholder="Email..."
+              placeholder="berlin@email.com"
               name="email"
               type="email"
               //   value={formData.email}
@@ -126,8 +133,9 @@ function Auth() {
             />
 
             <Form.Input
+              className="auth-input"
               label="Password"
-              placeholder="Password..."
+              placeholder="BellaCiao1"
               name="password"
               type="password"
               //   value={formData.password}
@@ -136,8 +144,9 @@ function Auth() {
             />
 
             <Form.Input
+              className="auth-input"
               label="Confirm Password"
-              placeholder="Confirm Password..."
+              placeholder="BellaCiao1"
               name="confirmPassword"
               type="password"
               //   value={formData.confirmPassword}
@@ -146,8 +155,9 @@ function Auth() {
             />
 
             <Form.TextArea
+              className="auth-textarea"
               label="About Me"
-              placeholder="Write a little about yourself here"
+              placeholder="Una mañana, me he despertado, O bella adiós, bella adiós, bella adiós, adiós, adiós."
               name="bio"
               type="text"
               //   value={formData.confirmPassword}
@@ -223,20 +233,22 @@ function Auth() {
             formData === initialState ? null : (
               <Card className="account-preview" centered>
                 <Card.Content>
-                  <Card.Content>
+                  <Card.Header>
                     {genAvatar && <BigHead {...avatar} />}
-                  </Card.Content>
+                  </Card.Header>
 
-                  <Card.Header>{formData.username}</Card.Header>
-                  <Card.Meta>{formData.email}</Card.Meta>
-                  <Card.Description>{formData.bio}</Card.Description>
+                  <div className="account-preview_content">
+                    <Card.Description className="account-preview_content-header">
+                      {formData.username}
+                    </Card.Description>
+                    <Card.Meta className="account-preview_content-meta">
+                      {formData.email}
+                    </Card.Meta>
+                    <Card.Description className="account-preview_content-bio">
+                      {formData.bio}
+                    </Card.Description>
+                  </div>
                 </Card.Content>
-                {/* <Card.Content extra>
-              <a>
-                <Icon name="user" />
-                10 Friends
-              </a>
-            </Card.Content> */}
               </Card>
             )
             // <div>{genAvatar && <BigHead {...avatar} />}</div>
@@ -249,9 +261,9 @@ function Auth() {
     //   if user already has account
     <div className="form-container">
       <Form
-        className="auth-form"
+        className="auth_form-login"
         onSubmit={onSubmit}
-        size={"medium"}
+        size={"large"}
         inverted
         noValidate
       >
@@ -266,8 +278,9 @@ function Auth() {
           }}
         />
         <Form.Input
+          className="auth-input"
           label="Username"
-          placeholder="Username..."
+          placeholder="Tokyo"
           name="username"
           type="text"
           // width={16}
@@ -277,8 +290,9 @@ function Auth() {
         />
 
         <Form.Input
+          className="auth-input"
           label="Password"
-          placeholder="Password..."
+          placeholder="Oliveria1"
           name="password"
           type="password"
           //   value={formData.password}

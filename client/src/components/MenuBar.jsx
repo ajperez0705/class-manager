@@ -16,7 +16,7 @@ function MenuBar() {
   const logout = (e) => {
     dispatch({ type: "LOGOUT" });
 
-    history.push("/auth");
+    history.push("/");
 
     setUser(null);
   };
@@ -40,13 +40,13 @@ function MenuBar() {
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
   const menuBar = user ? (
-    <Menu pointing secondary size="massive" color="purple">
+    <Menu pointing secondary size="massive" inverted>
       <Menu.Item
         name="home"
         active={activeItem === "home"}
         onClick={handleItemClick}
         as={Link}
-        to="/"
+        to="/home"
       />
       <Menu.Item
         name="class-story"
@@ -65,7 +65,9 @@ function MenuBar() {
       />
 
       <Menu.Menu position="right">
-        <h2>Hello, {user.result.username}</h2>
+        <Menu.Item className="menu-bar_welcome">
+          Hello, {user.result.username}
+        </Menu.Item>
         <Menu.Item
           name="my-account"
           active={activeItem === "my-account"}

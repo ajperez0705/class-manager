@@ -2,7 +2,9 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import ClassStory from "./Pages/ClassStory";
-import "./App.css";
+import "./style/App.css";
+import "./style/Auth.css";
+import "./style/Home.css";
 import { Container } from "semantic-ui-react";
 import MenuBar from "./components/MenuBar";
 import Auth from "./Pages/Auth";
@@ -14,11 +16,14 @@ import TestBigHead from "./Pages/TestBigHead";
 function App() {
   return (
     <BrowserRouter>
-      <MenuBar />
+      <Container className="menu-bar">
+        <MenuBar />
+      </Container>
+
       <Switch>
-        <Route exact path="/auth" component={Auth} />
+        <Route exact path="/" component={Auth} />
         <Container>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/home" component={Home} />
           <Route exact path="/class-story" component={ClassStory} />
           <Route
             exact

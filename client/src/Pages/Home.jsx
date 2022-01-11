@@ -56,7 +56,7 @@ function Home() {
         </>
       )}
 
-      <Grid stackable columns={6}>
+      <Grid stackable columns={5}>
         <Grid.Row>
           {students.map((student) => (
             <Grid.Column key={student._id} style={{ marginBottom: 20 }}>
