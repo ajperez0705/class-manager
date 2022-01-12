@@ -7,8 +7,8 @@
 
 /* Colors */
 :root {
-  --primary: #f3eff5;
-  --secondary: #2e145b;
+  --primary: #f3eff5 !important;
+  --secondary: #2e145b !important;
 }
 
 body {
@@ -143,5 +143,17 @@ h2 {
 
 .ui.card,
 .ui.cards > .card {
-  width: auto;
+  /* width: auto; */
+}
+
+/* Avatar */
+.user-avatar {
+  width: 300px;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
 }

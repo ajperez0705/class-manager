@@ -140,9 +140,6 @@ export const updatePoints = async (req, res) => {
   const { id: _id } = req.params;
   const student = req.body;
 
-  console.log(student);
-  console.log(_id);
-
   if (!mongoose.Types.ObjectId.isValid(_id)) {
     return res.status(404).send("No student with that id");
   }

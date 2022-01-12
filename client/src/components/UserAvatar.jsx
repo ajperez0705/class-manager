@@ -4,7 +4,7 @@ import { BigHead } from "@bigheads/core";
 function UserAvatar({ studentAvatar }) {
   return (
     <>
-      <div style={{ width: "300px" }}>
+      <div className="user-avatar">
         <BigHead {...JSON.parse(studentAvatar)} />
       </div>
     </>

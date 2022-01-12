@@ -11,6 +11,8 @@
   left: 50%;
   top: 20%;
 }
+
+/* Start of student cards */
 .point-totals {
   display: flex;
   justify-content: space-around;
@@ -28,8 +30,8 @@
 
 .student-card_header {
   color: white !important;
-  font-family: "Bangers";
-  font-size: 36px;
+  font-family: "Bangers" !important;
+  font-size: 36px !important;
   margin-top: 20px;
 }
 
@@ -50,6 +52,13 @@
   padding: 8px 0 0 0 !important;
   margin-top: 16px !important;
 }
+/* End of student cards */
+
+.ui.card,
+.ui.cards > .card {
+  width: auto !important;
+}
+/* Start of Modal */
 
 .modal_feedback-cards {
   margin-top: 24px !important;
@@ -57,14 +66,29 @@
 
 .modal_feedback-type-btns > .button {
   margin-left: 0 !important;
-  margin-top: 16px !important;
+  margin-bottom: 16px !important;
 }
 
-.ui.card,
-.ui.cards > .card {
-  width: auto !important;
+/*
+.modal-header {
+  background: var(--secondary) !important;
+  color: white !important;
+  border-bottom: 1px solid rgb(255, 255, 255) !important;
 }
 
-a .point-icon {
-  color: rgb(95, 31, 95) !important;
+.modal-content {
+  background: var(--secondary) !important;
+  color: white !important;
 }
+
+.modal-bottom {
+  background: var(--secondary) !important;
+  color: white !important;
+} */
+
+/* Student View */
+.display-card {
+  width: 200px !important;
+}
+
+/* End of Modal */

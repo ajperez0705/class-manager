@@ -128,10 +128,10 @@ export default class PointsConfetti extends Component {
               loading={fakingRequest}
             >
               <Card.Content textAlign={"center"}>
-                <Icon name={pointCard.icon} size="huge" />
+                <Image src={pointCard.image} size="small" />
               </Card.Content>
               <Card.Content>
-                <Card.Header>{pointCard.name}</Card.Header>
+                <Card.Header textAlign="center">{pointCard.name}</Card.Header>
               </Card.Content>
             </Card>
           ))}

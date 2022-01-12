@@ -4,7 +4,7 @@ import { BigHead } from "@bigheads/core";
 import { Image, Modal, Card, Icon } from "semantic-ui-react";
 import StudentModal from "./StudentModal";
 
-function UserCard({ student, pointAnim, setPointAnim, numPointsToShow }) {
+function UserCard({ student, pointAnim, setPointAnim, audioHandler }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -14,12 +14,10 @@ function UserCard({ student, pointAnim, setPointAnim, numPointsToShow }) {
       open={open}
       trigger={
         <Card className="student-card" centered>
-          {/* <Card.Content> */}
           <Card.Header className="student-card_header" textAlign="center">
             {student.username}
           </Card.Header>
           <BigHead {...JSON.parse(student.avatar)} />
-          {/* </Card.Content> */}
           <Card.Content className="student-card_score" extra>
             <div className="point-totals">
               <p>
@@ -41,7 +39,7 @@ function UserCard({ student, pointAnim, setPointAnim, numPointsToShow }) {
         setModalStatus={setOpen}
         pointAnim={pointAnim}
         setPointAnim={setPointAnim}
-        numPointsToShow={numPointsToShow}
+        audioHandler={audioHandler}
       />
     </Modal>
   );

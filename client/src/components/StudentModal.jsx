@@ -3,19 +3,26 @@ import { useDispatch } from "react-redux";
 import {
   Button,
   Header,
-  Grid,
   Modal,
   Card,
-  Icon,
   Form,
   Image,
+  Icon,
 } from "semantic-ui-react";
-import decode from "jwt-decode";
 import { updateStudentPoints } from "../actions/users";
 import UserAvatar from "./UserAvatar";
 import PointsConfetti from "../utils/PointsConfetti";
 import { motion } from "framer-motion";
+
+// Negative Images
+import bullying from "../images/point-icons/bullying.png";
+import rules from "../images/point-icons/breaking-rules.png";
+import phone from "../images/point-icons/phone-use.png";
+
+// Positive Images
+import helping from "../images/point-icons/helping-others.png";
 import work from "../images/point-icons/stellar-work.png";
+import participation from "../images/point-icons/participation.png";
 
 function StudentModal({
   student,
@@ -23,22 +30,22 @@ function StudentModal({
   setModalStatus,
   pointAnim,
   setPointAnim,
-  numPointsToShow,
+  audioHandler,
 }) {
   const positiveCards = [
     {
       id: 1,
-      icon: "handshake outline point-icon",
+      image: work,
       name: "Helping Others",
     },
     {
       id: 2,
-      icon: "trophy point-icon",
+      image: helping,
       name: "Stellar Work",
     },
     {
       id: 3,
-      icon: "bullhorn point-icon",
+      image: participation,
       name: "Participation",
     },
   ];
@@ -46,17 +53,17 @@ function StudentModal({
   const negativeCards = [
     {
       id: 1,
-      icon: "thumbs down outline point-icon",
+      image: bullying,
       name: "Bullying Others",
     },
     {
       id: 2,
-      icon: "file alternate outline point-icon",
+      image: rules,
       name: "Breaking Rules",
     },
     {
       id: 3,
-      icon: "mobile alternate point-icon",
+      image: phone,
       name: "Phone Use",
     },
   ];
@@ -68,7 +75,6 @@ function StudentModal({
   const [errors, setErrors] = useState(null);
 
   const dispatch = useDispatch();
-  console.log(student);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
@@ -78,10 +84,8 @@ function StudentModal({
     } else return;
   }, []);
 
-  console.log(0 > -1);
-
   const updatePoints = function (updateType, student, numPoints) {
-    if (updateType === "negative" && numPoints > -1) {
+    if (updateType === "negative" && numPoints === 0) {
       setErrors(
         "Please select how many points you would like to take away from this student."
       );
@@ -90,13 +94,13 @@ function StudentModal({
 
     setErrors(null);
     setPointAnim(true);
-    numPointsToShow(numPoints);
+    audioHandler(numPoints, updateType);
 
     if (updateType === "positive") {
       student.totalPoints = student.totalPoints + numPoints;
       student.allTimePoints = student.allTimePoints + numPoints;
     } else if (updateType === "negative") {
-      student.totalPoints = student.totalPoints - Math.abs(numPoints);
+      student.totalPoints = student.totalPoints - numPoints;
     }
 
     dispatch(updateStudentPoints(student._id, student));
@@ -128,7 +132,7 @@ function StudentModal({
         <>
           {pointAnim ? (
             <>
-              <Modal.Header>
+              <Modal.Header className="modal-header">
                 <span>{student.username}'s Current Points:</span>
                 <motion.p
                   //className="point-modal"
@@ -146,28 +150,18 @@ function StudentModal({
             </>
           ) : (
             <>
-              <Modal.Header>
-                <span>
-                  {student.username}'s Current Points: {student.totalPoints}
-                </span>
+              <Modal.Header className="modal-header">
+                {student.username}'s Current Points:{" "}
+                <span>{student.totalPoints}</span>
               </Modal.Header>
             </>
           )}
 
-          <Modal.Content image centered={true}>
+          <Modal.Content className="modal-content" image centered="true">
             <UserAvatar studentAvatar={student.avatar} />
             {feedBack === "positive" ? (
               <Modal.Description>
                 <h2>How many points do you want to give?</h2>
-                <Form.Input
-                  name="numPoints"
-                  type="number"
-                  placeholder="1"
-                  step="1"
-                  min="1"
-                  max="10"
-                  onChange={numPointsHandler}
-                />
                 <Modal.Actions className="modal_feedback-type-btns">
                   <Button color="green" disabled>
                     Positive Feedback
@@ -179,6 +173,16 @@ function StudentModal({
                     Negative Feedback
                   </Button>
                 </Modal.Actions>
+                <Form.Input
+                  className="modal-point-counter"
+                  name="numPoints"
+                  type="number"
+                  placeholder="1"
+                  step="1"
+                  min="1"
+                  max="10"
+                  onChange={numPointsHandler}
+                />
 
                 <PointsConfetti
                   updatePoints={updatePoints}
@@ -201,16 +205,6 @@ function StudentModal({
             ) : (
               <Modal.Description>
                 <h2>How many points do you want to take away?</h2>
-                <Form.Input
-                  name="numPoints"
-                  type="number"
-                  placeholder="-1"
-                  step="1"
-                  min="-10"
-                  max="-1"
-                  onChange={numPointsHandler}
-                />
-
                 <Modal.Actions className="modal_feedback-type-btns">
                   <Button
                     color="green"
@@ -222,6 +216,15 @@ function StudentModal({
                     Negative Feedback
                   </Button>
                 </Modal.Actions>
+                <Form.Input
+                  name="numPoints"
+                  type="number"
+                  placeholder="1"
+                  step="1"
+                  min="1"
+                  max="10"
+                  onChange={numPointsHandler}
+                />
 
                 <Card.Group className="modal_feedback-cards">
                   {negativeCards.map((card) => (
@@ -232,15 +235,38 @@ function StudentModal({
                       }
                     >
                       <Card.Content textAlign={"center"}>
-                        <Image src={work} />
-                        <Icon name={card.icon} size="huge" />
+                        <Image src={card.image} size={"small"} />
+                        {/* <Icon name={card.icon} size="huge" /> */}
                       </Card.Content>
                       <Card.Content>
-                        <Card.Header>{card.name}</Card.Header>
+                        <Card.Header textAlign={"center"}>
+                          {card.name}
+                        </Card.Header>
                       </Card.Content>
                     </Card>
+                    // <Card
+                    //   className="student-card"
+                    //   key={card.id}
+                    //   onClick={() =>
+                    //     updatePoints("negative", student, numPoints)
+                    //   }
+                    //   centered
+                    // >
+                    //   <Card.Content textAlign={"center"}>
+                    //     <Image src={card.image} size={"small"} />
+                    //   </Card.Content>
+                    //   <Card.Content>
+                    //     <Card.Header
+                    //       className="student-card_header"
+                    //       textAlign="center"
+                    //     >
+                    //       Test
+                    //     </Card.Header>
+                    //   </Card.Content>
+                    // </Card>
                   ))}
                 </Card.Group>
+
                 {errors && (
                   <div className="ui error message">
                     <ul className="list">
@@ -252,7 +278,7 @@ function StudentModal({
             )}
           </Modal.Content>
 
-          <Modal.Actions>
+          <Modal.Actions className="modal-bottom">
             <Button color="black" onClick={() => setModalStatus(false)}>
               Close
             </Button>
@@ -267,6 +293,18 @@ function StudentModal({
             <UserAvatar studentAvatar={student.avatar} />
             <Modal.Description>
               <Header>Points</Header>
+              <Card className="display-card">
+                <Card.Content textAlign={"center"}>
+                  <Icon name="thumbs up outline" size="huge" />
+                  <Header>Current Points</Header>
+                </Card.Content>
+                <Card.Content>
+                  <Card.Header textAlign={"center"}>
+                    {student.totalPoints}
+                  </Card.Header>
+                </Card.Content>
+              </Card>
+              <Card meta="Current Points" description={student.totalPoints} />
               <Card meta="Current Points" description={student.totalPoints} />
             </Modal.Description>
 

@@ -18,7 +18,6 @@ export const fetchStudents = () => async (dispatch) => {
 export const updateStudentPoints = (id, student) => async (dispatch) => {
   try {
     const { data } = await api.updateStudentPoints(id, student);
-    console.log(data);
 
     dispatch({ type: UPDATE_STUDENT, payload: data });
   } catch (error) {
