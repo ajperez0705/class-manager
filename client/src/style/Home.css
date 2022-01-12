@@ -3,6 +3,10 @@
   position: relative;
 }
 
+.home-grid {
+  margin-top: 1rem !important;
+}
+
 .point-modal {
   margin: 0 auto;
   text-align: center;
@@ -55,8 +59,8 @@
 /* End of student cards */
 
 .ui.card,
-.ui.cards > .card {
-  width: auto !important;
+.ui.cards.modal_feedback-cards > .card {
+  /* width: auto !important; */
 }
 /* Start of Modal */
 
@@ -66,16 +70,17 @@
 
 .modal_feedback-type-btns > .button {
   margin-left: 0 !important;
-  margin-bottom: 16px !important;
 }
 
-/*
 .modal-header {
-  background: var(--secondary) !important;
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  /* background: var(--secondary) !important;
   color: white !important;
-  border-bottom: 1px solid rgb(255, 255, 255) !important;
+  border-bottom: 1px solid rgb(255, 255, 255) !important; */
 }
-
+/*
 .modal-content {
   background: var(--secondary) !important;
   color: white !important;

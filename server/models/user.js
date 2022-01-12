@@ -9,9 +9,9 @@ const userSchema = mongoose.Schema({
   // id: { type: String },
   totalPoints: { type: Number },
   allTimePoints: { type: Number },
-  trophyA: { type: String },
-  trophyB: { type: String },
-  trophyC: { type: String },
+  marvinMoneybags: { type: String },
+  stanleySwordington: { type: String },
+  bradleyBomberman: { type: String },
   totalTrophies: { type: Number },
   isTeacher: { type: Boolean },
 });

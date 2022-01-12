@@ -151,8 +151,35 @@ function StudentModal({
           ) : (
             <>
               <Modal.Header className="modal-header">
-                {student.username}'s Current Points:{" "}
-                <span>{student.totalPoints}</span>
+                <div>
+                  {student.username}'s Current Points:{" "}
+                  <span>{student.totalPoints}</span>
+                </div>
+                {feedBack === "positive" ? (
+                  <Modal.Actions className="modal_feedback-type-btns">
+                    <Button color="green" disabled>
+                      Positive Feedback
+                    </Button>
+                    <Button
+                      color="red"
+                      onClick={() => changeFeedbackType("negative")}
+                    >
+                      Negative Feedback
+                    </Button>
+                  </Modal.Actions>
+                ) : (
+                  <Modal.Actions className="modal_feedback-type-btns">
+                    <Button
+                      color="green"
+                      onClick={() => changeFeedbackType("positive")}
+                    >
+                      Positive Feedback
+                    </Button>
+                    <Button color="red" disabled>
+                      Negative Feedback
+                    </Button>
+                  </Modal.Actions>
+                )}
               </Modal.Header>
             </>
           )}
@@ -162,17 +189,7 @@ function StudentModal({
             {feedBack === "positive" ? (
               <Modal.Description>
                 <h2>How many points do you want to give?</h2>
-                <Modal.Actions className="modal_feedback-type-btns">
-                  <Button color="green" disabled>
-                    Positive Feedback
-                  </Button>
-                  <Button
-                    color="red"
-                    onClick={() => changeFeedbackType("negative")}
-                  >
-                    Negative Feedback
-                  </Button>
-                </Modal.Actions>
+
                 <Form.Input
                   className="modal-point-counter"
                   name="numPoints"
@@ -205,17 +222,7 @@ function StudentModal({
             ) : (
               <Modal.Description>
                 <h2>How many points do you want to take away?</h2>
-                <Modal.Actions className="modal_feedback-type-btns">
-                  <Button
-                    color="green"
-                    onClick={() => changeFeedbackType("positive")}
-                  >
-                    Positive Feedback
-                  </Button>
-                  <Button color="red" disabled>
-                    Negative Feedback
-                  </Button>
-                </Modal.Actions>
+
                 <Form.Input
                   name="numPoints"
                   type="number"

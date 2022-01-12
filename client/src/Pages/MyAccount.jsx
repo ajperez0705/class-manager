@@ -61,9 +61,21 @@ function MyAccount() {
                 />
               </Card.Group>
               <Card.Group itemsPerRow={4}>
-                <Card color="red" header="Trophy A" meta={student.trophyA} />
-                <Card color="green" header="Trophy B" meta={student.trophyB} />
-                <Card color="blue" header="Trophy C" meta={student.trophyC} />
+                <Card
+                  color="red"
+                  header="Marvin Moneybags"
+                  meta={student.marvinMoneybags}
+                />
+                <Card
+                  color="green"
+                  header="Stanley Swordington"
+                  meta={student.stanleySwordington}
+                />
+                <Card
+                  color="blue"
+                  header="Bradley Bomberman"
+                  meta={student.bradleyBomberman}
+                />
                 <Card
                   color="blue"
                   header="Total Trophies"

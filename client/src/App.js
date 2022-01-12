@@ -5,6 +5,7 @@ import ClassStory from "./Pages/ClassStory";
 import "./style/App.css";
 import "./style/Auth.css";
 import "./style/Home.css";
+import "./style/Class-Story.css";
 import { Container } from "semantic-ui-react";
 import MenuBar from "./components/MenuBar";
 import Auth from "./Pages/Auth";

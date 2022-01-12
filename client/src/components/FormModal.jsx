@@ -43,7 +43,7 @@ function FormModal({
       onOpen={() => setModalStatus(true)}
       open={modalStatus}
       modalStatus={modalStatus}
-      trigger={<button>Create a Post</button>}
+      trigger={<button className="btn_gen-avatar">Create a Post</button>}
     >
       <PostForm
         filterPostAfterForm={filterPostAfterForm}

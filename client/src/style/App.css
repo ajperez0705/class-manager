@@ -8,7 +8,7 @@
 /* Colors */
 :root {
   --primary: #f3eff5 !important;
-  --secondary: #2e145b !important;
+  --secondary: rgb(59 31 108) !important;
 }
 
 body {
@@ -41,13 +41,6 @@ h2 {
   cursor: pointer;
   border-radius: 50px;
   box-shadow: 0px 0px 17px -5px rgba(0, 0, 0, 0.92);
-}
-
-.page-title {
-  display: block;
-  text-align: center;
-  font-size: 2rem;
-  margin-top: 10px;
 }
 
 .ui.teal.button:focus,

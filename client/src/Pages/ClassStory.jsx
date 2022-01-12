@@ -83,26 +83,26 @@ function ClassStory() {
         </>
       ) : (
         <>
-          <h1>Class Story</h1>
-
-          <Grid columns={3}>
+          <Grid className="class-story-grid" columns={3}>
             <Grid.Row className="page-title">
               <h1>Recent by MrTeacher</h1>
-              {isTeacher && (
-                <FormModal
-                  setOpen={setOpen}
-                  modalStatus={open}
-                  setModalStatus={setOpen}
-                  filterPostAfterForm={filterPostAfterForm}
-                  currentId={currentId}
-                  setCurrentId={setCurrentId}
-                  showForm={showForm}
-                />
-              )}
-              <select onChange={(e) => filterHandler(e)}>
-                <option value="recent">Most Recent</option>
-                <option value="oldest">Oldest</option>
-              </select>
+              <div className="class-story-controls">
+                {isTeacher && (
+                  <FormModal
+                    setOpen={setOpen}
+                    modalStatus={open}
+                    setModalStatus={setOpen}
+                    filterPostAfterForm={filterPostAfterForm}
+                    currentId={currentId}
+                    setCurrentId={setCurrentId}
+                    showForm={showForm}
+                  />
+                )}
+                <select className="dropdown" onChange={(e) => filterHandler(e)}>
+                  <option value="recent">Most Recent</option>
+                  <option value="oldest">Oldest</option>
+                </select>
+              </div>
             </Grid.Row>
             <Grid.Row>
               {/* <Transition.Group>

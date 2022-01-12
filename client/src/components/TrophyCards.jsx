@@ -16,27 +16,30 @@ function TrophyCards({
     {
       id: 1,
       icon: "thumbs down outline",
-      name: "Trophy A",
+      name: "Marvin Moneybags",
       symbol: "a",
-      description: "Trophy A allows you to chew gum in class for one week.",
+      description:
+        "Marvin Moneybags allows you to chew gum in class for one week.",
       pointValue: "10",
       btnColor: "purple",
     },
     {
       id: 2,
       icon: "thumbs down outline",
-      name: "Trophy B",
+      name: "Stanley Swordington",
       symbol: "b",
-      description: "Trophy B allows you to pick from the class treasure chest.",
+      description:
+        "Stanley Swordington allows you to pick from the class treasure chest.",
       pointValue: "20",
       btnColor: "blue",
     },
     {
       id: 3,
       icon: "thumbs down outline",
-      name: "Trophy C",
+      name: "Bradley Bomberman",
       symbol: "c",
-      description: "Trophy C allows you to get rid of your lowest test score.",
+      description:
+        "Bradley Bomberman allows you to get rid of your lowest test score.",
       pointValue: "30",
       btnColor: "green",
     },

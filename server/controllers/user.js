@@ -112,9 +112,9 @@ export const signup = async (req, res) => {
       allTimePoints: 0,
       negPoints: 0,
       curPoints: 0,
-      trophyA: 0,
-      trophyB: 0,
-      trophyC: 0,
+      marvinMoneybags: 0,
+      stanleySwordington: 0,
+      bradleyBomberman: 0,
       totalTrophies: 0,
     });
 

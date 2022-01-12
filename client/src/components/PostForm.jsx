@@ -52,7 +52,7 @@ export default function PostForm({
 
   return (
     <>
-      <Form className="post-form">
+      <Form className="post-form_login">
         {currentId ? (
           <h2>Edit the story</h2>
         ) : (

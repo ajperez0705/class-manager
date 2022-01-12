@@ -1,0 +1,79 @@
+.class-story-grid {
+  margin-top: 1rem !important;
+}
+
+.page-title {
+  padding: 0 24px !important;
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center !important;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.page-title h1 {
+  font-size: 48px;
+  margin-bottom: 0 !important;
+}
+
+.dropdown {
+  margin-left: 16px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 200px;
+  height: 50px;
+  background: linear-gradient(
+    90deg,
+    rgba(114, 19, 238, 1) 0%,
+    rgba(19, 76, 217, 1) 100%
+  );
+  color: white;
+  margin-top: 0px;
+  border: 0;
+  padding: 10px 8px;
+  border-radius: 50px;
+  box-shadow: 0px 0px 15px -4px rgb(0 0 0 / 40%);
+  font-size: 30px;
+  font-family: "Bangers";
+}
+
+.dropdown option {
+  background: var(--secondary);
+}
+
+.class-story_post-card {
+  border: none !important;
+  border-color: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0px 0px 15px -4px rgb(0 0 0 / 70%) !important;
+}
+
+.class-story_card-body {
+  background: var(--secondary) !important;
+  color: white !important;
+  padding: 16px 24px !important;
+}
+
+.class-story_card-body div {
+  color: white !important;
+}
+
+.class-story_card-body div.meta {
+  color: rgba(204, 204, 204, 0.555) !important;
+}
+
+.class-story_card-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--secondary) !important;
+}
+
+/* Modal */
+.post-form_login {
+  background-color: rgb(59 31 108);
+  border: none;
+  padding: 24px 48px;
+}

@@ -46,17 +46,17 @@ function StudentMarket() {
 
     switch (trophyName) {
       case "a":
-        currentStudent[0].trophyA++;
+        currentStudent[0].marvinMoneybags++;
         currentStudent[0].totalTrophies++;
         break;
 
       case "b":
-        currentStudent[0].trophyB++;
+        currentStudent[0].stanleySwordington++;
         currentStudent[0].totalTrophies++;
         break;
 
       case "c":
-        currentStudent[0].trophyC++;
+        currentStudent[0].bradleyBomberman++;
         currentStudent[0].totalTrophies++;
         break;
 
@@ -115,7 +115,7 @@ function StudentMarket() {
                   </Grid.Column>
                   <Grid.Column>
                     <Card>
-                      <Card.Content header="Trophy A" />
+                      <Card.Content header="Marvin Moneybags" />
                       <Card.Content>
                         {anim && trophyAnim === "a" ? (
                           <motion.h5
@@ -124,18 +124,18 @@ function StudentMarket() {
                               color: "green",
                             }}
                           >
-                            {student.trophyA}
+                            {student.marvinMoneybags}
                           </motion.h5>
                         ) : (
-                          student.trophyA
+                          student.marvinMoneybags
                         )}
                       </Card.Content>
-                      {/* <Card.Content description={`x${student.trophyA}`} /> */}
+                      {/* <Card.Content description={`x${student.marvinMoneybags}`} /> */}
                     </Card>
                   </Grid.Column>
                   <Grid.Column>
                     <Card>
-                      <Card.Content header="Trophy B" />
+                      <Card.Content header="Stanley Swordington" />
                       <Card.Content>
                         {anim && trophyAnim === "b" ? (
                           <motion.h5
@@ -144,19 +144,21 @@ function StudentMarket() {
                               color: "green",
                             }}
                           >
-                            {student.trophyB}
+                            {student.stanleySwordington}
                           </motion.h5>
                         ) : (
-                          student.trophyB
+                          student.stanleySwordington
                         )}
                       </Card.Content>
-                      {/* <Card.Content description={`x${student.trophyB}`} /> */}
+                      {/* <Card.Content description={`x${student.stanleySwordington}`} /> */}
                     </Card>
                   </Grid.Column>
                   <Grid.Column>
                     <Card>
-                      <Card.Content header="Trophy C" />
-                      <Card.Content description={`x${student.trophyC}`} />
+                      <Card.Content header="Bradley Bomberman" />
+                      <Card.Content
+                        description={`x${student.bradleyBomberman}`}
+                      />
                     </Card>
                   </Grid.Column>
                 </Grid.Row>

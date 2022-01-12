@@ -29,9 +29,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      <h1>Home</h1>
-
-      <Grid stackable columns={5}>
+      <Grid className="home-grid" stackable columns={5}>
         <Grid.Row>
           {students.map((student) => (
             <Grid.Column key={student._id} style={{ marginBottom: 20 }}>
