@@ -83,7 +83,7 @@ function ClassStory() {
         </>
       ) : (
         <>
-          <Grid className="class-story-grid" columns={3}>
+          <Grid className="class-story-grid" columns={3} stackable>
             <Grid.Row className="page-title">
               <h1>Recent by MrTeacher</h1>
               <div className="class-story-controls">
@@ -104,8 +104,7 @@ function ClassStory() {
                 </select>
               </div>
             </Grid.Row>
-            <Grid.Row>
-              {/* <Transition.Group>
+            {/* <Transition.Group>
             {posts &&
               posts?.map((post) => (
                 <Grid.Column key={post._id} style={{ marginBottom: 20 }}>
@@ -114,19 +113,18 @@ function ClassStory() {
               ))}
           </Transition.Group> */}
 
-              <Transition.Group>
-                {posts && (
-                  <Pagination
-                    data={posts}
-                    RenderComponent={PostCard}
-                    pageLimit={Math.ceil(posts.length / 6)}
-                    dataLimit={6}
-                    setCurrentId={setCurrentId}
-                    filter={filter}
-                  />
-                )}
-              </Transition.Group>
-            </Grid.Row>
+            <Transition.Group>
+              {posts && (
+                <Pagination
+                  data={posts}
+                  RenderComponent={PostCard}
+                  pageLimit={Math.ceil(posts.length / 6)}
+                  dataLimit={6}
+                  setCurrentId={setCurrentId}
+                  filter={filter}
+                />
+              )}
+            </Transition.Group>
           </Grid>
         </>
       )}

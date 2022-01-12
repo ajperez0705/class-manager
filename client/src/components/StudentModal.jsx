@@ -8,6 +8,7 @@ import {
   Form,
   Image,
   Icon,
+  Grid,
 } from "semantic-ui-react";
 import { updateStudentPoints } from "../actions/users";
 import UserAvatar from "./UserAvatar";
@@ -243,7 +244,6 @@ function StudentModal({
                     >
                       <Card.Content textAlign={"center"}>
                         <Image src={card.image} size={"small"} />
-                        {/* <Icon name={card.icon} size="huge" /> */}
                       </Card.Content>
                       <Card.Content>
                         <Card.Header textAlign={"center"}>
@@ -251,26 +251,6 @@ function StudentModal({
                         </Card.Header>
                       </Card.Content>
                     </Card>
-                    // <Card
-                    //   className="student-card"
-                    //   key={card.id}
-                    //   onClick={() =>
-                    //     updatePoints("negative", student, numPoints)
-                    //   }
-                    //   centered
-                    // >
-                    //   <Card.Content textAlign={"center"}>
-                    //     <Image src={card.image} size={"small"} />
-                    //   </Card.Content>
-                    //   <Card.Content>
-                    //     <Card.Header
-                    //       className="student-card_header"
-                    //       textAlign="center"
-                    //     >
-                    //       Test
-                    //     </Card.Header>
-                    //   </Card.Content>
-                    // </Card>
                   ))}
                 </Card.Group>
 

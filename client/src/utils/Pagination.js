@@ -9,8 +9,12 @@ export default function Pagination({
   setCurrentId,
   filter,
 }) {
-  const [pages] = useState(Math.round(data.length / dataLimit));
+  const [pages, setPages] = useState(Math.ceil(data.length / dataLimit));
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setPages(Math.ceil(data.length / dataLimit));
+  }, [data, dataLimit]);
 
   useEffect(() => {
     if (currentPage !== 1) {
@@ -47,58 +51,53 @@ export default function Pagination({
 
   return (
     <>
-      {/* show the posts, 6 posts at a time */}
-      {getPaginatedData().map((data, idx) => (
-        <Grid.Column key={idx} style={{ marginBottom: 20 }}>
-          <RenderComponent
-            data={data}
-            _id={data._id}
-            title={data.title}
-            message={data.message}
-            createdAt={data.createdAt}
-            selectedFile={data.selectedFile}
-            comments={data.comments}
-            likes={data.likes}
-            setCurrentId={setCurrentId}
-          />
-        </Grid.Column>
-      ))}
-
-      {/* show the pagiantion
-        it consists of next and previous buttons
-        along with page numbers, in our case, 5 page
-        numbers at a time
-    */}
-      <div className="pagination">
-        {/* previous button */}
-        <button
-          onClick={goToPreviousPage}
-          className={`prev ${currentPage === 1 ? "disabled" : ""}`}
-        >
-          prev
-        </button>
-
-        {/* show page numbers */}
-        {getPaginationGroup().map((item, index) => (
-          <button
-            key={index}
-            onClick={changePage}
-            className={`paginationItem ${
-              currentPage === item ? "active" : null
-            }`}
-          >
-            <span>{item}</span>
-          </button>
+      <Grid.Row>
+        {/* show the posts, 6 posts at a time */}
+        {getPaginatedData().map((data, idx) => (
+          <Grid.Column key={idx} style={{ marginBottom: 20 }}>
+            <RenderComponent
+              data={data}
+              _id={data._id}
+              title={data.title}
+              message={data.message}
+              createdAt={data.createdAt}
+              selectedFile={data.selectedFile}
+              comments={data.comments}
+              likes={data.likes}
+              setCurrentId={setCurrentId}
+            />
+          </Grid.Column>
         ))}
+      </Grid.Row>
 
-        {/* next button */}
-        <button
-          onClick={goToNextPage}
-          className={`next ${currentPage === pages ? "disabled" : ""}`}
-        >
-          next
-        </button>
-      </div>
+      <Grid.Row className="pagination-row">
+        <div className="pagination">
+          {/* previous button */}
+          {currentPage > 1 && (
+            <button onClick={goToPreviousPage} className="secondary-btn">
+              prev
+            </button>
+          )}
+
+          {/* show page numbers */}
+          {getPaginationGroup().map((item, index) => (
+            <button
+              key={index}
+              onClick={changePage}
+              className={`paginationItem ${currentPage === item && "active"}`}
+            >
+              <span>{item}</span>
+            </button>
+          ))}
+
+          {/* next button */}
+          {currentPage === pages ? null : (
+            <button onClick={goToNextPage} className="secondary-btn">
+              next
+            </button>
+          )}
+        </div>
+      </Grid.Row>
     </>
   );
 }

@@ -7,12 +7,15 @@ import {
   Icon,
   Image,
   Label,
+  Sticky,
 } from "semantic-ui-react";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import CommentSection from "../components/CommentSection";
 import { likePost } from "../actions/posts";
 import { useDispatch } from "react-redux";
+import { BigHead } from "@bigheads/core";
+import { profAvatar } from "../utils/profAvatar";
 
 function SinglePost(props) {
   console.log({ props });
@@ -24,6 +27,7 @@ function SinglePost(props) {
   const currentPost = useSelector((state) =>
     state.posts.filter((p) => p?._id === postId)
   );
+
   const [clickedPostData, setClickedPostData] = useState(currentPost[0]);
   const dispatch = useDispatch();
 
@@ -37,12 +41,12 @@ function SinglePost(props) {
 
     setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 1000);
   }, []);
 
   useEffect(() => {
     setClickedPostData(currentPost[0]);
-  }, [dispatch, currentPost]);
+  }, [dispatch, currentPost, clickedPostData.comments.length]);
 
   return (
     <>
@@ -52,44 +56,28 @@ function SinglePost(props) {
           <h1>Loading...</h1>
         </div>
       ) : (
-        <Grid>
+        <Grid className="single-post-grid" centered>
           <Grid.Row>
             <Grid.Column width={2}>
-              <Image
-                src="https://react.semantic-ui.com/images/avatar/large/molly.png"
-                size="small"
-                float="right"
-              />
+              <Sticky>
+                <BigHead {...JSON.parse(profAvatar)} />
+              </Sticky>
             </Grid.Column>
             <Grid.Column width={10}>
               <Card fluid>
                 <CardContent>
-                  <div>
-                    <Card.Header>{clickedPostData.title}</Card.Header>
-                    <Card.Meta>
-                      {moment(clickedPostData.createdAt).fromNow()}
-                    </Card.Meta>
-                    <Card.Description>
-                      {clickedPostData.message}
-                    </Card.Description>
-                    <Card.Description>
-                      <Image src={clickedPostData.selectedFile} />
-                    </Card.Description>
-                  </div>
+                  <Card.Header>{clickedPostData.title}</Card.Header>
+                  <Card.Meta>
+                    {moment(clickedPostData.createdAt).fromNow()}
+                  </Card.Meta>
+                  <Card.Description>{clickedPostData.message}</Card.Description>
+                  <Card.Description className="single-post_image">
+                    <Image src={clickedPostData.selectedFile} />
+                  </Card.Description>
                 </CardContent>
                 <hr />
                 <Card.Content extra>
                   {/* <LikeButton user={user} post={{ id, likeCount, likes }} /> */}
-                  <Button
-                    as="div"
-                    labelPosition="right"
-                    onClick={() => console.log("comment on post")}
-                  >
-                    <Button basic color="purple">
-                      <Icon name="comments" />
-                    </Button>
-                    <Label basic color="purple" pointing="left" />
-                  </Button>
 
                   <Button
                     onClick={() => dispatch(likePost(clickedPostData._id))}
@@ -101,6 +89,19 @@ function SinglePost(props) {
                       {clickedPostData.likes &&
                         clickedPostData.likes.length > 0 &&
                         clickedPostData.likes.length}
+                    </span>
+                  </Button>
+                  <Button
+                    // as="div"
+                    onClick={() => console.log("comment on post")}
+                    color="violet"
+                    basic
+                  >
+                    <Icon name="comments" />
+                    <span>
+                      {clickedPostData.comments &&
+                        clickedPostData.comments.length > 0 &&
+                        clickedPostData.comments.length}
                     </span>
                   </Button>
                   {/* {user && user.username === username && (

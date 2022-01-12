@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Form, Transition } from "semantic-ui-react";
+import {
+  Button,
+  Header,
+  Form,
+  Transition,
+  Segment,
+  Modal,
+} from "semantic-ui-react";
 import FileBase from "react-file-base64";
 import { createPost, updatePost } from "../actions/posts";
 
@@ -52,48 +59,54 @@ export default function PostForm({
 
   return (
     <>
-      <Form className="post-form_login">
-        {currentId ? (
-          <h2>Edit the story</h2>
-        ) : (
-          <h2>Create a Story for the class</h2>
-        )}
-        <Form.Field>
-          <Form.Input
-            placeholder="Title"
-            name="title"
-            value={postData.title}
-            onChange={(e) =>
-              setPostData({ ...postData, title: e.target.value })
-            }
-          />
-          <Form.Input
-            placeholder="message"
-            name="message"
-            value={postData.message}
-            onChange={(e) =>
-              setPostData({ ...postData, message: e.target.value })
-            }
-          />
-
-          <div>
-            <FileBase
-              type="file"
-              multiple={false}
-              onDone={({ base64 }) =>
-                setPostData({ ...postData, selectedFile: base64 })
+      {currentId ? (
+        <Header className="class-story_form-header" as="h2" attached="top">
+          Edit the story
+        </Header>
+      ) : (
+        <Header className="class-story_form-header" as="h2" attached="top">
+          Create a Story for the class
+        </Header>
+      )}
+      <Segment attached>
+        <Form className="class-story_form">
+          <Form.Field>
+            <Form.Input
+              placeholder="Title"
+              name="title"
+              value={postData.title}
+              onChange={(e) =>
+                setPostData({ ...postData, title: e.target.value })
               }
             />
-          </div>
+            <Form.Input
+              placeholder="message"
+              name="message"
+              value={postData.message}
+              onChange={(e) =>
+                setPostData({ ...postData, message: e.target.value })
+              }
+            />
 
-          <Button type="submit" color="purple" onClick={onSubmit}>
+            <div>
+              <FileBase
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) =>
+                  setPostData({ ...postData, selectedFile: base64 })
+                }
+              />
+            </div>
+          </Form.Field>
+          <Button type="submit" color="blue" onClick={onSubmit}>
             Submit
           </Button>
-        </Form.Field>
-      </Form>
-      <Button color="purple" onClick={() => setModalStatus(false)}>
-        Cancel
-      </Button>
+          <Button basic color="red" onClick={() => setModalStatus(false)}>
+            Cancel
+          </Button>
+        </Form>
+      </Segment>
+
       {/* {error && (
         <div className="ui error message" style={{ marginBottom: 20 }}>
           <ul className="list">

@@ -18,6 +18,24 @@
     align-self: center; */
 }
 
+.btn_main {
+  font-family: "Bangers";
+  padding: 10px 24px;
+  margin: 1em 0;
+  font-size: 24px;
+  background: linear-gradient(
+    90deg,
+    rgba(214, 141, 89, 1) 0%,
+    rgba(236, 99, 119, 1) 46%,
+    rgba(236, 99, 119, 1) 85%
+  );
+  color: rgb(255, 255, 255);
+  border: none;
+  cursor: pointer;
+  border-radius: 50px;
+  box-shadow: 0px 0px 17px -5px rgba(0, 0, 0, 0.92);
+}
+
 .auth-container_auth {
   width: 1000px;
   margin: 12px 24px;
@@ -122,6 +140,7 @@
   border-radius: 12px !important;
   padding: 24px 48px;
   box-shadow: 0px 0px 15px -4px rgb(0 0 0 / 70%) !important;
+  max-width: 300px !important;
 }
 
 .account-preview_content-header {

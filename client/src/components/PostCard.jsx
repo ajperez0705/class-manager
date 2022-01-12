@@ -25,7 +25,7 @@ export default function PostCard({
       ) ? (
         <>
           <Button inverted onClick={() => dispatch(likePost(_id))}>
-            <Icon name="like" />
+            <Icon fitted name="like" />
             {numOfLikes > 2
               ? `You and ${numOfLikes - 1} others`
               : `${numOfLikes}`}
@@ -34,7 +34,7 @@ export default function PostCard({
       ) : (
         <>
           <Button inverted onClick={() => dispatch(likePost(_id))}>
-            <Icon name="like" />
+            <Icon fitted name="like" />
             {numOfLikes}
           </Button>
         </>
@@ -44,7 +44,7 @@ export default function PostCard({
     return (
       <>
         <Button inverted onClick={() => dispatch(likePost(_id))}>
-          <Icon name="like" />
+          <Icon fitted name="like" />
         </Button>
       </>
     );
@@ -75,13 +75,13 @@ export default function PostCard({
       <Card.Content className="class-story_card-stats" extra>
         <Likes />
         <Button inverted as={Link} to={`/posts/${_id}`} post={title}>
-          <Icon name="comments" />
+          <Icon fitted name="comments" />
           <span> {numOfComments}</span>
         </Button>
 
         {user?.result?.isTeacher === true && (
           <Button onClick={() => dispatch(deletePost(_id))} inverted>
-            <Icon name="delete" />
+            <Icon fitted name="delete" />
           </Button>
         )}
 

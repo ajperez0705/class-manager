@@ -77,21 +77,23 @@ function CommentSection({ post }) {
         </Card>
       )}
       {comments?.map((comment) => (
-        <Card fluid key={comment._id}>
+        <Card className="comment-section-card" fluid key={comment._id}>
           <Card.Content>
             <Card.Header>{comment.message}</Card.Header>
             <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
-            {/* <Card.Description>{comment.message}</Card.Description> */}
-            {myComments.includes(comment) && (
+          </Card.Content>
+          {/* <Card.Description>{comment.message}</Card.Description> */}
+          {myComments.includes(comment) && (
+            <Card.Description>
               <Button
                 basic
                 color="purple"
                 onClick={(e) => deleteCommentHandler(e, comment?._id)}
               >
-                <Icon name="delete" />
+                <Icon fitted name="delete" />
               </Button>
-            )}
-          </Card.Content>
+            </Card.Description>
+          )}
         </Card>
       ))}
     </div>
