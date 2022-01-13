@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Card } from "semantic-ui-react";
+import { Card, Grid, Header, Image } from "semantic-ui-react";
 import UserAvatar from "../components/UserAvatar";
 
 function MyAccount() {
@@ -39,49 +39,130 @@ function MyAccount() {
         <>
           {currentStudent.map((student) => (
             <div key={student._id}>
-              <h1>Hello {student.username} 👋</h1>
+              <Header className="my-account-title" as="h1">
+                Hello {student.username} 👋
+              </Header>
               <p>
-                Here is the student marketplace. You may use the points you
-                earned to purchase trophies. Each trophy has a different value
-                and allows different perks if you have them. Read each
-                description to learn more about them!
+                This is the My Account page. Here, you can view your account
+                information, as well as the amount of points and trophies you
+                have accumulated.
               </p>
-              <UserAvatar studentAvatar={student.avatar} />
-              {student.bio}
-              <Card.Group itemsPerRow={2}>
-                <Card
-                  color="red"
-                  header="Current Points"
-                  meta={student.totalPoints}
-                />
-                <Card
-                  color="green"
-                  header="All Time Points"
-                  meta={student.allTimePoints}
-                />
-              </Card.Group>
-              <Card.Group itemsPerRow={4}>
-                <Card
-                  color="red"
-                  header="Marvin Moneybags"
-                  meta={student.marvinMoneybags}
-                />
-                <Card
-                  color="green"
-                  header="Stanley Swordington"
-                  meta={student.stanleySwordington}
-                />
-                <Card
-                  color="blue"
-                  header="Bradley Bomberman"
-                  meta={student.bradleyBomberman}
-                />
-                <Card
-                  color="blue"
-                  header="Total Trophies"
-                  meta={student.totalTrophies}
-                />
-              </Card.Group>
+
+              <Grid className="my-account-info" stackable divided>
+                <Grid.Column width={6}>
+                  <div className="my-account-avatar">
+                    <UserAvatar studentAvatar={student.avatar} />
+                  </div>
+                </Grid.Column>
+                <Grid.Column width={10} verticalAlign="middle">
+                  <Header as="h2">At A Glance</Header>
+                  <div className="my-account-info-brief">
+                    <Header as="h3">
+                      <span> Username: </span>
+                      {student.username}
+                    </Header>
+                    <Header as="h3">
+                      <span> Email: </span>
+                      {student.email}
+                    </Header>
+                    <Header as="h3">
+                      <span> Role: </span>
+                      Student
+                    </Header>
+                  </div>
+                  <p>{student.bio}</p>
+                </Grid.Column>
+              </Grid>
+
+              <Grid
+                className="my-account-grid"
+                columns={2}
+                divided
+                inverted
+                stackable
+              >
+                <Grid.Row textAlign="center">
+                  <Grid.Column textAlign="center" verticalAlign="middle">
+                    <Header
+                      className="my-account-card-title"
+                      content="Current Total Points"
+                      as="h2"
+                    />
+                    <Card.Content className="my-account-number">
+                      {student.totalPoints}
+                    </Card.Content>
+                  </Grid.Column>
+
+                  <Grid.Column>
+                    <Header
+                      className="my-account-card-title"
+                      content="All Time Points"
+                      as="h2"
+                    />
+                    <Card.Content className="my-account-number">
+                      {student.allTimePoints}
+                    </Card.Content>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+
+              <Grid
+                className="my-account-grid"
+                columns="equal"
+                divided
+                inverted
+                stackable
+              >
+                <Grid.Row textAlign="center">
+                  <Grid.Column textAlign="center" verticalAlign="middle">
+                    <Header
+                      className="my-account-card-title"
+                      content="Total Trophies"
+                      as="h2"
+                    />
+                    <Card.Content
+                      className="my-account-number"
+                      content={student.totalTrophies}
+                    />
+                  </Grid.Column>
+
+                  <Grid.Column textAlign="center" verticalAlign="middle">
+                    <Header
+                      className="my-account-card-title"
+                      content="Marvin Moneybags"
+                      as="h2"
+                    />
+                    <Card.Content
+                      className="my-account-number"
+                      content={student.marvinMoneybags}
+                    />
+                  </Grid.Column>
+
+                  <Grid.Column textAlign="center" verticalAlign="middle">
+                    <Header
+                      className="my-account-card-title"
+                      content="Stanley Swordington"
+                      as="h2"
+                    />
+                    <Card.Content
+                      className="my-account-number"
+                      content={student.stanleySwordington}
+                    />
+                  </Grid.Column>
+
+                  <Grid.Column textAlign="center" verticalAlign="middle">
+                    <Header
+                      className="my-account-card-title"
+                      content="Bradley Bomberman"
+                      as="h2"
+                    />
+                    <Card.Content
+                      className="my-account-number"
+                      content={student.bradleyBomberman}
+                    />
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
             </div>
           ))}
         </>

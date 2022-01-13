@@ -60,7 +60,7 @@
 
 .ui.card,
 .ui.cards.modal_feedback-cards > .card {
-  /* width: auto !important; */
+  width: auto !important;
 }
 /* Start of Modal */
 
@@ -93,7 +93,21 @@
 
 /* Student View */
 .display-card {
-  width: 200px !important;
+  width: 160px !important;
+}
+
+.trophy-list {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: flex-start;
+}
+
+.trophy-label {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  margin: 0 8px;
 }
 
 /* End of Modal */

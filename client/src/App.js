@@ -6,6 +6,8 @@ import "./style/App.css";
 import "./style/Auth.css";
 import "./style/Home.css";
 import "./style/Class-Story.css";
+import "./style/Market.css";
+import "./style/MyAccount.css";
 import { Container } from "semantic-ui-react";
 import MenuBar from "./components/MenuBar";
 import Auth from "./Pages/Auth";

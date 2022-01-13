@@ -8,7 +8,7 @@ import {
   Form,
   Image,
   Icon,
-  Grid,
+  Feed,
 } from "semantic-ui-react";
 import { updateStudentPoints } from "../actions/users";
 import UserAvatar from "./UserAvatar";
@@ -24,6 +24,11 @@ import phone from "../images/point-icons/phone-use.png";
 import helping from "../images/point-icons/helping-others.png";
 import work from "../images/point-icons/stellar-work.png";
 import participation from "../images/point-icons/participation.png";
+
+// Trophies
+import moneyBag from "../images/trophies/money-bag.png";
+import bomb from "../images/trophies/bomb.png";
+import sword from "../images/trophies/sword.png";
 
 function StudentModal({
   student,
@@ -282,35 +287,71 @@ function StudentModal({
               <Header>Points</Header>
               <Card className="display-card">
                 <Card.Content textAlign={"center"}>
-                  <Icon name="thumbs up outline" size="huge" />
-                  <Header>Current Points</Header>
-                </Card.Content>
-                <Card.Content>
+                  <Icon color="violet" name="target" size="huge" />
+                  <Header as="h4">Current Points</Header>
                   <Card.Header textAlign={"center"}>
                     {student.totalPoints}
                   </Card.Header>
                 </Card.Content>
               </Card>
-              <Card meta="Current Points" description={student.totalPoints} />
-              <Card meta="Current Points" description={student.totalPoints} />
+              <Card className="display-card">
+                <Card.Content textAlign={"center"}>
+                  <Icon color="violet" name="chart line" size="huge" />
+                  <Header as="h4">All-Time Points</Header>
+                  <Card.Header textAlign={"center"}>
+                    {student.allTimePoints}
+                  </Card.Header>
+                </Card.Content>
+              </Card>
             </Modal.Description>
 
             <Modal.Description>
               <Header>Trophies</Header>
-              <Card meta="Trophies" description={student.totalTrophies} />
+              <Card>
+                <Feed size="large">
+                  <Feed.Event>
+                    <Feed.Label className="trophy-label" image={moneyBag} />
+                    <Feed.Content>
+                      <Feed.Date content={`x${student.marvinMoneybags}`} />
+                      <Feed.Summary>
+                        Owning one of these will get you group.
+                      </Feed.Summary>
+                    </Feed.Content>
+                  </Feed.Event>
+                </Feed>
+              </Card>
+              <Card>
+                <Feed size="large">
+                  <Feed.Event>
+                    <Feed.Label className="trophy-label" image={bomb} />
+                    <Feed.Content>
+                      <Feed.Date content={`x${student.marvinMoneybags}`} />
+                      <Feed.Summary>
+                        Owning one of these will get you group.
+                      </Feed.Summary>
+                    </Feed.Content>
+                  </Feed.Event>
+                </Feed>
+              </Card>
+              <Card>
+                <Feed size="large">
+                  <Feed.Event>
+                    <Feed.Label className="trophy-label" image={sword} />
+                    <Feed.Content>
+                      <Feed.Date content={`x${student.marvinMoneybags}`} />
+                      <Feed.Summary>
+                        Owning one of these will get you group.
+                      </Feed.Summary>
+                    </Feed.Content>
+                  </Feed.Event>
+                </Feed>
+              </Card>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
-            <Button color="black" onClick={() => setModalStatus(false)}>
-              Nope
+            <Button color="red" onClick={() => setModalStatus(false)}>
+              Close
             </Button>
-            <Button
-              content="Yep, that's me"
-              labelPosition="right"
-              icon="checkmark"
-              onClick={() => setModalStatus(false)}
-              positive
-            />
           </Modal.Actions>
         </>
       )}

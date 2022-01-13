@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { purchaseTrophy, updateStudentPoints } from "../actions/users";
 import TrophyCards from "../components/TrophyCards";
-import { Container, Grid, Card } from "semantic-ui-react";
+import { Container, Grid, Card, Segment, Header } from "semantic-ui-react";
 import { motion } from "framer-motion";
 
 function StudentMarket() {
@@ -73,7 +73,7 @@ function StudentMarket() {
   };
 
   return (
-    <>
+    <Container>
       {isTeacher ? (
         <>
           <h1>Hello, {user.result.username}</h1>
@@ -86,90 +86,34 @@ function StudentMarket() {
       ) : (
         <>
           {currentStudent.map((student) => (
-            <div key={student._id}>
-              <h1>
-                Hello {student.username}, you have{" "}
-                <motion.span className="span">
-                  {anim && trophyAnim ? (
-                    <motion.span
-                      animate={{
-                        fontSize: "50px",
-                        color: "red",
-                      }}
-                    >
-                      {student.totalPoints}
-                    </motion.span>
-                  ) : (
-                    student.totalPoints
-                  )}
-                </motion.span>{" "}
-                points to spend!
-              </h1>
-              <Grid columns="equal">
-                <Grid.Row>
-                  <Grid.Column>
-                    <Card>
-                      <Card.Content header="Total Trophies" />
-                      <Card.Content description={student.totalTrophies} />
-                    </Card>
-                  </Grid.Column>
-                  <Grid.Column>
-                    <Card>
-                      <Card.Content header="Marvin Moneybags" />
-                      <Card.Content>
-                        {anim && trophyAnim === "a" ? (
-                          <motion.h5
-                            animate={{
-                              fontSize: "50px",
-                              color: "green",
-                            }}
-                          >
-                            {student.marvinMoneybags}
-                          </motion.h5>
-                        ) : (
-                          student.marvinMoneybags
-                        )}
-                      </Card.Content>
-                      {/* <Card.Content description={`x${student.marvinMoneybags}`} /> */}
-                    </Card>
-                  </Grid.Column>
-                  <Grid.Column>
-                    <Card>
-                      <Card.Content header="Stanley Swordington" />
-                      <Card.Content>
-                        {anim && trophyAnim === "b" ? (
-                          <motion.h5
-                            animate={{
-                              fontSize: "50px",
-                              color: "green",
-                            }}
-                          >
-                            {student.stanleySwordington}
-                          </motion.h5>
-                        ) : (
-                          student.stanleySwordington
-                        )}
-                      </Card.Content>
-                      {/* <Card.Content description={`x${student.stanleySwordington}`} /> */}
-                    </Card>
-                  </Grid.Column>
-                  <Grid.Column>
-                    <Card>
-                      <Card.Content header="Bradley Bomberman" />
-                      <Card.Content
-                        description={`x${student.bradleyBomberman}`}
-                      />
-                    </Card>
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
-              <p>
-                Here is the student marketplace. You may use the points you
-                earned to purchase trophies. Each trophy has a different value
-                and allows different perks if you have them. Read each
-                description to learn more about them!
-              </p>
-            </div>
+            <>
+              <Container key={student._id} className="market-hero">
+                <Header className="market-title" as="h1" textAlign="center">
+                  Hello {student.username}, you have{" "}
+                  <motion.span className="span">
+                    {anim && trophyAnim ? (
+                      <motion.span
+                        animate={{
+                          fontSize: "50px",
+                          color: "red",
+                        }}
+                      >
+                        {student.totalPoints}
+                      </motion.span>
+                    ) : (
+                      student.totalPoints
+                    )}
+                  </motion.span>{" "}
+                  points to spend!
+                </Header>
+                <p className="market-hero-p">
+                  Here is the student marketplace. You may use the points you
+                  earned to purchase trophies. Each trophy has a different value
+                  and allows different perks if you have them. Read each
+                  description to learn more about them!
+                </p>
+              </Container>
+            </>
           ))}
           {!isTeacher && (
             <TrophyCards
@@ -183,7 +127,7 @@ function StudentMarket() {
           )}
         </>
       )}
-    </>
+    </Container>
   );
 }
 

@@ -1,0 +1,99 @@
+.market-title {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  font-size: 40px !important;
+  /* background-color: #3b1f6cd5; */
+  color: white !important;
+}
+
+.market-hero {
+  background-color: #3b1f6cd5;
+  padding: 0 160px !important;
+  padding-top: 24px !important;
+  padding-bottom: 48px !important;
+  border-radius: 0 0 8px 8px;
+}
+
+.market-hero-p {
+  color: white;
+  font-size: 20px;
+}
+
+.trophy-card-grid {
+  margin: 60px 0 !important;
+}
+
+.trophy-card-money {
+  padding: 16px !important;
+  background: #70b8df !important;
+  border: none !important;
+  border-color: none !important;
+  border-radius: 12px !important;
+  padding: 24px 48px;
+  /* box-shadow: 0px 0px 15px -4px rgb(0 0 0 / 70%) !important; */
+  text-align: center;
+}
+
+.trophy-card-sword {
+  padding: 16px !important;
+  background: #f16c6c !important;
+  border: none !important;
+  border-color: none !important;
+  border-radius: 12px !important;
+  padding: 24px 48px;
+  /* box-shadow: 0px 0px 15px -4px rgb(0 0 0 / 70%) !important; */
+  text-align: center;
+}
+
+.trophy-card-bomb {
+  padding: 16px !important;
+  background: #9cb691 !important;
+  border: none !important;
+  border-color: none !important;
+  border-radius: 12px !important;
+  padding: 24px 48px;
+  /* box-shadow: 0px 0px 15px -4px rgb(0 0 0 / 70%) !important; */
+  text-align: center;
+}
+
+.trophy-card_header {
+  color: white !important;
+  font-family: "Bangers" !important;
+  font-size: 36px !important;
+  margin-top: 20px;
+}
+
+.trophy-card-image {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 12px 0 !important;
+}
+
+.trophy-card_meta {
+  color: rgba(255, 255, 255, 0.589) !important;
+  font-size: 16px !important;
+  margin: 8px 0;
+}
+
+.trophy-card-description {
+  color: white !important;
+  font-size: 16px !important;
+}
+
+.trophy-card_bio {
+  font-size: 16px;
+  color: white;
+}
+
+.trophy-card-button {
+  margin: 12px 0 !important;
+  background: white !important;
+}
+
+.trophy-card_score {
+  color: white !important;
+  background-color: #6a40df !important;
+  padding: 8px 0 0 0 !important;
+  margin-top: 16px !important;
+}

@@ -63,18 +63,18 @@ function MenuBar() {
         as={Link}
         to="/market"
       />
+      <Menu.Item
+        name="my-account"
+        active={activeItem === "my-account"}
+        onClick={handleItemClick}
+        as={Link}
+        to="/my-account"
+      />
 
       <Menu.Menu position="right">
         <Menu.Item className="menu-bar_welcome">
           Hello, {user.result.username}
         </Menu.Item>
-        <Menu.Item
-          name="my-account"
-          active={activeItem === "my-account"}
-          onClick={handleItemClick}
-          as={Link}
-          to="/my-account"
-        />
         <Menu.Item name="logout" onClick={logout} />
       </Menu.Menu>
     </Menu>

@@ -1,0 +1,72 @@
+.my-account-info {
+  border: none;
+  background: rgb(255, 255, 255);
+  border-radius: 8px;
+  margin: 16px 2px !important;
+  padding: 0px 16px !important;
+}
+
+.my-account-info-brief {
+  display: flex;
+  justify-content: flex-start;
+  /* align-items: center; */
+}
+
+.my-account-info-brief h3 {
+  margin-top: 0 !important;
+  margin-right: 20px !important;
+}
+
+.my-account-info span {
+  color: rgba(80, 80, 80, 0.699);
+}
+
+.my-account-title {
+  font-size: 48px !important;
+  margin-top: 2rem !important;
+}
+
+.my-account-avatar {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.my-account-avatar svg {
+  width: 250px !important;
+}
+
+.my-account-card {
+  border-color: #3b1f6c !important;
+}
+
+.my-account-grid {
+  background-color: #3b1f6c;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px 3px rgba(58, 58, 58, 0.26);
+  margin-top: 40px !important;
+  margin-bottom: 20px !important;
+}
+
+.my-account-grid .card {
+  background: #3b1f6c !important;
+  color: white !important;
+  border: #3b1f6c !important;
+  box-shadow: none !important;
+}
+
+.my-account-grid .header {
+  color: white !important;
+}
+
+.my-account-card-title {
+  font-size: 24px !important;
+  color: rgba(255, 255, 255, 0.781);
+}
+
+.my-account-number {
+  color: white !important;
+  font-size: 36px !important;
+  padding: 16px !important;
+  border-top: 2px solid !important;
+  border-color: #3b1f6c !important;
+}

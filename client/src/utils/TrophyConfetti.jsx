@@ -118,17 +118,19 @@ export default class TrophyConfetti extends Component {
         }}
       >
         {this.props.trophyAnim === true ? (
-          <Button disabled>Hello</Button>
+          <Button disabled>Purchase</Button>
         ) : (
           <Button
+            className="trophy-card-button"
             name={this.props.name}
             value={this.props.value}
             onClick={this.fakeRequest}
             loading={fakingRequest}
             icon={type ? "like" : "trophy"}
             size="large"
+            color="standard"
           >
-            Hello
+            Purchase
           </Button>
         )}
       </Reward>
