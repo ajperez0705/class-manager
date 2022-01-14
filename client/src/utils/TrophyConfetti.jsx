@@ -117,8 +117,10 @@ export default class TrophyConfetti extends Component {
           springAnimation,
         }}
       >
-        {this.props.trophyAnim === true ? (
-          <Button disabled>Purchase</Button>
+        {this.props.trophyAnim === true || this.props.isTeacher === true ? (
+          <Button className="trophy-card-button" disabled>
+            Purchase
+          </Button>
         ) : (
           <Button
             className="trophy-card-button"

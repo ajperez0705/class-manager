@@ -13,13 +13,32 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const post = req.body;
+  console.log(post.selectedFile.length);
 
-  const newPost = new PostMessage({
-    ...post,
-    createdAt: new Date().toISOString(),
-  });
-
+  let errors = [];
   try {
+    if (post.title.length === 0) {
+      errors.push("Title must contain at least one character.");
+    }
+
+    if (post.message.length === 0) {
+      errors.push("Message must contain at least one character.");
+    }
+
+    if (post.selectedFile.length === 0) {
+      errors.push("An image must be uploaded.");
+    }
+    console.log(errors);
+
+    if (errors.length > 0) {
+      return res.status(404).json({ errors });
+    }
+
+    const newPost = await new PostMessage({
+      ...post,
+      createdAt: new Date().toISOString(),
+    });
+
     await newPost.save();
 
     res.status(201).json(newPost);

@@ -16,7 +16,7 @@ function MenuBar() {
   const logout = (e) => {
     dispatch({ type: "LOGOUT" });
 
-    history.push("/");
+    history.push("/auth");
 
     setUser(null);
   };
@@ -46,7 +46,7 @@ function MenuBar() {
         active={activeItem === "home"}
         onClick={handleItemClick}
         as={Link}
-        to="/home"
+        to="/"
       />
       <Menu.Item
         name="class-story"

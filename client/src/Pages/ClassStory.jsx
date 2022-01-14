@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Transition, Select } from "semantic-ui-react";
+import { Grid, Select } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../actions/posts";
 // import PostCard from "../components/PostCard";
@@ -15,7 +15,7 @@ import FormModal from "../components/FormModal";
 
 function ClassStory() {
   const dispatch = useDispatch();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user] = useState(JSON.parse(localStorage.getItem("profile")));
   const [isTeacher, setIsTeacher] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -31,7 +31,7 @@ function ClassStory() {
 
   // On initial render, checks if logged in and if user is teacher
   useEffect(() => {
-    if (!user) return;
+    // if (!user) return;
 
     if (user.result.isTeacher) {
       setIsTeacher(true);
@@ -113,18 +113,16 @@ function ClassStory() {
               ))}
           </Transition.Group> */}
 
-            <Transition.Group>
-              {posts && (
-                <Pagination
-                  data={posts}
-                  RenderComponent={PostCard}
-                  pageLimit={Math.ceil(posts.length / 6)}
-                  dataLimit={6}
-                  setCurrentId={setCurrentId}
-                  filter={filter}
-                />
-              )}
-            </Transition.Group>
+            {posts && (
+              <Pagination
+                data={posts}
+                RenderComponent={PostCard}
+                pageLimit={Math.ceil(posts.length / 6)}
+                dataLimit={6}
+                setCurrentId={setCurrentId}
+                filter={filter}
+              />
+            )}
           </Grid>
         </>
       )}

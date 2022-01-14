@@ -57,9 +57,12 @@ export const signup = async (req, res) => {
     if (existingUsername) {
       errors.push("Username already exists");
       // return res.status(404).json({ message: "User already exists" });
-      console.log(errors);
     } else if (username.length < 2) {
       errors.push("Username must be more than 2 characters");
+    }
+
+    if (username[0] !== username[0].toUpperCase()) {
+      errors.push("First character of username must be capitalized");
     }
 
     if (existingUserEmail) {
@@ -70,21 +73,20 @@ export const signup = async (req, res) => {
       errors.push("Example of a valid email: someone@example.com");
     }
 
-    if (!password.match(passwordValidation)) {
+    if (!password.trim().match(passwordValidation)) {
       errors.push(
-        "Password must contain at least 8 characters, 1 number, 1 upper and 1 lowercase."
+        "Password must contain at least 8 characters, 1 number, 1 upper and 1 lowercase"
       );
     }
 
-    if (password !== confirmPassword) {
+    if (password.trim() !== confirmPassword.trim()) {
       errors.push("Password and Confirm Password fields must match!");
       // return res.status(404).json({ message: "Passwords do not match" });
     }
 
     //   The second arg of 12 within the hash method is known as salt, which stands for how difficult you want the password to be hashed
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const hashedPassword = await bcrypt.hash(password.trim(), 12);
 
-    console.log(bio.length);
     if (bio.length < 25 || bio.length > 250) {
       errors.push(
         "Bio must be at least 25 characters, and less then 250 characters."
@@ -136,7 +138,6 @@ export const signup = async (req, res) => {
 
 // Change points
 export const updatePoints = async (req, res) => {
-  console.log("reached update point controller");
   const { id: _id } = req.params;
   const student = req.body;
 
@@ -157,12 +158,8 @@ export const updatePoints = async (req, res) => {
 
 // Purchase Trophy
 export const purchaseTrophy = async (req, res) => {
-  console.log("reached purchase trophy controller");
   const { id: _id } = req.params;
   const student = req.body;
-
-  console.log(student);
-  console.log(_id);
 
   if (!mongoose.Types.ObjectId.isValid(_id)) {
     return res.status(404).send("No student with that id");

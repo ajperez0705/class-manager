@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "semantic-ui-react";
+import { Grid, Transition } from "semantic-ui-react";
 
 export default function Pagination({
   data,
@@ -51,53 +51,63 @@ export default function Pagination({
 
   return (
     <>
-      <Grid.Row>
-        {/* show the posts, 6 posts at a time */}
-        {getPaginatedData().map((data, idx) => (
-          <Grid.Column key={idx} style={{ marginBottom: 20 }}>
-            <RenderComponent
-              data={data}
-              _id={data._id}
-              title={data.title}
-              message={data.message}
-              createdAt={data.createdAt}
-              selectedFile={data.selectedFile}
-              comments={data.comments}
-              likes={data.likes}
-              setCurrentId={setCurrentId}
-            />
-          </Grid.Column>
-        ))}
-      </Grid.Row>
+      {data.length > 0 ? (
+        <>
+          <Grid.Row>
+            {/* show the posts, 6 posts at a time */}
+            {getPaginatedData().map((data, idx) => (
+              <Grid.Column key={idx} style={{ marginBottom: 20 }}>
+                <RenderComponent
+                  data={data}
+                  _id={data._id}
+                  title={data.title}
+                  message={data.message}
+                  createdAt={data.createdAt}
+                  selectedFile={data.selectedFile}
+                  comments={data.comments}
+                  likes={data.likes}
+                  setCurrentId={setCurrentId}
+                />
+              </Grid.Column>
+            ))}
+          </Grid.Row>
+          <Grid.Row className="pagination-row">
+            <div className="pagination">
+              {/* previous button */}
+              {currentPage > 1 && (
+                <button onClick={goToPreviousPage} className="secondary-btn">
+                  prev
+                </button>
+              )}
 
-      <Grid.Row className="pagination-row">
-        <div className="pagination">
-          {/* previous button */}
-          {currentPage > 1 && (
-            <button onClick={goToPreviousPage} className="secondary-btn">
-              prev
-            </button>
-          )}
+              {/* show page numbers */}
+              {getPaginationGroup().map((item, index) => (
+                <button
+                  key={index}
+                  onClick={changePage}
+                  className={`paginationItem ${
+                    currentPage === item && "active"
+                  }`}
+                >
+                  <span>{item}</span>
+                </button>
+              ))}
 
-          {/* show page numbers */}
-          {getPaginationGroup().map((item, index) => (
-            <button
-              key={index}
-              onClick={changePage}
-              className={`paginationItem ${currentPage === item && "active"}`}
-            >
-              <span>{item}</span>
-            </button>
-          ))}
-
-          {/* next button */}
-          {currentPage === pages ? null : (
-            <button onClick={goToNextPage} className="secondary-btn">
-              next
-            </button>
-          )}
-        </div>
-      </Grid.Row>
+              {/* next button */}
+              {currentPage === pages ? null : (
+                <button onClick={goToNextPage} className="secondary-btn">
+                  next
+                </button>
+              )}
+            </div>
+          </Grid.Row>
+        </>
+      ) : (
+        <p>
+          You have not created any posts yet. Use the create post button above
+          to create content for your class!
+        </p>
+      )}
     </>
   );
 }

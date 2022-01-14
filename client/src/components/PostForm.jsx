@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Button,
-  Header,
-  Form,
-  Transition,
-  Segment,
-  Modal,
-} from "semantic-ui-react";
+import { Button, Header, Form, Segment, Message } from "semantic-ui-react";
 import FileBase from "react-file-base64";
 import { createPost, updatePost } from "../actions/posts";
 
@@ -17,6 +10,8 @@ export default function PostForm({
   filterPostAfterForm,
   modalStatus,
   setModalStatus,
+  errors,
+  setErrors,
 }) {
   const [postData, setPostData] = useState({
     title: "",
@@ -26,19 +21,25 @@ export default function PostForm({
   const post = useSelector((state) =>
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );
+  const [success, setSuccess] = useState("");
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (post) setPostData(post);
   }, [post]);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(postData.title);
 
     if (currentId) {
       dispatch(updatePost(currentId, postData));
     } else {
-      dispatch(createPost(postData));
+      let feedback = await dispatch(createPost(postData, setErrors));
+      if (feedback === "error") return;
+      setSuccess(feedback);
     }
     clear();
 
@@ -55,6 +56,8 @@ export default function PostForm({
       message: "",
       selectedFile: "",
     });
+    setErrors([]);
+    setSuccess();
   };
 
   return (
@@ -105,15 +108,23 @@ export default function PostForm({
             Cancel
           </Button>
         </Form>
+        {errors.length > 0 && (
+          <div className="ui error message">
+            <ul className="list">
+              {errors.map((error) => {
+                return <li key={error}>{error}</li>;
+              })}
+            </ul>
+          </div>
+        )}
+        {success !== "" && (
+          <Message
+            success
+            header="Post Created Successfully"
+            content={success}
+          />
+        )}
       </Segment>
-
-      {/* {error && (
-        <div className="ui error message" style={{ marginBottom: 20 }}>
-          <ul className="list">
-            <li>{error.graphQLErrors[0].message}</li>
-          </ul>
-        </div>
-      )} */}
     </>
   );
 }

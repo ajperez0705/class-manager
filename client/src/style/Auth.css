@@ -62,6 +62,16 @@
 
 .auth-form-btns {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.auth-form-btns p {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .auth-form-btns button:not(:last-child) {
@@ -141,6 +151,7 @@
   padding: 24px 48px;
   box-shadow: 0px 0px 15px -4px rgb(0 0 0 / 70%) !important;
   max-width: 300px !important;
+  overflow-wrap: break-word !important;
 }
 
 .account-preview_content-header {
@@ -159,6 +170,7 @@
 .account-preview_content-bio {
   font-size: 16px;
   color: white;
+  overflow-wrap: break-word;
 }
 /* End of Auth */
 

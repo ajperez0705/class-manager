@@ -34,6 +34,8 @@ function Auth() {
   const [avatar, setAvatar] = useState({});
   const [genAvatar, setGenAvatar] = useState(false);
   const [enteredApp, setEnteredApp] = useState(false);
+  // Handles when to see the second part of registration
+  const [registerTwo, setRegisterTwo] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -50,7 +52,6 @@ function Auth() {
     console.log(avatarString);
 
     setFormData({ ...formData, avatar: avatarString });
-    console.log(formData);
   };
 
   const onSubmit = (e) => {
@@ -68,6 +69,8 @@ function Auth() {
   };
 
   const switchMode = () => {
+    setFormData(initialState);
+    setErrors([]);
     setisSignup((prevIsSignup) => !prevIsSignup);
   };
 
@@ -90,7 +93,6 @@ function Auth() {
   };
 
   const authForm = isSignup ? (
-    // <div className="form-container">
     <Grid centered stackable>
       <Grid.Row>
         <Grid.Column width={8}>
@@ -175,15 +177,15 @@ function Auth() {
               >
                 Register
               </motion.button>
-              <motion.button
-                className="btn_main"
+              <p
+                // className="btn_main"
                 onClick={switchMode}
-                whileHover={{
-                  scale: 1.1,
-                }}
+                // whileHover={{
+                //   scale: 1.1,
+                // }}
               >
                 Have an account? Login
-              </motion.button>
+              </p>
             </div>
             {/* <GoogleLogin
                   clientId="327712308001-bah7566eof34tbrfdlhtm5s6vkpdir12.apps.googleusercontent.com"
@@ -309,15 +311,15 @@ function Auth() {
           >
             Login
           </motion.button>
-          <motion.button
-            className="btn_main"
+          <p
+            // className="btn_main"
             onClick={switchMode}
-            whileHover={{
-              scale: 1.1,
-            }}
+            // whileHover={{
+            //   scale: 1.1,
+            // }}
           >
-            Sign Up
-          </motion.button>
+            Do not have an account? Sign Up.
+          </p>
         </div>
         {/* <GoogleLogin
             clientId="327712308001-bah7566eof34tbrfdlhtm5s6vkpdir12.apps.googleusercontent.com"

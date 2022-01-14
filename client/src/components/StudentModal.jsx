@@ -136,59 +136,55 @@ function StudentModal({
     <>
       {isTeacher ? (
         <>
-          {pointAnim ? (
-            <>
-              <Modal.Header className="modal-header">
-                <span>{student.username}'s Current Points:</span>
-                <motion.p
-                  //className="point-modal"
+          <Modal.Header className="modal-header">
+            <div>
+              <span>{student.username}'s Current Points: </span>
+              {pointAnim ? (
+                <motion.span
                   animate={{
                     // fontSize: "500px",
-                    scale: 1.3,
-                    originX: 0,
-                    originY: 0,
+                    scale: 1.1,
+                    color: "green",
                   }}
-                  // transition={{ duration: 3 }}
                 >
                   {student.totalPoints}
-                </motion.p>
-              </Modal.Header>
-            </>
-          ) : (
-            <>
-              <Modal.Header className="modal-header">
-                <div>
-                  {student.username}'s Current Points:{" "}
-                  <span>{student.totalPoints}</span>
-                </div>
-                {feedBack === "positive" ? (
-                  <Modal.Actions className="modal_feedback-type-btns">
-                    <Button color="green" disabled>
-                      Positive Feedback
-                    </Button>
-                    <Button
-                      color="red"
-                      onClick={() => changeFeedbackType("negative")}
-                    >
-                      Negative Feedback
-                    </Button>
-                  </Modal.Actions>
-                ) : (
-                  <Modal.Actions className="modal_feedback-type-btns">
-                    <Button
-                      color="green"
-                      onClick={() => changeFeedbackType("positive")}
-                    >
-                      Positive Feedback
-                    </Button>
-                    <Button color="red" disabled>
-                      Negative Feedback
-                    </Button>
-                  </Modal.Actions>
-                )}
-              </Modal.Header>
-            </>
-          )}
+                </motion.span>
+              ) : (
+                <motion.span>{student.totalPoints}</motion.span>
+              )}
+            </div>
+
+            {/* <span>{student.username}'s Current Points:</span>
+            <div>
+              {student.username}'s Current Points:{" "}
+              <span>{student.totalPoints}</span>
+            </div> */}
+            {feedBack === "positive" ? (
+              <Modal.Actions className="modal_feedback-type-btns">
+                <Button color="green" disabled>
+                  Positive Feedback
+                </Button>
+                <Button
+                  color="red"
+                  onClick={() => changeFeedbackType("negative")}
+                >
+                  Negative Feedback
+                </Button>
+              </Modal.Actions>
+            ) : (
+              <Modal.Actions className="modal_feedback-type-btns">
+                <Button
+                  color="green"
+                  onClick={() => changeFeedbackType("positive")}
+                >
+                  Positive Feedback
+                </Button>
+                <Button color="red" disabled>
+                  Negative Feedback
+                </Button>
+              </Modal.Actions>
+            )}
+          </Modal.Header>
 
           <Modal.Content className="modal-content" image centered="true">
             <UserAvatar studentAvatar={student.avatar} />
@@ -269,7 +265,6 @@ function StudentModal({
               </Modal.Description>
             )}
           </Modal.Content>
-
           <Modal.Actions className="modal-bottom">
             <Button color="black" onClick={() => setModalStatus(false)}>
               Close

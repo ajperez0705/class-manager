@@ -25,6 +25,7 @@ function TrophyCards({
   setErrors,
   setTrophyAnim,
   trophyAnim,
+  isTeacher,
 }) {
   const trophies = [
     {
@@ -123,6 +124,7 @@ function TrophyCards({
                     setErrors={setErrors}
                     setTrophyAnim={setTrophyAnim}
                     trophyAnim={trophyAnim}
+                    isTeacher={isTeacher}
                   />
                   {errors.length > 0 && errors[0].trophyName === trophy.symbol && (
                     <div className="ui error message">

@@ -16,46 +16,65 @@ import { likePost } from "../actions/posts";
 import { useDispatch } from "react-redux";
 import { BigHead } from "@bigheads/core";
 import { profAvatar } from "../utils/profAvatar";
+import { useParams } from "react-router";
 
 function SinglePost(props) {
-  console.log({ props });
+  const { postId } = useParams();
+  // console.log({ props });
   //   const commentInputRef = useRef(null);
   // const _id = props.match.params.postId;
-  const [postId, setPostId] = useState(props.match.params.postId);
+  // const [postId, setPostId] = useState();
   //   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const currentPost = useSelector((state) =>
-    state.posts.filter((p) => p?._id === postId)
-  );
+  const currentPost = useSelector((state) => {
+    const allPosts = state.posts;
+    return allPosts.filter((p) => p?._id === postId);
+  });
 
-  const [clickedPostData, setClickedPostData] = useState(currentPost[0]);
+  const [clickedPostData, setClickedPostData] = useState();
   const dispatch = useDispatch();
 
+  if (!localStorage.postContent) {
+    localStorage.setItem("postContent", JSON.stringify(currentPost[0]));
+  } else if (localStorage.postContent._id !== postId) {
+    localStorage.removeItem("postContent");
+    localStorage.setItem("postContent", JSON.stringify(currentPost[0]));
+  } else {
+    localStorage.getItem("postContent");
+  }
   // useEffect(() => {
   //   init();
   // }, []);
 
-  useEffect(() => {
-    setIsLoading(true);
-    setClickedPostData(currentPost[0]);
+  // const init = function () {
+  //   setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
+  //   console.log(postId);
+  // };
 
   useEffect(() => {
-    setClickedPostData(currentPost[0]);
-  }, [dispatch, currentPost, clickedPostData.comments.length]);
+    console.log("set current post");
+    console.log(currentPost[0]);
+
+    setClickedPostData(currentPost.length === 1 ? currentPost[0] : "");
+  }, [currentPost]);
+
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   setClickedPostData(currentPost[0]);
+
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 1000);
+  // }, [clickedPostData]);
+
+  // useEffect(() => {
+  //   setClickedPostData(currentPost[0]);
+  // }, [dispatch, currentPost, clickedPostData.comments.length]);
 
   return (
     <>
-      {isLoading === true ? (
-        <div>
-          {" "}
-          <h1>Loading...</h1>
-        </div>
-      ) : (
+      {clickedPostData && (
         <Grid className="single-post-grid" centered>
           <Grid.Row>
             <Grid.Column width={2}>

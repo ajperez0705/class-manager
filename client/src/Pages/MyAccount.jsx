@@ -17,6 +17,7 @@ function MyAccount() {
   useEffect(() => {
     if (user.result.isTeacher) {
       setIsTeacher(true);
+      setUser(JSON.parse(localStorage.getItem("profile")));
     }
 
     setCurrentStudent(curStudent);
@@ -27,13 +28,40 @@ function MyAccount() {
     <>
       {isTeacher ? (
         <>
-          <h1>Hello, {user.result.username}</h1>
+          <Header className="my-account-title" as="h1">
+            Hello {user.result?.username} 👋
+          </Header>
           <p>
-            As the teacher, you may not purchase any trophies of course, but
-            this page will look very similar to how your students will see this
-            page from their end.
+            This is the My Account page. As the teacher, you are only allowed to
+            see your account information. Students are able to view the amount
+            of points and trophies they have accumulated.
           </p>
-          <p>Put the avatar here</p>
+
+          <Grid className="my-account-info" stackable divided>
+            <Grid.Column width={6}>
+              <div className="my-account-avatar">
+                <UserAvatar studentAvatar={user.result?.avatar} />
+              </div>
+            </Grid.Column>
+            <Grid.Column width={10} verticalAlign="middle">
+              <Header as="h2">At A Glance</Header>
+              <div className="my-account-info-brief">
+                <Header as="h3">
+                  <span> Username: </span>
+                  {user.result?.username}
+                </Header>
+                <Header as="h3">
+                  <span> Email: </span>
+                  {user.result?.email}
+                </Header>
+                <Header as="h3">
+                  <span> Role: </span>
+                  Teacher
+                </Header>
+              </div>
+              <p>{user.result?.bio}</p>
+            </Grid.Column>
+          </Grid>
         </>
       ) : (
         <>

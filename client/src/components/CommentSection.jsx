@@ -36,6 +36,7 @@ function CommentSection({ post }) {
 
     setComments(newComments);
     setComment("");
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   };
 
   const deleteCommentHandler = async (e, clicked_id) => {

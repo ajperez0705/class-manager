@@ -36,20 +36,22 @@ export const getPosts = (filter) => async (dispatch) => {
     }
 
     dispatch({ type: FETCH_ALL, payload: finalData });
-  } catch (error) {
-    console.log(error.message);
+  } catch (err) {
+    console.log(err.message);
   }
 };
 
-export const createPost = (post) => async (dispatch) => {
+export const createPost = (post, setErrors) => async (dispatch) => {
   try {
-    console.log(post);
     const { data } = await api.createPost(post);
     console.log(data);
 
     dispatch({ type: CREATE, payload: data });
-  } catch (error) {
-    console.log(error);
+    return "sucess";
+  } catch (err) {
+    console.log(err.response.data.errors);
+    setErrors(err.response.data.errors);
+    return "error";
   }
 };
 
@@ -59,8 +61,8 @@ export const updatePost = (id, post) => async (dispatch) => {
     const { data } = await api.updatePost(id, post);
 
     dispatch({ type: UPDATE, payload: data });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -69,8 +71,8 @@ export const deletePost = (id) => async (dispatch) => {
     await api.deletePost(id);
 
     dispatch({ type: DELETE, payload: id });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -80,8 +82,8 @@ export const likePost = (id) => async (dispatch) => {
     const { data } = await api.likePost(id);
 
     dispatch({ type: UPDATE, payload: data });
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -94,8 +96,8 @@ export const commentPost = (finalComment, id) => async (dispatch) => {
     dispatch({ type: COMMENT, payload: data });
 
     return data.comments;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -108,7 +110,7 @@ export const deleteComment = (commentID, postID) => async (dispatch) => {
     dispatch({ type: DELETE_COMMENT, payload: commentID });
 
     return data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };

@@ -10,8 +10,6 @@ import failureAudio from "../sound/failure.mp3";
 function Home() {
   const dispatch = useDispatch();
   const students = useSelector((state) => state.users);
-  const test = useSelector((state) => state);
-  console.log(test);
 
   // current Id is used to grab the id of the post you want to edit
   const [currentId, setCurrentId] = useState(null);

@@ -27,7 +27,7 @@ function FormModal({
   const [feedBack, setFeedBack] = useState("positive");
   const [numPoints, setNumPoints] = useState(0);
   const [isTeacher, setIsTeacher] = useState(null);
-  const dispatch = useDispatch();
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
@@ -51,6 +51,8 @@ function FormModal({
         setCurrentId={setCurrentId}
         setModalStatus={setModalStatus}
         modalStatus={modalStatus}
+        errors={errors}
+        setErrors={setErrors}
       />
     </Modal>
   );

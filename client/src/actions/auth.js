@@ -8,7 +8,7 @@ export const signin = (formData, setErrors, history) => async (dispatch) => {
 
     dispatch({ type: AUTH, data });
 
-    history.push("/home");
+    history.push("/");
   } catch (err) {
     setErrors([err.response.data.message]);
   }
@@ -21,9 +21,8 @@ export const signup = (formData, setErrors, history) => async (dispatch) => {
 
     dispatch({ type: AUTH, data });
 
-    history.push("/home");
+    history.push("/");
   } catch (err) {
-    console.log(err.response.data.errors);
     setErrors(err.response.data.errors);
   }
 };
