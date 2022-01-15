@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardContent,
+  Container,
   Grid,
   Icon,
   Image,
@@ -17,31 +18,40 @@ import { useDispatch } from "react-redux";
 import { BigHead } from "@bigheads/core";
 import { profAvatar } from "../utils/profAvatar";
 import { useParams } from "react-router";
+import { getPosts } from "../actions/posts";
 
-function SinglePost(props) {
+function SinglePost() {
   const { postId } = useParams();
-  // console.log({ props });
-  //   const commentInputRef = useRef(null);
-  // const _id = props.match.params.postId;
-  // const [postId, setPostId] = useState();
-  //   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [clickedPostData, setClickedPostData] = useState("");
+  const dispatch = useDispatch();
+
   const currentPost = useSelector((state) => {
+    console.log(postId);
+    console.log("ran use selector");
     const allPosts = state.posts;
     return allPosts.filter((p) => p?._id === postId);
   });
 
-  const [clickedPostData, setClickedPostData] = useState();
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPosts());
+  }, []);
 
-  if (!localStorage.postContent) {
-    localStorage.setItem("postContent", JSON.stringify(currentPost[0]));
-  } else if (localStorage.postContent._id !== postId) {
-    localStorage.removeItem("postContent");
-    localStorage.setItem("postContent", JSON.stringify(currentPost[0]));
-  } else {
-    localStorage.getItem("postContent");
-  }
+  useEffect(() => {
+    console.log(`checking for current post: ${currentPost.length}`);
+    if (currentPost.length === 1) {
+      setClickedPostData(currentPost[0]);
+    }
+  }, [currentPost.length, currentPost, postId]);
+
+  // if (!localStorage.postContent) {
+  //   localStorage.setItem("postContent", JSON.stringify(currentPost[0]));
+  // } else if (localStorage.postContent._id !== postId) {
+  //   localStorage.removeItem("postContent");
+  //   localStorage.setItem("postContent", JSON.stringify(currentPost[0]));
+  // } else {
+  //   localStorage.getItem("postContent");
+  // }
   // useEffect(() => {
   //   init();
   // }, []);
@@ -51,13 +61,6 @@ function SinglePost(props) {
 
   //   console.log(postId);
   // };
-
-  useEffect(() => {
-    console.log("set current post");
-    console.log(currentPost[0]);
-
-    setClickedPostData(currentPost.length === 1 ? currentPost[0] : "");
-  }, [currentPost]);
 
   // useEffect(() => {
   //   setIsLoading(true);
@@ -73,7 +76,8 @@ function SinglePost(props) {
   // }, [dispatch, currentPost, clickedPostData.comments.length]);
 
   return (
-    <>
+    <Container>
+      {!clickedPostData && <h1>No data to show</h1>}
       {clickedPostData && (
         <Grid className="single-post-grid" centered>
           <Grid.Row>
@@ -133,7 +137,7 @@ function SinglePost(props) {
           </Grid.Row>
         </Grid>
       )}
-    </>
+    </Container>
   );
 }
 

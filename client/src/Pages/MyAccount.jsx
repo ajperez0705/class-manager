@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Card, Grid, Header, Image } from "semantic-ui-react";
+import { Card, Container, Grid, Header, Image } from "semantic-ui-react";
 import UserAvatar from "../components/UserAvatar";
 
 function MyAccount() {
@@ -25,7 +25,7 @@ function MyAccount() {
   }, []);
 
   return (
-    <>
+    <Container>
       {isTeacher ? (
         <>
           <Header className="my-account-title" as="h1">
@@ -195,7 +195,7 @@ function MyAccount() {
           ))}
         </>
       )}
-    </>
+    </Container>
   );
 }
 

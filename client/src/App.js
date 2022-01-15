@@ -20,23 +20,19 @@ import "./style/MyAccount.css";
 function App() {
   return (
     <BrowserRouter>
+      <MenuBar />
       <Switch>
         <Route exact path="/auth" component={Auth} />
-        <Container>
-          <Container className="menu-bar">
-            <MenuBar />
-          </Container>
-          <PrivateRoute exact path="/" component={Home} />
-          <PrivateRoute exact path="/class-story" component={ClassStory} />
-          <PrivateRoute
-            exact
-            path="/market"
-            component={(props) => <StudentMarket {...props} />}
-          />
-          <PrivateRoute exact path="/my-account" component={MyAccount} />
-          <PrivateRoute exact path="/posts/:postId" component={SinglePost} />
-          <PrivateRoute exact path="/test" component={TestBigHead} />
-        </Container>
+        <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute exact path="/class-story" component={ClassStory} />
+        <PrivateRoute
+          exact
+          path="/market"
+          component={(props) => <StudentMarket {...props} />}
+        />
+        <PrivateRoute exact path="/my-account" component={MyAccount} />
+        <PrivateRoute exact path="/posts/:postId" component={SinglePost} />
+        <PrivateRoute exact path="/test" component={TestBigHead} />
       </Switch>
     </BrowserRouter>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Menu } from "semantic-ui-react";
+import { Menu, Container } from "semantic-ui-react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
@@ -40,44 +40,46 @@ function MenuBar() {
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
   const menuBar = user ? (
-    <Menu pointing secondary size="massive" inverted>
-      <Menu.Item
-        name="home"
-        active={activeItem === "home"}
-        onClick={handleItemClick}
-        as={Link}
-        to="/"
-      />
-      <Menu.Item
-        name="class-story"
-        active={activeItem === "class-story"}
-        onClick={handleItemClick}
-        as={Link}
-        to="/class-story"
-      />
+    <Container className="menu-bar">
+      <Menu pointing secondary size="massive" inverted>
+        <Menu.Item
+          name="home"
+          active={activeItem === "home"}
+          onClick={handleItemClick}
+          as={Link}
+          to="/"
+        />
+        <Menu.Item
+          name="class-story"
+          active={activeItem === "class-story"}
+          onClick={handleItemClick}
+          as={Link}
+          to="/class-story"
+        />
 
-      <Menu.Item
-        name="market"
-        active={activeItem === "market"}
-        onClick={handleItemClick}
-        as={Link}
-        to="/market"
-      />
-      <Menu.Item
-        name="my-account"
-        active={activeItem === "my-account"}
-        onClick={handleItemClick}
-        as={Link}
-        to="/my-account"
-      />
+        <Menu.Item
+          name="market"
+          active={activeItem === "market"}
+          onClick={handleItemClick}
+          as={Link}
+          to="/market"
+        />
+        <Menu.Item
+          name="my-account"
+          active={activeItem === "my-account"}
+          onClick={handleItemClick}
+          as={Link}
+          to="/my-account"
+        />
 
-      <Menu.Menu position="right">
-        <Menu.Item className="menu-bar_welcome">
-          Hello, {user.result.username}
-        </Menu.Item>
-        <Menu.Item name="logout" onClick={logout} />
-      </Menu.Menu>
-    </Menu>
+        <Menu.Menu position="right">
+          <Menu.Item className="menu-bar_welcome">
+            Hello, {user.result.username}
+          </Menu.Item>
+          <Menu.Item name="logout" onClick={logout} />
+        </Menu.Menu>
+      </Menu>
+    </Container>
   ) : null;
   // <Menu pointing secondary size="massive" color="purple">
   //   <Menu.Item

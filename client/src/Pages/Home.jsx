@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
 import { fetchStudents } from "../actions/users";
 import UserCard from "../components/UserCard";
 
@@ -28,23 +28,25 @@ function Home() {
   };
 
   return (
-    <div className="home-container">
-      <Grid className="home-grid" stackable columns={5}>
-        <Grid.Row>
-          {students.map((student) => (
-            <Grid.Column key={student._id} style={{ marginBottom: 20 }}>
-              <UserCard
-                student={student}
-                setCurrentId={setCurrentId}
-                pointAnim={pointAnim}
-                setPointAnim={setPointAnim}
-                audioHandler={audioHandler}
-              />
-            </Grid.Column>
-          ))}
-        </Grid.Row>
-      </Grid>
-    </div>
+    <Container>
+      <div className="home-container">
+        <Grid className="home-grid" stackable columns={5}>
+          <Grid.Row>
+            {students.map((student) => (
+              <Grid.Column key={student._id} style={{ marginBottom: 20 }}>
+                <UserCard
+                  student={student}
+                  setCurrentId={setCurrentId}
+                  pointAnim={pointAnim}
+                  setPointAnim={setPointAnim}
+                  audioHandler={audioHandler}
+                />
+              </Grid.Column>
+            ))}
+          </Grid.Row>
+        </Grid>
+      </div>
+    </Container>
   );
 }
 

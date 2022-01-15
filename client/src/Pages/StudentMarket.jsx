@@ -23,12 +23,12 @@ function StudentMarket() {
   //const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    if (user.result.isTeacher === true) {
+    if (user.result.isTeacher) {
       setIsTeacher(true);
-      setUser(JSON.parse(localStorage.getItem("profile")));
     }
 
     setCurrentStudent(curStudent);
+    console.log(currentStudent);
   }, []);
 
   const buyTrophy = function (e) {
@@ -75,39 +75,13 @@ function StudentMarket() {
   return (
     <Container>
       {isTeacher ? (
-        // <>
-        //   <h1>Hello, {user.result.username}</h1>
-        //   <p>
-        //     As the teacher, you may not purchase any trophies of course, but
-        //     this page will look very similar to how your students will see this
-        //     page from their end.
-        //   </p>
-        // </>
         <>
-          {
-            <>
-              <Container className="market-hero">
-                <Header className="market-title" as="h1" textAlign="center">
-                  Hello {user.result?.username}
-                </Header>
-                <p className="market-hero-p">
-                  This is the student marketplace. Your students may use the
-                  points they earned to purchase trophies. Each trophy has a
-                  different value and allows different perks within the
-                  classroom. Read each description to learn more about them!
-                </p>
-              </Container>
-            </>
-          }
-          <TrophyCards
-            curStudent={curStudent}
-            isTeacher={isTeacher}
-            buyTrophy={buyTrophy}
-            errors={errors}
-            setErrors={setErrors}
-            setTrophyAnim={setTrophyAnim}
-            trophyAnim={trophyAnim}
-          />
+          <h1>Hello, {user.result.username}</h1>
+          <p>
+            As the teacher, you may not purchase any trophies of course, but
+            this page will look very similar to how your students will see this
+            page from their end.
+          </p>
         </>
       ) : (
         <>

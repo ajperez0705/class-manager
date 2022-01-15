@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Select } from "semantic-ui-react";
+import { Grid, Container } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../actions/posts";
 // import PostCard from "../components/PostCard";
@@ -52,8 +52,6 @@ function ClassStory() {
   // Re-calls the posts using the current filter whenever the filter handler changes
   useEffect(() => {
     dispatch(getPosts(filter));
-
-    console.log("called get more posts");
   }, [filter, dispatch]);
 
   const showPostForm = function () {
@@ -76,7 +74,7 @@ function ClassStory() {
   };
 
   return (
-    <div>
+    <Container>
       {isLoading === true ? (
         <>
           <Loading />
@@ -126,7 +124,7 @@ function ClassStory() {
           </Grid>
         </>
       )}
-    </div>
+    </Container>
   );
 }
 

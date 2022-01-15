@@ -32,6 +32,7 @@ export const getPosts = (filter) => async (dispatch) => {
         break;
 
       default:
+        finalData = data;
         break;
     }
 
