@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { Form, Grid, Header, Container, Card } from "semantic-ui-react";
 // import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { BigHead } from "@bigheads/core";
 import { getRandomOptions } from "../utils/bigheads";
-import { motion } from "framer-motion";
 
 import { signin, signup } from "../actions/auth";
 import Register from "../components/auth/Register";
@@ -51,6 +48,7 @@ function Auth() {
     if (isSignup) {
       dispatch(signup(formData, setErrors, history));
     } else {
+      console.log(formData);
       dispatch(signin(formData, setErrors, history));
     }
   };
@@ -104,6 +102,8 @@ function Auth() {
       errors={errors}
       switchMode={switchMode}
       setEnteredApp={setEnteredApp}
+      setFormData={setFormData}
+      formData={formData}
     />
   );
 
