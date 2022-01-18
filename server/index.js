@@ -24,6 +24,10 @@ app.use(express.json({ limit: 1024 * 1024 * 10, type: "application/json" }));
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Hello Class Manager");
+});
+
 const PORT = process.env.PORT || 5000;
 
 mongoose
