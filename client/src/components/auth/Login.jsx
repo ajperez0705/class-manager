@@ -8,7 +8,35 @@ function Login({
   errors,
   switchMode,
   setEnteredApp,
+  setFormData,
+  formData,
 }) {
+  const loginCreatedUser = async function (e) {
+    const role = e.target.value;
+
+    if (role === "student") {
+      await setFormData({
+        ...formData,
+        username: "Tokyo",
+        password: "Tokyo123",
+      });
+
+      setTimeout(() => {
+        onSubmit(e);
+      }, 2000);
+    } else if (role === "prof") {
+      await setFormData({
+        ...formData,
+        username: "Professor",
+        password: "Professor1",
+      });
+
+      setTimeout(() => {
+        onSubmit(e);
+      }, 2000);
+    }
+  };
+
   return (
     <>
       <div className="form-container">
@@ -29,6 +57,22 @@ function Login({
               marginBottom: 20,
             }}
           />
+          <div className="reveal-creds-container">
+            <button
+              className="reveal-creds-container"
+              onClick={loginCreatedUser}
+              value="prof"
+            >
+              Login as the professor.
+            </button>
+            <button
+              className="reveal-creds-container"
+              onClick={loginCreatedUser}
+              value="student"
+            >
+              Login as a student.
+            </button>
+          </div>
           <Form.Input
             className="auth-input"
             label="Username"
@@ -40,7 +84,6 @@ function Login({
             //   error={errors.username ? true : false}
             onChange={onChangeHandler}
           />
-
           <Form.Input
             className="auth-input"
             label="Password"
@@ -61,15 +104,7 @@ function Login({
             >
               Login
             </motion.button>
-            <p
-              // className="btn_main"
-              onClick={switchMode}
-              // whileHover={{
-              //   scale: 1.1,
-              // }}
-            >
-              Do not have an account? Sign Up.
-            </p>
+            <p onClick={switchMode}>Do not have an account? Sign Up.</p>
           </div>
           {/* <GoogleLogin
             clientId="327712308001-bah7566eof34tbrfdlhtm5s6vkpdir12.apps.googleusercontent.com"
