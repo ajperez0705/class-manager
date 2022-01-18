@@ -45,7 +45,7 @@ export const createPost = (post, setErrors) => async (dispatch) => {
     const { data } = await api.createPost(post);
 
     dispatch({ type: CREATE, payload: data });
-    return "sucess";
+    return "success";
   } catch (err) {
     setErrors(err.response.data.errors);
     return "error";

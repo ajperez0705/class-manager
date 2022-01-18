@@ -10,15 +10,20 @@ import userRoutes from "./routes/users.js";
 const app = express();
 dotenv.config();
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: 1024 * 1024 * 10,
+    type: "application/x-www-form-urlencoded",
+  })
+);
+// app.use(express.json());
+app.use(express.json({ limit: 1024 * 1024 * 10, type: "application/json" }));
 
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
-// MongoDB
-// const MONGODB =
-//   "mongodb+srv://testuser:GhjPC1sdAUlpJiUo@cluster0.z8inf.mongodb.net/class-manager?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
 mongoose
