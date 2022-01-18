@@ -3,7 +3,6 @@ import { Card, Feed } from "semantic-ui-react";
 import { trophies } from "../../utils/trophyArray";
 
 function StudentViewModalTrophies({ student }) {
-  console.log(trophies);
   return (
     <>
       <Card>

@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import Reward from "react-rewards";
-import {
-  Button,
-  Header,
-  Image,
-  Modal,
-  Card,
-  Icon,
-  Form,
-} from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 const defaults = {
   confetti: {
@@ -96,9 +88,9 @@ export default class TrophyConfetti extends Component {
       elementSize,
       zIndex,
       springAnimation,
-      rewardPunish,
+      // rewardPunish,
     } = this.state;
-    const disabled = rewardPunish === "punish";
+    // const disabled = rewardPunish === "punish";
     return (
       <Reward
         ref={(ref) => {

@@ -37,20 +37,16 @@ export const getPosts = (filter) => async (dispatch) => {
     }
 
     dispatch({ type: FETCH_ALL, payload: finalData });
-  } catch (err) {
-    console.log(err.message);
-  }
+  } catch (err) {}
 };
 
 export const createPost = (post, setErrors) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post);
-    console.log(data);
 
     dispatch({ type: CREATE, payload: data });
     return "sucess";
   } catch (err) {
-    console.log(err.response.data.errors);
     setErrors(err.response.data.errors);
     return "error";
   }
@@ -105,8 +101,6 @@ export const commentPost = (finalComment, id) => async (dispatch) => {
 export const deleteComment = (commentID, postID) => async (dispatch) => {
   try {
     const { data } = await api.deleteComment(commentID, postID);
-
-    console.log(data);
 
     dispatch({ type: DELETE_COMMENT, payload: commentID });
 

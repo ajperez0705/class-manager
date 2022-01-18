@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Transition } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 export default function Pagination({
   data,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Card, Container, Grid, Header, Image } from "semantic-ui-react";
+import { Card, Container, Grid, Header } from "semantic-ui-react";
 import { fetchStudents } from "../actions/users";
 import UserAvatar from "../components/UserAvatar";
 

@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import Reward from "react-rewards";
-import {
-  Button,
-  Header,
-  Image,
-  Modal,
-  Card,
-  Icon,
-  Form,
-} from "semantic-ui-react";
+import { Image, Card } from "semantic-ui-react";
 
 const defaults = {
   confetti: {

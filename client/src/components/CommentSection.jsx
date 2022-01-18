@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Form, Icon, Button } from "semantic-ui-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import moment from "moment";
 
 import { commentPost, deleteComment } from "../actions/posts";
@@ -11,9 +11,6 @@ function CommentSection({ post }) {
   const [myComments, setMyComments] = useState([]);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
-  const currentPost = useSelector((state) =>
-    state.posts.filter((p) => p?._id === post?._id)
-  );
 
   useEffect(() => {
     if (!comments) return;

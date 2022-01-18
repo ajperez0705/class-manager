@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Image, Button, Grid } from "semantic-ui-react";
+import { Card, Image, Grid } from "semantic-ui-react";
 import TrophyConfetti from "../utils/TrophyConfetti";
 import { motion } from "framer-motion";
 import { trophies } from "../utils/trophyArray";

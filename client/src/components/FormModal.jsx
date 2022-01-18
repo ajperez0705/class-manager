@@ -1,19 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import {
-  Button,
-  Header,
-  Image,
-  Modal,
-  Card,
-  Icon,
-  Form,
-} from "semantic-ui-react";
-import decode from "jwt-decode";
-import { updateStudentPoints } from "../actions/users";
-import UserAvatar from "./UserAvatar";
-import PointsConfetti from "../utils/PointsConfetti";
-import { motion } from "framer-motion";
+import { Modal } from "semantic-ui-react";
 import PostForm from "./PostForm";
 
 function FormModal({
@@ -24,8 +10,6 @@ function FormModal({
   filterPostAfterForm,
 }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
-  const [feedBack, setFeedBack] = useState("positive");
-  const [numPoints, setNumPoints] = useState(0);
   const [isTeacher, setIsTeacher] = useState(null);
   const [errors, setErrors] = useState([]);
 

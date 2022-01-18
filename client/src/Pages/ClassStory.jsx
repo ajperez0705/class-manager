@@ -3,7 +3,7 @@ import { Grid, Container } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../actions/posts";
 // import PostCard from "../components/PostCard";
-import PostForm from "../components/PostForm";
+// import PostForm from "../components/PostForm";
 import PostCard from "../components/PostCard";
 import Pagination from "../utils/Pagination";
 import Loading from "../utils/Loading";
@@ -20,11 +20,10 @@ function ClassStory() {
   const [open, setOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showForm, setShowForm] = useState(false);
+  const [showForm] = useState(false);
   const [filter, setFilter] = useState("recent");
 
   const posts = useSelector((state) => state.posts);
-  let resetPagination = 1;
 
   // current Id is used to grab the id of the post you want to edit
   const [currentId, setCurrentId] = useState(null);
@@ -54,13 +53,13 @@ function ClassStory() {
     dispatch(getPosts(filter));
   }, [filter, dispatch]);
 
-  const showPostForm = function () {
-    if (showForm === true) {
-      setShowForm(false);
-    } else {
-      setShowForm(true);
-    }
-  };
+  // const showPostForm = function () {
+  //   if (showForm === true) {
+  //     setShowForm(false);
+  //   } else {
+  //     setShowForm(true);
+  //   }
+  // };
 
   const filterHandler = function (e) {
     e.preventDefault();
@@ -101,14 +100,6 @@ function ClassStory() {
                 </select>
               </div>
             </Grid.Row>
-            {/* <Transition.Group>
-            {posts &&
-              posts?.map((post) => (
-                <Grid.Column key={post._id} style={{ marginBottom: 20 }}>
-                  <PostCard data={post} setCurrentId={setCurrentId} />
-                </Grid.Column>
-              ))}
-          </Transition.Group> */}
 
             {posts && (
               <Pagination

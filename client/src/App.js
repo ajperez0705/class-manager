@@ -34,7 +34,7 @@ function App() {
         <PrivateRoute exact path="/my-account" component={MyAccount} />
         <PrivateRoute exact path="/posts/:postId" component={SinglePost} />
         {/* <Route exact path="/test" component={RichTextEditor} /> */}
-        <Route path="/" component={FourOFour} />
+        <PrivateRoute path="/" component={FourOFour} />
       </Switch>
     </BrowserRouter>
   );

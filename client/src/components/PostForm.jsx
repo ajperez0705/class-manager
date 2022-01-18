@@ -32,8 +32,6 @@ export default function PostForm({
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(postData.title);
-
     if (currentId) {
       dispatch(updatePost(currentId, postData));
     } else {

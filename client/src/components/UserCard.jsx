@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BigHead } from "@bigheads/core";
 
-import { Image, Modal, Card, Icon } from "semantic-ui-react";
+import { Modal, Card, Icon } from "semantic-ui-react";
 import StudentModal from "./StudentModal";
 
 function UserCard({ student, pointAnim, setPointAnim, audioHandler }) {

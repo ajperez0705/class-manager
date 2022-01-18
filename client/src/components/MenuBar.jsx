@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, Container } from "semantic-ui-react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -15,6 +15,7 @@ function MenuBar() {
 
   const logout = (e) => {
     dispatch({ type: "LOGOUT" });
+    setActiveItem(path);
 
     history.push("/auth");
 

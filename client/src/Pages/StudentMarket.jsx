@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchStudents,
-  purchaseTrophy,
-  updateStudentPoints,
-} from "../actions/users";
+import { fetchStudents, purchaseTrophy } from "../actions/users";
 import TrophyCards from "../components/TrophyCards";
-import { Container, Grid, Card, Segment, Header } from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 import { motion } from "framer-motion";
 
 function StudentMarket() {
@@ -45,8 +41,6 @@ function StudentMarket() {
 
     const trophyName = e.target.name;
     const trophyValue = e.target.value;
-    console.log(trophyName);
-    console.log(trophyValue);
 
     // Handle points logic
     currentStudent[0].totalPoints = currentStudent[0].totalPoints - trophyValue;
@@ -89,6 +83,15 @@ function StudentMarket() {
             this page will look very similar to how your students will see this
             page from their end.
           </p>
+          <TrophyCards
+            curStudent={curStudent}
+            buyTrophy={buyTrophy}
+            errors={errors}
+            setErrors={setErrors}
+            setTrophyAnim={setTrophyAnim}
+            trophyAnim={trophyAnim}
+            isTeacher={isTeacher}
+          />
         </>
       ) : (
         <>
@@ -130,6 +133,7 @@ function StudentMarket() {
               setErrors={setErrors}
               setTrophyAnim={setTrophyAnim}
               trophyAnim={trophyAnim}
+              isTeacher={isTeacher}
             />
           )}
         </>
