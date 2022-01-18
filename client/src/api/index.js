@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({
+  baseURL: "https://class-manager-app.herokuapp.com",
+});
 
 // Helps the Auth middleware
 // Happens before all requests. Sends the token back to backend to validate
