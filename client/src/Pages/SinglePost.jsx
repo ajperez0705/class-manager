@@ -27,8 +27,6 @@ function SinglePost() {
   const dispatch = useDispatch();
 
   const currentPost = useSelector((state) => {
-    console.log(postId);
-    console.log("ran use selector");
     const allPosts = state.posts;
     return allPosts.filter((p) => p?._id === postId);
   });
@@ -38,42 +36,10 @@ function SinglePost() {
   }, []);
 
   useEffect(() => {
-    console.log(`checking for current post: ${currentPost.length}`);
     if (currentPost.length === 1) {
       setClickedPostData(currentPost[0]);
     }
   }, [currentPost.length, currentPost, postId]);
-
-  // if (!localStorage.postContent) {
-  //   localStorage.setItem("postContent", JSON.stringify(currentPost[0]));
-  // } else if (localStorage.postContent._id !== postId) {
-  //   localStorage.removeItem("postContent");
-  //   localStorage.setItem("postContent", JSON.stringify(currentPost[0]));
-  // } else {
-  //   localStorage.getItem("postContent");
-  // }
-  // useEffect(() => {
-  //   init();
-  // }, []);
-
-  // const init = function () {
-  //   setIsLoading(true);
-
-  //   console.log(postId);
-  // };
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   setClickedPostData(currentPost[0]);
-
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 1000);
-  // }, [clickedPostData]);
-
-  // useEffect(() => {
-  //   setClickedPostData(currentPost[0]);
-  // }, [dispatch, currentPost, clickedPostData.comments.length]);
 
   return (
     <Container>

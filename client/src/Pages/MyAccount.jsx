@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Card, Container, Grid, Header, Image } from "semantic-ui-react";
+import { fetchStudents } from "../actions/users";
 import UserAvatar from "../components/UserAvatar";
 
 function MyAccount() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user] = useState(JSON.parse(localStorage.getItem("profile")));
 
   const curStudent = useSelector((state) => {
     const students = state.users;
     return students.filter((student) => student._id === user.result._id);
   });
 
-  const [currentStudent, setCurrentStudent] = useState(curStudent);
+  const [currentStudent, setCurrentStudent] = useState([]);
   const [isTeacher, setIsTeacher] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (user.result.isTeacher) {
       setIsTeacher(true);
-      setUser(JSON.parse(localStorage.getItem("profile")));
     }
 
-    setCurrentStudent(curStudent);
-    console.log(currentStudent);
+    dispatch(fetchStudents());
   }, []);
+
+  useEffect(() => {
+    if (curStudent.length === 1) {
+      setCurrentStudent(curStudent);
+    }
+  }, [curStudent.length, curStudent]);
 
   return (
     <Container>
@@ -145,18 +151,6 @@ function MyAccount() {
                   <Grid.Column textAlign="center" verticalAlign="middle">
                     <Header
                       className="my-account-card-title"
-                      content="Total Trophies"
-                      as="h2"
-                    />
-                    <Card.Content
-                      className="my-account-number"
-                      content={student.totalTrophies}
-                    />
-                  </Grid.Column>
-
-                  <Grid.Column textAlign="center" verticalAlign="middle">
-                    <Header
-                      className="my-account-card-title"
                       content="Marvin Moneybags"
                       as="h2"
                     />
@@ -187,6 +181,17 @@ function MyAccount() {
                     <Card.Content
                       className="my-account-number"
                       content={student.bradleyBomberman}
+                    />
+                  </Grid.Column>
+                  <Grid.Column textAlign="center" verticalAlign="middle">
+                    <Header
+                      className="my-account-card-title"
+                      content="Total Trophies"
+                      as="h2"
+                    />
+                    <Card.Content
+                      className="my-account-number"
+                      content={student.totalTrophies}
                     />
                   </Grid.Column>
                 </Grid.Row>

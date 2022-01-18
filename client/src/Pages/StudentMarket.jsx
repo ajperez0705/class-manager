@@ -1,35 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { purchaseTrophy, updateStudentPoints } from "../actions/users";
+import {
+  fetchStudents,
+  purchaseTrophy,
+  updateStudentPoints,
+} from "../actions/users";
 import TrophyCards from "../components/TrophyCards";
 import { Container, Grid, Card, Segment, Header } from "semantic-ui-react";
 import { motion } from "framer-motion";
 
 function StudentMarket() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user] = useState(JSON.parse(localStorage.getItem("profile")));
 
   const curStudent = useSelector((state) => {
     const students = state.users;
     return students.filter((student) => student._id === user.result._id);
   });
 
-  const [currentStudent, setCurrentStudent] = useState(curStudent);
+  const [currentStudent, setCurrentStudent] = useState([]);
   const [isTeacher, setIsTeacher] = useState(null);
   const [anim, setAnim] = useState(false);
   const [trophyAnim, setTrophyAnim] = useState(null);
   const [errors, setErrors] = useState([]);
-
   const dispatch = useDispatch();
-  //const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     if (user.result.isTeacher) {
       setIsTeacher(true);
     }
 
-    setCurrentStudent(curStudent);
-    console.log(currentStudent);
+    dispatch(fetchStudents());
   }, []);
+
+  useEffect(() => {
+    if (curStudent.length === 1) {
+      setCurrentStudent(curStudent);
+    }
+  }, [curStudent.length, curStudent]);
 
   const buyTrophy = function (e) {
     e.preventDefault();

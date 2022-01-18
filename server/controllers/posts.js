@@ -13,7 +13,6 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const post = req.body;
-  console.log(post.selectedFile.length);
 
   let errors = [];
   try {
@@ -28,7 +27,6 @@ export const createPost = async (req, res) => {
     if (post.selectedFile.length === 0) {
       errors.push("An image must be uploaded.");
     }
-    console.log(errors);
 
     if (errors.length > 0) {
       return res.status(404).json({ errors });
@@ -109,7 +107,6 @@ export const likePost = async (req, res) => {
 export const commentPost = async (req, res) => {
   const { id } = req.params;
   const { finalComment } = req.body;
-  console.log(req.body);
 
   const post = await PostMessage.findById(id);
 
@@ -130,16 +127,10 @@ export const deleteComment = async (req, res) => {
   }
 
   const post = await PostMessage.findById(postID);
-  // console.log(post);
-
-  post.comments.forEach((comment) => {
-    console.log(String(comment._id));
-  });
 
   post.comments = post.comments.filter(
     (comment) => String(comment._id) !== commentID
   );
-  // console.log(post);
 
   await PostMessage.findByIdAndUpdate(postID, post, {
     new: true,

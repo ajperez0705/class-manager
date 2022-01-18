@@ -68,7 +68,6 @@ export const signup = async (req, res) => {
     if (existingUserEmail) {
       errors.push("Email already exists");
       // return res.status(404).json({ message: "User already exists" });
-      console.log(errors);
     } else if (!email.match(emailValidation)) {
       errors.push("Example of a valid email: someone@example.com");
     }
@@ -181,7 +180,6 @@ export const getStudents = async (req, res) => {
     const users = await User.find();
 
     const students = users.filter((user) => user.isTeacher === false);
-    console.log(students);
 
     res.status(200).json(students);
   } catch (error) {

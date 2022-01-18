@@ -110,4 +110,9 @@
   margin: 0 8px;
 }
 
+.student-modal-trophies .card {
+  margin: 20px !important;
+  padding: 8px !important;
+}
+
 /* End of Modal */

@@ -29,6 +29,7 @@ import participation from "../images/point-icons/participation.png";
 import moneyBag from "../images/trophies/money-bag.png";
 import bomb from "../images/trophies/bomb.png";
 import sword from "../images/trophies/sword.png";
+import StudentViewModalTrophies from "./ModalComponents/StudentViewModalTrophies";
 
 function StudentModal({
   student,
@@ -300,47 +301,9 @@ function StudentModal({
               </Card>
             </Modal.Description>
 
-            <Modal.Description>
+            <Modal.Description className="student-modal-trophies">
               <Header>Trophies</Header>
-              <Card>
-                <Feed size="large">
-                  <Feed.Event>
-                    <Feed.Label className="trophy-label" image={moneyBag} />
-                    <Feed.Content>
-                      <Feed.Date content={`x${student.marvinMoneybags}`} />
-                      <Feed.Summary>
-                        Owning one of these will get you group.
-                      </Feed.Summary>
-                    </Feed.Content>
-                  </Feed.Event>
-                </Feed>
-              </Card>
-              <Card>
-                <Feed size="large">
-                  <Feed.Event>
-                    <Feed.Label className="trophy-label" image={bomb} />
-                    <Feed.Content>
-                      <Feed.Date content={`x${student.marvinMoneybags}`} />
-                      <Feed.Summary>
-                        Owning one of these will get you group.
-                      </Feed.Summary>
-                    </Feed.Content>
-                  </Feed.Event>
-                </Feed>
-              </Card>
-              <Card>
-                <Feed size="large">
-                  <Feed.Event>
-                    <Feed.Label className="trophy-label" image={sword} />
-                    <Feed.Content>
-                      <Feed.Date content={`x${student.marvinMoneybags}`} />
-                      <Feed.Summary>
-                        Owning one of these will get you group.
-                      </Feed.Summary>
-                    </Feed.Content>
-                  </Feed.Event>
-                </Feed>
-              </Card>
+              <StudentViewModalTrophies student={student} />
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>

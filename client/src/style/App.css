@@ -123,3 +123,7 @@ p {
   align-content: center;
   align-items: center;
 }
+
+.loader {
+  height: 90vh !important;
+}

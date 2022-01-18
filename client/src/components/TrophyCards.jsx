@@ -2,72 +2,22 @@ import React from "react";
 import { Card, Image, Button, Grid } from "semantic-ui-react";
 import TrophyConfetti from "../utils/TrophyConfetti";
 import { motion } from "framer-motion";
-
-// Trophies
-import moneyBag from "../images/trophies/money-bag.png";
-import bomb from "../images/trophies/bomb.png";
-import sword from "../images/trophies/sword.png";
-
-const buttonVariants = {
-  hover: {
-    transition: {
-      yoyo: Infinity,
-    },
-  },
-};
+import { trophies } from "../utils/trophyArray";
 
 function TrophyCards({
   buyTrophy,
   curStudent,
-  pointAnim,
-  setPointAnim,
   errors,
   setErrors,
   setTrophyAnim,
   trophyAnim,
   isTeacher,
 }) {
-  const trophies = [
-    {
-      id: 1,
-      image: moneyBag,
-      name: "Marvin Moneybags",
-      className: "trophy-card-money",
-      symbol: "a",
-      description:
-        "Marvin Moneybags allows you to chew gum in class for one week.",
-      pointValue: "10",
-      btnColor: "purple",
-    },
-    {
-      id: 2,
-      image: sword,
-      name: "Stanley Swordington",
-      className: "trophy-card-sword",
-      symbol: "b",
-      description:
-        "Stanley Swordington allows you to pick from the class treasure chest.",
-      pointValue: "20",
-      btnColor: "blue",
-    },
-    {
-      id: 3,
-      image: bomb,
-      name: "Bradley Bomberman",
-      className: "trophy-card-bomb",
-      symbol: "c",
-      description:
-        "Bradley Bomberman allows you to get rid of your lowest test score.",
-      pointValue: "30",
-      btnColor: "green",
-    },
-  ];
-
   return (
     <Grid className="trophy-card-grid" columns={3} stackable>
       <Grid.Row>
         {trophies.map((trophy) => (
-          <Grid.Column>
+          <Grid.Column key={trophy.id}>
             <motion.div
               // animate={{
               //   scale: 1,
@@ -84,12 +34,7 @@ function TrophyCards({
                 },
               }}
             >
-              <Card
-                raised
-                className={trophy.className}
-                centered
-                key={trophy.id}
-              >
+              <Card raised className={trophy.className} centered>
                 <Card.Content centered>
                   <Card.Header
                     className="trophy-card_header"

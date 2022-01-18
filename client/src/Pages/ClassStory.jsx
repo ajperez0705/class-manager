@@ -69,7 +69,6 @@ function ClassStory() {
   };
 
   const filterPostAfterForm = function () {
-    console.log("reached function");
     dispatch(getPosts(filter));
   };
 
@@ -77,13 +76,13 @@ function ClassStory() {
     <Container>
       {isLoading === true ? (
         <>
-          <Loading />
+          <Loading content="Loading class posts." />
         </>
       ) : (
         <>
           <Grid className="class-story-grid" columns={3} stackable>
             <Grid.Row className="page-title">
-              <h1>Recent by MrTeacher</h1>
+              <h1>Recent by El Professor</h1>
               <div className="class-story-controls">
                 {isTeacher && (
                   <FormModal
