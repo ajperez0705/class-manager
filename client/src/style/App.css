@@ -127,3 +127,16 @@ p {
 .loader {
   height: 90vh !important;
 }
+
+/* 404 */
+.fourOFour-container {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 60vh;
+}
+
+.fourOFour-container div {
+  padding: 24px;
+}

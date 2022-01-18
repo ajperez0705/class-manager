@@ -141,15 +141,29 @@ function StudentModal({
             <div>
               <span>{student.username}'s Current Points: </span>
               {pointAnim ? (
-                <motion.span
-                  animate={{
-                    // fontSize: "500px",
-                    scale: 1.1,
-                    color: "green",
-                  }}
-                >
-                  {student.totalPoints}
-                </motion.span>
+                <>
+                  {feedBack === "positive" ? (
+                    <motion.span
+                      animate={{
+                        // fontSize: "500px",
+                        scale: 1.1,
+                        color: "green",
+                      }}
+                    >
+                      {student.totalPoints}
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      animate={{
+                        // fontSize: "500px",
+                        scale: 1.1,
+                        color: "red",
+                      }}
+                    >
+                      {student.totalPoints}
+                    </motion.span>
+                  )}
+                </>
               ) : (
                 <motion.span>{student.totalPoints}</motion.span>
               )}
